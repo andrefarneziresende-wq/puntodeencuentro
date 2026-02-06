@@ -185,7 +185,7 @@ export function MemberDetailPage() {
             {/* Contact Details */}
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-[13px] text-[#333] truncate">{member.email}</span>
+                <span className="text-[13px] text-[#333] font-bold truncate">{member.email}</span>
                 <button 
                   onClick={() => copyToClipboard(member.email, 'email')}
                   className="p-1"
@@ -195,7 +195,7 @@ export function MemberDetailPage() {
                 {copiedField === 'email' && <span className="text-[10px] text-[#4CAF50]">Copiado</span>}
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[13px] text-[#333]">{member.telefono}</span>
+                <span className="text-[13px] text-[#333] font-bold">{member.telefono}</span>
                 <button onClick={() => setShowWhatsAppModal(true)} className="p-1">
                   <img src="/icon-whatsapp.png" alt="WhatsApp" width="20" height="20" />
                 </button>
