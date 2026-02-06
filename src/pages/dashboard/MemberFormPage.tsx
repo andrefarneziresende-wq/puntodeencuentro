@@ -366,21 +366,27 @@ export function MemberFormPage() {
                 )}
               </button>
               <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
+                {/* Es miembro toggle - aligned right */}
+                <div className="flex items-center justify-end gap-2 mb-2">
                   <span className="text-[14px] text-[#333]">¿Es miembro?</span>
                   <Toggle checked={formData.esMiembro} onChange={(val) => setFormData({ ...formData, esMiembro: val })} />
                 </div>
                 {formData.esMiembro && (
-                  <div>
-                    <label className="block text-[14px] text-[#333] mb-1">Número *</label>
-                    <input
-                      type="text"
-                      value={formData.numero}
-                      onChange={(e) => setFormData({ ...formData, numero: e.target.value })}
-                      className="w-24 px-3 py-2 border border-[#E0E0E0] rounded-lg text-[14px]"
-                      placeholder=""
-                    />
-                  </div>
+                  <>
+                    {/* Separator line */}
+                    <div className="border-t border-[#E0E0E0] my-2"></div>
+                    {/* Número - label and input side by side */}
+                    <div className="flex items-center gap-2">
+                      <label className="text-[14px] text-[#333]">Número *</label>
+                      <input
+                        type="text"
+                        value={formData.numero}
+                        onChange={(e) => setFormData({ ...formData, numero: e.target.value })}
+                        className="w-20 px-3 py-2 border border-[#E0E0E0] rounded-lg text-[14px]"
+                        placeholder=""
+                      />
+                    </div>
+                  </>
                 )}
               </div>
             </div>
