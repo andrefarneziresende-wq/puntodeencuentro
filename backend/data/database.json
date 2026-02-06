@@ -45,13 +45,69 @@
       "ultimoAno": 75,
       "desdeSiempre": 85,
       "historico": [
-        { "fecha": "01/10", "integrantes": 270, "visitantes": 55, "total": 270, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "08/10", "integrantes": 275, "visitantes": 60, "total": 275, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "15/10", "integrantes": 265, "visitantes": 50, "total": 265, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "22/10", "integrantes": 293, "visitantes": 45, "total": 338, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "29/10", "integrantes": 300, "visitantes": 55, "total": 320, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "05/11", "integrantes": 310, "visitantes": 60, "total": 330, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
-        { "fecha": "12/11", "integrantes": 295, "visitantes": 120, "total": 320, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 }
+        {
+          "fecha": "01/10",
+          "integrantes": 270,
+          "visitantes": 55,
+          "total": 270,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "08/10",
+          "integrantes": 275,
+          "visitantes": 60,
+          "total": 275,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "15/10",
+          "integrantes": 265,
+          "visitantes": 50,
+          "total": 265,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "22/10",
+          "integrantes": 293,
+          "visitantes": 45,
+          "total": 338,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "29/10",
+          "integrantes": 300,
+          "visitantes": 55,
+          "total": 320,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "05/11",
+          "integrantes": 310,
+          "visitantes": 60,
+          "total": 330,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        },
+        {
+          "fecha": "12/11",
+          "integrantes": 295,
+          "visitantes": 120,
+          "total": 320,
+          "mediaIntegrantes": 280,
+          "mediaVisitantes": 30,
+          "mediaTotal": 310
+        }
       ]
     },
     "demografia": {
@@ -61,8 +117,8 @@
       "otros": 4
     },
     "oracion": {
-      "promedio": 7084,
-      "contestadas": 4359
+      "motivosDeOracion": 7084,
+      "oracionesContestadas": 4359
     },
     "fe": {
       "visitantes": {
@@ -96,34 +152,75 @@
     },
     "formacion": {
       "discipuladoInicial": {
-        "terminado": { "total": 183, "porcentaje": 72 },
-        "iniciado": { "total": 42, "porcentaje": 22 },
-        "noIniciado": { "total": 21, "porcentaje": 6 }
+        "terminado": {
+          "total": 183,
+          "porcentaje": 72
+        },
+        "iniciado": {
+          "total": 42,
+          "porcentaje": 22
+        },
+        "noIniciado": {
+          "total": 21,
+          "porcentaje": 6
+        }
       },
       "preBautismo": {
-        "terminado": { "total": 183, "porcentaje": 72 },
-        "iniciado": { "total": 42, "porcentaje": 22 },
-        "noIniciado": { "total": 21, "porcentaje": 6 }
+        "terminado": {
+          "total": 183,
+          "porcentaje": 72
+        },
+        "iniciado": {
+          "total": 42,
+          "porcentaje": 22
+        },
+        "noIniciado": {
+          "total": 21,
+          "porcentaje": 6
+        }
       },
       "escuelaBiblica": {
-        "terminado": { "total": 183, "porcentaje": 72 },
-        "iniciado": { "total": 21, "porcentaje": 6 },
-        "noIniciado": { "total": 42, "porcentaje": 22 }
+        "terminado": {
+          "total": 183,
+          "porcentaje": 72
+        },
+        "iniciado": {
+          "total": 21,
+          "porcentaje": 6
+        },
+        "noIniciado": {
+          "total": 42,
+          "porcentaje": 22
+        }
       },
       "escuelaDiscipulado": {
-        "terminado": { "total": 21, "porcentaje": 6 },
-        "iniciado": { "total": 183, "porcentaje": 72 },
-        "noIniciado": { "total": 42, "porcentaje": 22 }
+        "terminado": {
+          "total": 21,
+          "porcentaje": 6
+        },
+        "iniciado": {
+          "total": 183,
+          "porcentaje": 72
+        },
+        "noIniciado": {
+          "total": 42,
+          "porcentaje": 22
+        }
       },
       "entrenamiento": {
-        "terminado": { "total": 21, "porcentaje": 6 },
-        "iniciado": { "total": 183, "porcentaje": 72 },
-        "noIniciado": { "total": 42, "porcentaje": 22 }
+        "terminado": {
+          "total": 21,
+          "porcentaje": 6
+        },
+        "iniciado": {
+          "total": 183,
+          "porcentaje": 72
+        },
+        "noIniciado": {
+          "total": 42,
+          "porcentaje": 22
+        }
       }
-    },
-    "oracion": {
-      "motivosDeOracion": 7084,
-      "oracionesContestadas": 4359
     }
   },
   "users": [
@@ -466,34 +563,78 @@
       "direccion": "Calle San Vicente Mártir, 12 46023 Valencia",
       "rol": "responsable",
       "grupo": "Casa de Samuel",
-      "gruposSupervisa": ["Jóvenes chicos 16 a 18 años", "Jóvenes chicos 19 a 25 años", "Casa Enrique y Julia"],
+      "gruposSupervisa": [],
       "esMiembro": true,
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 95,
-      "asistencia": { "ultimoMes": 53, "ultimoAno": 75, "desdeSiempre": 85 },
+      "asistencia": {
+        "ultimoMes": 53,
+        "ultimoAno": 75,
+        "desdeSiempre": 85
+      },
       "formacion": {
-        "discipuladoInicial": "Terminado",
-        "preBautismos": "Terminado",
-        "escuelaBiblica": "Terminado",
-        "escuelaDiscipulado": "Terminado",
-        "entrenamiento": "Terminado"
+        "discipuladoInicial": "terminado",
+        "preBautismos": "terminado",
+        "escuelaBiblica": "terminado",
+        "escuelaDiscipulado": "terminado",
+        "entrenamiento": "terminado"
       },
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Jóvenes", "Adolescentes", "Multimedia"],
-      "observaciones": "Es el hijo de María Rodríguez y de Ernesto Hernández, de Burgos.",
+      "ministerios": [
+        "Jóvenes",
+        "Adolescentes",
+        "Multimedia"
+      ],
+      "observaciones": "Es el hijo de María Rodríguez y de Ernesto Hernández, de Burgos. 2",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Multimedia Proyección", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Multimedia Proyección", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Multimedia OBS", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Multimedia OBS", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Multimedia OBS", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Multimedia OBS", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Multimedia OBS", "asistio": true },
-        { "fecha": "17/03/2025", "nombre": "Multimedia Proyección", "asistio": true },
-        { "fecha": "17/03/2025", "nombre": "Multimedia Proyección", "asistio": false }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia Proyección",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia Proyección",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia OBS",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia OBS",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia OBS",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia OBS",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Multimedia OBS",
+          "asistio": true
+        },
+        {
+          "fecha": "17/03/2025",
+          "nombre": "Multimedia Proyección",
+          "asistio": true
+        },
+        {
+          "fecha": "17/03/2025",
+          "nombre": "Multimedia Proyección",
+          "asistio": false
+        }
       ]
     },
     {
@@ -513,7 +654,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 88,
-      "asistencia": { "ultimoMes": 53, "ultimoAno": 75, "desdeSiempre": 85 },
+      "asistencia": {
+        "ultimoMes": 53,
+        "ultimoAno": 75,
+        "desdeSiempre": 85
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -524,17 +669,52 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Jóvenes", "Alabanza"],
+      "ministerios": [
+        "Jóvenes",
+        "Alabanza"
+      ],
       "observaciones": "Primo de Ernesto.",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Alabanza Bajo", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Bajo", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Guitarra Eléctrica", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Guitarra Eléctrica", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Bajo", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Bajo", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Guitarra Eléctrica", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Bajo", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Bajo",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Bajo",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Guitarra Eléctrica",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Guitarra Eléctrica",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Bajo",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Bajo",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Guitarra Eléctrica",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Bajo",
+          "asistio": true
+        }
       ]
     },
     {
@@ -554,7 +734,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 92,
-      "asistencia": { "ultimoMes": 53, "ultimoAno": 75, "desdeSiempre": 85 },
+      "asistencia": {
+        "ultimoMes": 53,
+        "ultimoAno": 75,
+        "desdeSiempre": 85
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -568,16 +752,56 @@
       "ministerios": [],
       "observaciones": "Sobrino de los pastores de jóvenes.",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        }
       ]
     },
     {
@@ -595,9 +819,15 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": true,
-      "etiquetas": ["Nuevo creyente"],
+      "etiquetas": [
+        "Nuevo creyente"
+      ],
       "porcentaje": 85,
-      "asistencia": { "ultimoMes": 53, "ultimoAno": 75, "desdeSiempre": 85 },
+      "asistencia": {
+        "ultimoMes": 53,
+        "ultimoAno": 75,
+        "desdeSiempre": 85
+      },
       "formacion": {
         "discipuladoInicial": "Iniciado",
         "preBautismos": "No iniciado",
@@ -608,12 +838,26 @@
       "bautizado": false,
       "nuevoBautizado": false,
       "iglesiaProcedente": "Iglesia La Buena Paz, Madrid",
-      "ministerios": ["Voluntarios"],
+      "ministerios": [
+        "Voluntarios"
+      ],
       "observaciones": "",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": false },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Auditorio", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": false
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Auditorio",
+          "asistio": true
+        }
       ]
     },
     {
@@ -631,9 +875,15 @@
       "gruposSupervisa": null,
       "esMiembro": false,
       "nuevoCreyente": true,
-      "etiquetas": ["Nuevo creyente"],
+      "etiquetas": [
+        "Nuevo creyente"
+      ],
       "porcentaje": null,
-      "asistencia": { "ultimoMes": 0, "ultimoAno": 0, "desdeSiempre": 0 },
+      "asistencia": {
+        "ultimoMes": 0,
+        "ultimoAno": 0,
+        "desdeSiempre": 0
+      },
       "formacion": {
         "discipuladoInicial": "Iniciado",
         "preBautismos": "Terminado",
@@ -665,7 +915,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 72,
-      "asistencia": { "ultimoMes": 48, "ultimoAno": 70, "desdeSiempre": 72 },
+      "asistencia": {
+        "ultimoMes": 48,
+        "ultimoAno": 70,
+        "desdeSiempre": 72
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -676,11 +930,21 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Voluntarios"],
+      "ministerios": [
+        "Voluntarios"
+      ],
       "observaciones": "",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Voluntarios Hall", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Voluntarios Hall",
+          "asistio": true
+        }
       ]
     },
     {
@@ -700,7 +964,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 90,
-      "asistencia": { "ultimoMes": 88, "ultimoAno": 90, "desdeSiempre": 90 },
+      "asistencia": {
+        "ultimoMes": 88,
+        "ultimoAno": 90,
+        "desdeSiempre": 90
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -711,11 +979,21 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Alabanza"],
+      "ministerios": [
+        "Alabanza"
+      ],
       "observaciones": "Hermana de Samuel.",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Alabanza Voces", "asistio": true },
-        { "fecha": "20/03/2025", "nombre": "Alabanza Voces", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Voces",
+          "asistio": true
+        },
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Voces",
+          "asistio": true
+        }
       ]
     },
     {
@@ -733,9 +1011,16 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": true,
-      "etiquetas": ["Nuevo creyente", "Hombres senior"],
+      "etiquetas": [
+        "Nuevo creyente",
+        "Hombres senior"
+      ],
       "porcentaje": null,
-      "asistencia": { "ultimoMes": 25, "ultimoAno": 30, "desdeSiempre": 30 },
+      "asistencia": {
+        "ultimoMes": 25,
+        "ultimoAno": 30,
+        "desdeSiempre": 30
+      },
       "formacion": {
         "discipuladoInicial": "Iniciado",
         "preBautismos": "No iniciado",
@@ -767,7 +1052,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": null,
-      "asistencia": { "ultimoMes": 40, "ultimoAno": 45, "desdeSiempre": 50 },
+      "asistencia": {
+        "ultimoMes": 40,
+        "ultimoAno": 45,
+        "desdeSiempre": 50
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -797,9 +1086,15 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": false,
-      "etiquetas": ["Hombres senior"],
+      "etiquetas": [
+        "Hombres senior"
+      ],
       "porcentaje": 85,
-      "asistencia": { "ultimoMes": 80, "ultimoAno": 85, "desdeSiempre": 85 },
+      "asistencia": {
+        "ultimoMes": 80,
+        "ultimoAno": 85,
+        "desdeSiempre": 85
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -810,7 +1105,9 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Consejería"],
+      "ministerios": [
+        "Consejería"
+      ],
       "observaciones": "Líder del grupo de hombres senior.",
       "servicios": []
     },
@@ -829,9 +1126,17 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": false,
-      "etiquetas": ["Hombres senior", "Hombres adultos 2", "Hombres adultos 1"],
+      "etiquetas": [
+        "Hombres senior",
+        "Hombres adultos 2",
+        "Hombres adultos 1"
+      ],
       "porcentaje": 92,
-      "asistencia": { "ultimoMes": 90, "ultimoAno": 92, "desdeSiempre": 92 },
+      "asistencia": {
+        "ultimoMes": 90,
+        "ultimoAno": 92,
+        "desdeSiempre": 92
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -842,7 +1147,10 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Consejería", "Enseñanza"],
+      "ministerios": [
+        "Consejería",
+        "Enseñanza"
+      ],
       "observaciones": "Líder con múltiples responsabilidades.",
       "servicios": []
     },
@@ -863,7 +1171,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 80,
-      "asistencia": { "ultimoMes": 75, "ultimoAno": 80, "desdeSiempre": 80 },
+      "asistencia": {
+        "ultimoMes": 75,
+        "ultimoAno": 80,
+        "desdeSiempre": 80
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -874,10 +1186,16 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Niños"],
+      "ministerios": [
+        "Niños"
+      ],
       "observaciones": "",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Niños Escuela Dominical", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Niños Escuela Dominical",
+          "asistio": true
+        }
       ]
     },
     {
@@ -895,9 +1213,15 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": false,
-      "etiquetas": ["Mujeres senior"],
+      "etiquetas": [
+        "Mujeres senior"
+      ],
       "porcentaje": null,
-      "asistencia": { "ultimoMes": 60, "ultimoAno": 65, "desdeSiempre": 70 },
+      "asistencia": {
+        "ultimoMes": 60,
+        "ultimoAno": 65,
+        "desdeSiempre": 70
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -908,7 +1232,9 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Intercesión"],
+      "ministerios": [
+        "Intercesión"
+      ],
       "observaciones": "Madre de Carla.",
       "servicios": []
     },
@@ -929,7 +1255,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": null,
-      "asistencia": { "ultimoMes": 35, "ultimoAno": 40, "desdeSiempre": 45 },
+      "asistencia": {
+        "ultimoMes": 35,
+        "ultimoAno": 40,
+        "desdeSiempre": 45
+      },
       "formacion": {
         "discipuladoInicial": "Iniciado",
         "preBautismos": "No iniciado",
@@ -961,7 +1291,11 @@
       "nuevoCreyente": false,
       "etiquetas": [],
       "porcentaje": 78,
-      "asistencia": { "ultimoMes": 75, "ultimoAno": 78, "desdeSiempre": 78 },
+      "asistencia": {
+        "ultimoMes": 75,
+        "ultimoAno": 78,
+        "desdeSiempre": 78
+      },
       "formacion": {
         "discipuladoInicial": "Terminado",
         "preBautismos": "Terminado",
@@ -972,10 +1306,16 @@
       "bautizado": true,
       "nuevoBautizado": false,
       "iglesiaProcedente": null,
-      "ministerios": ["Alabanza"],
+      "ministerios": [
+        "Alabanza"
+      ],
       "observaciones": "Hermano de Sandra.",
       "servicios": [
-        { "fecha": "20/03/2025", "nombre": "Alabanza Batería", "asistio": true }
+        {
+          "fecha": "20/03/2025",
+          "nombre": "Alabanza Batería",
+          "asistio": true
+        }
       ]
     }
   ]

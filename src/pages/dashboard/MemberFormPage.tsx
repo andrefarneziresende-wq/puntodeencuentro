@@ -156,7 +156,15 @@ export function MemberFormPage() {
           email: member.email || '',
           direccion: member.direccion || '',
           grupo: member.grupo || '',
-          responsabilidad: {
+          responsabilidad: member.responsabilidad ? {
+            ayudante: member.responsabilidad.ayudante || false,
+            ayudanteGrupos: member.responsabilidad.ayudanteGrupos || [],
+            responsable: member.responsabilidad.responsable || false,
+            responsableGrupos: member.responsabilidad.responsableGrupos || [],
+            supervisor: member.responsabilidad.supervisor || false,
+            supervisorGrupos: member.responsabilidad.supervisorGrupos || []
+          } : {
+            // Fallback for old data format
             ayudante: member.rol === 'ayudante',
             ayudanteGrupos: member.rol === 'ayudante' ? (member.gruposSupervisa || []) : [],
             responsable: member.rol === 'responsable',

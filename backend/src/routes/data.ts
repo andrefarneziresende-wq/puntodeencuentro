@@ -181,6 +181,15 @@ router.post('/integrantes', async (req: Request, res: Response) => {
            req.body.responsabilidad?.ayudante ? 'ayudante' : null,
       grupo: req.body.grupo || null,
       gruposSupervisa: req.body.responsabilidad?.supervisorGrupos || [],
+      // Save all responsibility data
+      responsabilidad: {
+        ayudante: req.body.responsabilidad?.ayudante || false,
+        ayudanteGrupos: req.body.responsabilidad?.ayudanteGrupos || [],
+        responsable: req.body.responsabilidad?.responsable || false,
+        responsableGrupos: req.body.responsabilidad?.responsableGrupos || [],
+        supervisor: req.body.responsabilidad?.supervisor || false,
+        supervisorGrupos: req.body.responsabilidad?.supervisorGrupos || []
+      },
       esMiembro: req.body.esMiembro || false,
       nuevoCreyente: req.body.fe?.nuevoCreyente || false,
       etiquetas: [],
@@ -243,6 +252,15 @@ router.put('/integrantes/:id', async (req: Request, res: Response) => {
            req.body.responsabilidad?.ayudante ? 'ayudante' : null,
       grupo: req.body.grupo || null,
       gruposSupervisa: req.body.responsabilidad?.supervisorGrupos || [],
+      // Save all responsibility data
+      responsabilidad: {
+        ayudante: req.body.responsabilidad?.ayudante || false,
+        ayudanteGrupos: req.body.responsabilidad?.ayudanteGrupos || [],
+        responsable: req.body.responsabilidad?.responsable || false,
+        responsableGrupos: req.body.responsabilidad?.responsableGrupos || [],
+        supervisor: req.body.responsabilidad?.supervisor || false,
+        supervisorGrupos: req.body.responsabilidad?.supervisorGrupos || []
+      },
       esMiembro: req.body.esMiembro || false,
       nuevoCreyente: req.body.fe?.nuevoCreyente || false,
       formacion: {
