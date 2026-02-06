@@ -133,7 +133,7 @@ export function TestimonyDetailPage() {
           </h1>
 
           {/* Group Badge */}
-          <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-white px-3 py-1 rounded-full text-[12px] font-medium mb-5">
+          <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black px-3 py-1 rounded-full text-[12px] font-medium mb-5 underline">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
               <circle cx="9" cy="7" r="4"/>

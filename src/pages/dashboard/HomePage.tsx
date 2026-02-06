@@ -130,7 +130,7 @@ export function HomePage() {
                   </h3>
                   
                   {/* Group Badge */}
-                  <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-white text-[12px] font-medium px-3 py-1.5 rounded-full mb-3">
+                  <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1.5 rounded-full mb-3 underline">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                       <circle cx="9" cy="7" r="4"/>
@@ -173,7 +173,7 @@ export function HomePage() {
             <p className="text-[48px] font-bold text-[#333333] leading-none mb-3">2</p>
             
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-white text-[13px] font-medium px-3 py-1.5 rounded-full mb-4">
+            <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[13px] font-medium px-3 py-1.5 rounded-full mb-4 underline">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                 <circle cx="9" cy="7" r="4"/>
