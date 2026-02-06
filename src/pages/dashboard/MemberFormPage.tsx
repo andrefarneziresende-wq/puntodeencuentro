@@ -145,8 +145,8 @@ export function MemberFormPage() {
     setCheckingNumero(true);
     try {
       const result = await api.getIntegrantes();
-      if (result.data) {
-        const exists = result.data.some((integrante: any) => 
+      if (result.data?.integrantes) {
+        const exists = result.data.integrantes.some((integrante: any) => 
           integrante.numero?.toString() === numero.trim() && 
           integrante.id !== id // Exclude current member when editing
         );
