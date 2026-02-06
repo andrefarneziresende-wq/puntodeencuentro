@@ -934,13 +934,16 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* Nueva Reunión Button */}
-        <section className="-mx-5 px-5 py-5 bg-white">
+      </main>
+
+      {/* Nueva Reunión Button - Footer */}
+      <footer className="w-full bg-white px-5 py-5">
+        <div className="max-w-2xl mx-auto">
           <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
             NUEVA REUNIÓN
           </button>
-        </section>
-      </main>
+        </div>
+      </footer>
     </div>
   );
 }
