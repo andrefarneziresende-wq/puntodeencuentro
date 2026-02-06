@@ -31,17 +31,6 @@ export function TestimoniesPage() {
     setLoading(false);
   };
 
-  const handleToggleFavorite = async (id: string) => {
-    const result = await api.toggleFavorite(id);
-    if (result.data) {
-      setTestimonies(prev =>
-        prev.map(t =>
-          t.id === id ? { ...t, isFavoriteByResponsible: result.data!.testimony.isFavoriteByResponsible } : t
-        )
-      );
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <AppHeader />
@@ -80,9 +69,6 @@ export function TestimoniesPage() {
                   content={testimony.content}
                   groupName={testimony.groupName}
                   createdAt={testimony.createdAt}
-                  isFavorite={testimony.isFavoriteByResponsible}
-                  showFavoriteButton={true}
-                  onToggleFavorite={() => handleToggleFavorite(testimony.id)}
                 />
               ))}
             </div>
