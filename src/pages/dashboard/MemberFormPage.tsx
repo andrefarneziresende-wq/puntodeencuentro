@@ -375,7 +375,7 @@ export function MemberFormPage() {
                   <>
                     {/* Separator line - only between the content */}
                     <div className="flex justify-end my-2">
-                      <div className="w-32 border-t border-[#E0E0E0]"></div>
+                      <div className="w-44 border-t border-[#E0E0E0]"></div>
                     </div>
                     {/* Número - label and input side by side, aligned right */}
                     <div className="flex items-center justify-end gap-2">
