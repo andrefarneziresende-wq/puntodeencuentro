@@ -174,7 +174,7 @@ export function HomePage() {
                   </h3>
                   
                   {/* Group Badge */}
-                  <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1.5 rounded-full mb-3 underline">
+                  <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1.5 rounded-lg mb-3 underline">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                       <circle cx="9" cy="7" r="4"/>
@@ -217,7 +217,7 @@ export function HomePage() {
             <p className="text-[48px] font-bold text-[#333333] leading-none mb-3">2</p>
             
             {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[13px] font-medium px-3 py-1.5 rounded-full mb-4">
+            <div className="inline-flex items-center gap-1.5 bg-[#72E6EA] text-black text-[13px] font-medium px-3 py-1.5 rounded-lg mb-4">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                 <circle cx="9" cy="7" r="4"/>
@@ -236,7 +236,7 @@ export function HomePage() {
               <div>
                 <p className="text-[40px] font-bold text-[#333333] leading-none">323</p>
                 <p className="text-[12px] text-[#9E9E9E] mb-2">7 en cada grupo</p>
-                <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-full mb-2">
+                <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="7" r="4"/>
                     <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
@@ -261,7 +261,7 @@ export function HomePage() {
               <div>
                 <p className="text-[40px] font-bold text-[#333333] leading-none">298</p>
                 <p className="text-[12px] text-[#9E9E9E] mb-2">6,5 en cada grupo</p>
-                <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-full mb-2">
+                <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-lg mb-2">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="7" r="4"/>
                     <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
@@ -292,7 +292,7 @@ export function HomePage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-[28px] font-bold text-[#333333] leading-none">86</p>
-                  <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-full mt-1">
+                  <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-lg mt-1">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="12" cy="7" r="4"/>
                       <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
@@ -302,7 +302,7 @@ export function HomePage() {
                 </div>
                 <div>
                   <p className="text-[28px] font-bold text-[#333333] leading-none">86</p>
-                  <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-full mt-1">
+                  <div className="inline-flex items-center gap-1.5 bg-[#4CAF50] text-white text-[11px] font-medium px-2.5 py-1 rounded-lg mt-1">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="12" cy="7" r="4"/>
                       <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
@@ -320,20 +320,20 @@ export function HomePage() {
             <div className="grid grid-cols-3 gap-2">
               <div>
                 <p className="text-[32px] font-bold text-[#333333] leading-none">9</p>
-                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-full mt-1">
+                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-lg mt-1">
                   Supervisor
                 </div>
-                <span className="block bg-[#F2F2F2] text-[#9E9E9E] text-[8px] px-1.5 py-0.5 rounded-full mt-1">1 cada 5,1 grupos</span>
+                <span className="block bg-[#F2F2F2] text-[#9E9E9E] text-[8px] px-1.5 py-0.5 rounded-lg mt-1">1 cada 5,1 grupos</span>
               </div>
               <div>
                 <p className="text-[32px] font-bold text-[#333333] leading-none">51</p>
-                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-full mt-1">
+                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-lg mt-1">
                   Responsable
                 </div>
               </div>
               <div>
                 <p className="text-[32px] font-bold text-[#333333] leading-none">33</p>
-                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-full mt-1">
+                <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-lg mt-1">
                   Ayudante
                 </div>
               </div>
@@ -356,7 +356,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.visitantes?.total || 0}</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.visitantes?.porGrupo || 0} en cada grupo</span>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-lg relative -top-1">{stats?.fe?.visitantes?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-[#E0E0E0] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
                 <img src="/icon-visitor.png" alt="" width="14" height="14" />
@@ -371,7 +371,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.nuevosCreyentes?.total || 0}</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.nuevosCreyentes?.porGrupo || 0} en cada grupo</span>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-lg relative -top-1">{stats?.fe?.nuevosCreyentes?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#D4E157] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
@@ -391,7 +391,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.nuevosBautizados?.total || 0}</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.nuevosBautizados?.porGrupo || 0} en cada grupo</span>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-lg relative -top-1">{stats?.fe?.nuevosBautizados?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#C8EDFA] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
@@ -411,7 +411,7 @@ export function HomePage() {
             <div>
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.procedentesOtraIglesia?.total || 0}</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.procedentesOtraIglesia?.porGrupo || 0} en cada grupo</span>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-lg relative -top-1">{stats?.fe?.procedentesOtraIglesia?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
