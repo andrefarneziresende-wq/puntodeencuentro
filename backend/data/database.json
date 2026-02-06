@@ -1,0 +1,386 @@
+{
+  "dashboardStats": {
+    "gruposDeHogar": {
+      "total": 2,
+      "integrantes": {
+        "total": 323,
+        "porGrupo": 7,
+        "sinGrupo": 183,
+        "sinGrupoPorcentaje": 72
+      },
+      "miembros": {
+        "total": 298,
+        "porGrupo": 6.5,
+        "sinGrupo": 183,
+        "sinGrupoPorcentaje": 72
+      },
+      "enMinisterio": {
+        "integrantes": 86,
+        "miembros": 86
+      },
+      "liderazgo": {
+        "supervisores": 9,
+        "supervisoresPorGrupo": 5.1,
+        "responsables": 51,
+        "ayudantes": 33
+      }
+    },
+    "integrantes": {
+      "total": 69,
+      "nuevos": 9,
+      "bajas": 51,
+      "otros": 33
+    },
+    "ministerios": 67,
+    "peticiones": 23,
+    "lideres": 12,
+    "reuniones": 7,
+    "madurez": {
+      "consolidados": 73,
+      "enProceso": 22,
+      "nuevos": 5
+    },
+    "asistencia": {
+      "ultimaReunion": 53,
+      "mediaMes": 75,
+      "mediaGeneral": 85
+    },
+    "demografia": {
+      "hombres": 183,
+      "mujeres": 42,
+      "ninos": 21,
+      "otros": 4
+    },
+    "oracion": {
+      "promedio": 7084,
+      "contestadas": 4359
+    }
+  },
+  "users": [
+    {
+      "id": "6c2f827b-04a0-4627-9419-1dc04030cdd9",
+      "email": "admin@puntodeencuentro.org",
+      "password": "$2a$10$VWsO.aveR7iNTBbf6hAd5Oz92DHsbo1F0sg/DURI20Vei1dTRD1zK",
+      "name": "Administrador",
+      "photoUrl": null,
+      "role": "admin",
+      "createdAt": "2026-02-06T09:57:35.667Z",
+      "updatedAt": "2026-02-06T09:57:35.667Z"
+    },
+    {
+      "id": "u2",
+      "email": "maria@puntodeencuentro.org",
+      "password": "$2a$10$VWsO.aveR7iNTBbf6hAd5Oz92DHsbo1F0sg/DURI20Vei1dTRD1zK",
+      "name": "María González",
+      "photoUrl": null,
+      "role": "leader",
+      "createdAt": "2026-01-15T10:00:00.000Z",
+      "updatedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "u3",
+      "email": "carlos@puntodeencuentro.org",
+      "password": "$2a$10$VWsO.aveR7iNTBbf6hAd5Oz92DHsbo1F0sg/DURI20Vei1dTRD1zK",
+      "name": "Carlos Rodríguez",
+      "photoUrl": null,
+      "role": "leader",
+      "createdAt": "2026-01-10T10:00:00.000Z",
+      "updatedAt": "2026-01-10T10:00:00.000Z"
+    },
+    {
+      "id": "u4",
+      "email": "ana@puntodeencuentro.org",
+      "password": "$2a$10$VWsO.aveR7iNTBbf6hAd5Oz92DHsbo1F0sg/DURI20Vei1dTRD1zK",
+      "name": "Ana Martínez",
+      "photoUrl": null,
+      "role": "member",
+      "createdAt": "2026-01-20T10:00:00.000Z",
+      "updatedAt": "2026-01-20T10:00:00.000Z"
+    }
+  ],
+  "passwordResets": [],
+  "groups": [
+    {
+      "id": "g1",
+      "name": "Casa de Samuel",
+      "description": "Grupo de hogar enfocado en familias jóvenes",
+      "meetingDay": "Miércoles",
+      "meetingTime": "19:30",
+      "address": "Calle Mayor 45, 2º",
+      "leaderId": "u2",
+      "leaderName": "María González",
+      "memberCount": 12,
+      "isActive": true,
+      "createdAt": "2025-03-15T10:00:00.000Z",
+      "updatedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "id": "g2",
+      "name": "Casa de María",
+      "description": "Grupo de mujeres",
+      "meetingDay": "Jueves",
+      "meetingTime": "10:00",
+      "address": "Av. Libertad 22",
+      "leaderId": "u3",
+      "leaderName": "Carlos Rodríguez",
+      "memberCount": 8,
+      "isActive": true,
+      "createdAt": "2025-04-20T10:00:00.000Z",
+      "updatedAt": "2026-01-10T10:00:00.000Z"
+    },
+    {
+      "id": "g3",
+      "name": "Casa de Pedro",
+      "description": "Grupo mixto de adultos",
+      "meetingDay": "Viernes",
+      "meetingTime": "20:00",
+      "address": "Plaza Central 8",
+      "leaderId": "6c2f827b-04a0-4627-9419-1dc04030cdd9",
+      "leaderName": "Administrador",
+      "memberCount": 15,
+      "isActive": true,
+      "createdAt": "2025-02-10T10:00:00.000Z",
+      "updatedAt": "2026-01-05T10:00:00.000Z"
+    },
+    {
+      "id": "g4",
+      "name": "Casa de Esperanza",
+      "description": "Grupo de jóvenes universitarios",
+      "meetingDay": "Sábado",
+      "meetingTime": "18:00",
+      "address": "C/ Universidad 15",
+      "leaderId": "u4",
+      "leaderName": "Ana Martínez",
+      "memberCount": 20,
+      "isActive": true,
+      "createdAt": "2025-06-01T10:00:00.000Z",
+      "updatedAt": "2026-01-20T10:00:00.000Z"
+    }
+  ],
+  "members": [
+    {
+      "id": "m1",
+      "name": "Juan Pérez",
+      "email": "juan.perez@email.com",
+      "phone": "+34 612 345 678",
+      "groupId": "g1",
+      "groupName": "Casa de Samuel",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-04-01T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m2",
+      "name": "Laura Sánchez",
+      "email": "laura.sanchez@email.com",
+      "phone": "+34 623 456 789",
+      "groupId": "g1",
+      "groupName": "Casa de Samuel",
+      "role": "co-leader",
+      "photoUrl": null,
+      "joinedAt": "2025-03-20T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m3",
+      "name": "Pedro García",
+      "email": "pedro.garcia@email.com",
+      "phone": "+34 634 567 890",
+      "groupId": "g2",
+      "groupName": "Casa de María",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-05-15T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m4",
+      "name": "Sofía López",
+      "email": "sofia.lopez@email.com",
+      "phone": "+34 645 678 901",
+      "groupId": "g2",
+      "groupName": "Casa de María",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-06-01T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m5",
+      "name": "Miguel Torres",
+      "email": "miguel.torres@email.com",
+      "phone": "+34 656 789 012",
+      "groupId": "g3",
+      "groupName": "Casa de Pedro",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-02-20T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m6",
+      "name": "Elena Ruiz",
+      "email": "elena.ruiz@email.com",
+      "phone": "+34 667 890 123",
+      "groupId": "g3",
+      "groupName": "Casa de Pedro",
+      "role": "co-leader",
+      "photoUrl": null,
+      "joinedAt": "2025-02-15T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m7",
+      "name": "David Fernández",
+      "email": "david.fernandez@email.com",
+      "phone": "+34 678 901 234",
+      "groupId": "g4",
+      "groupName": "Casa de Esperanza",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-06-15T10:00:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": "m8",
+      "name": "Carmen Díaz",
+      "email": "carmen.diaz@email.com",
+      "phone": "+34 689 012 345",
+      "groupId": "g4",
+      "groupName": "Casa de Esperanza",
+      "role": "member",
+      "photoUrl": null,
+      "joinedAt": "2025-07-01T10:00:00.000Z",
+      "isActive": true
+    }
+  ],
+  "ministries": [
+    {
+      "id": "min1",
+      "name": "Alabanza",
+      "description": "Ministerio de música y adoración",
+      "leaderName": "María González",
+      "memberCount": 15,
+      "isActive": true
+    },
+    {
+      "id": "min2",
+      "name": "Niños",
+      "description": "Ministerio de escuela dominical",
+      "leaderName": "Ana Martínez",
+      "memberCount": 8,
+      "isActive": true
+    },
+    {
+      "id": "min3",
+      "name": "Jóvenes",
+      "description": "Ministerio de juventud",
+      "leaderName": "Carlos Rodríguez",
+      "memberCount": 25,
+      "isActive": true
+    },
+    {
+      "id": "min4",
+      "name": "Misiones",
+      "description": "Apoyo a misioneros",
+      "leaderName": "Administrador",
+      "memberCount": 10,
+      "isActive": true
+    }
+  ],
+  "withdrawals": [
+    {
+      "id": "w1",
+      "memberId": "m-old-1",
+      "memberName": "Roberto Jiménez",
+      "groupId": "g1",
+      "groupName": "Casa de Samuel",
+      "reason": "Cambio de ciudad",
+      "date": "2025-12-15T10:00:00.000Z",
+      "notes": "Se mudó a Barcelona por trabajo"
+    },
+    {
+      "id": "w2",
+      "memberId": "m-old-2",
+      "memberName": "Patricia Moreno",
+      "groupId": "g2",
+      "groupName": "Casa de María",
+      "reason": "Personal",
+      "date": "2025-11-20T10:00:00.000Z",
+      "notes": "Decidió tomarse un descanso"
+    }
+  ],
+  "testimonies": [
+    {
+      "id": "t1",
+      "title": "Un milagro en forma de conversión inesperada",
+      "content": "Hasta hace unos días, si alguien me hubiera dicho que mi hermano iba a entregarle su vida a Jesús, me habría reído. No porque no lo deseara, sino porque él siempre fue el más escéptico de la familia. Ateo declarado, activista en redes contra todo lo que tuviera que ver con la fe. Solía decirme: \"No necesito un dios imaginario para vivir\".\n\nPero la semana pasada, todo cambió.\n\nMi hermano pasó por una crisis personal muy fuerte. Llevaba meses luchando con ansiedad, insomnio y una sensación de vacío que no lograba llenar con nada. Ni la terapia, ni los libros de autoayuda, ni sus escapadas al monte. Me llamó un martes por la noche y me dijo con voz entrecortada: \"No puedo más. ¿Podemos hablar?\"\n\nNos vimos al día siguiente. Por primera vez no discutimos. Simplemente me escuchó mientras le hablaba de Jesús. Le conté cómo Dios me sostuvo en mi propia oscuridad, y cómo el evangelio no es religión ni reglas, sino una persona viva que transforma. No le insistí, solo le compartí mi experiencia y oré por él antes de irme.\n\nDos días después, me escribió un mensaje que no olvidaré jamás:\n\"Esta mañana, en casa, me arrodillé. Le dije a Jesús que si era real, que entrara. No sé cómo explicarlo... pero algo ha cambiado. Estoy en paz. Estoy llorando, pero no de tristeza. Gracias por no rendirte conmigo.\"\n\nEl domingo pasado vino a la iglesia por primera vez en su vida. Se sentó al final, con cara de no saber muy bien qué hacía allí, pero con los ojos brillantes. Después del culto me abrazó y me dijo: \"Ahora lo entiendo\".\n\nTodavía está procesando, haciendo preguntas, aprendiendo. Pero sé que Dios ya comenzó una obra que nadie va a detener.\n\nY yo, que llevaba años orando por él, solo puedo decir: ¡Gloria a Dios!",
+      "groupId": "g1",
+      "groupName": "Casa de Samuel",
+      "authorId": "6c2f827b-04a0-4627-9419-1dc04030cdd9",
+      "authorName": "Administrador",
+      "isFavoriteByResponsible": true,
+      "isFavoriteByAdmin": false,
+      "isHighlighted": true,
+      "createdAt": "2025-07-29T10:00:00.000Z",
+      "updatedAt": "2026-02-06T10:54:11.357Z"
+    },
+    {
+      "id": "t2",
+      "title": "Dios restauró mi matrimonio",
+      "content": "Quiero compartir lo que Dios ha hecho en mi familia. Hace seis meses, mi esposa y yo estábamos al borde del divorcio. Años de resentimiento, peleas constantes, y una distancia emocional que parecía imposible de superar.\n\nUn amigo nos invitó al grupo de hogar, y aunque fuimos con mucha resistencia, algo empezó a cambiar. Vimos parejas que también habían pasado por dificultades, pero que hablaban de perdón, de gracia, de segundas oportunidades.\n\nHoy, después de meses de trabajo, consejería y mucha oración del grupo, puedo decir que tenemos un matrimonio nuevo. No perfecto, pero restaurado. Solo Dios puede hacer esto.\n\nGracias, Casa de Samuel, por no dejarnos solos.",
+      "groupId": "g1",
+      "groupName": "Casa de Samuel",
+      "authorId": "u2",
+      "authorName": "María González",
+      "isFavoriteByResponsible": false,
+      "isFavoriteByAdmin": false,
+      "isHighlighted": false,
+      "createdAt": "2025-07-28T14:30:00.000Z",
+      "updatedAt": "2025-07-28T14:30:00.000Z"
+    },
+    {
+      "id": "t3",
+      "title": "Sanidad después de años de dolor",
+      "content": "Durante 15 años cargué con el dolor de la pérdida de mi madre. Nunca lo procesé, solo lo enterré. Pero en las reuniones del grupo, aprendí que Dios quiere sanar no solo nuestro futuro, sino también nuestro pasado.\n\nCon el apoyo de mis hermanos en Cristo, pude finalmente llorar, perdonar, y soltar. Hoy camino más liviana, con esperanza. El Señor es bueno.",
+      "groupId": "g2",
+      "groupName": "Casa de María",
+      "authorId": "u3",
+      "authorName": "Carlos Rodríguez",
+      "isFavoriteByResponsible": true,
+      "isFavoriteByAdmin": true,
+      "isHighlighted": true,
+      "createdAt": "2025-07-25T09:15:00.000Z",
+      "updatedAt": "2025-07-25T09:15:00.000Z"
+    },
+    {
+      "id": "t4",
+      "title": "De la depresión a la esperanza",
+      "content": "Llegué al grupo de hogar en uno de los momentos más oscuros de mi vida. Había perdido mi trabajo, mi relación había terminado, y no encontraba razones para seguir adelante.\n\nLos hermanos me acogieron sin juzgarme. Oraron por mí, me llamaron durante la semana, me invitaron a sus casas. Me mostraron el amor de Cristo de forma práctica.\n\nHoy, un año después, tengo un nuevo trabajo, nuevas amistades verdaderas, y sobre todo, una relación real con Dios. La depresión ya no me domina. Hay días difíciles, pero sé que no estoy solo.",
+      "groupId": "g3",
+      "groupName": "Casa de Pedro",
+      "authorId": "u4",
+      "authorName": "Ana Martínez",
+      "isFavoriteByResponsible": true,
+      "isFavoriteByAdmin": true,
+      "isHighlighted": true,
+      "createdAt": "2025-07-20T16:00:00.000Z",
+      "updatedAt": "2025-07-20T16:00:00.000Z"
+    },
+    {
+      "id": "t5",
+      "title": "Mi hijo volvió a casa",
+      "content": "Durante tres años, mi hijo estuvo alejado de la familia y de Dios. Se fue de casa a los 18 años después de una fuerte discusión. No sabíamos nada de él, solo que estaba vivo.\n\nEl grupo oró fielmente cada semana por él. Yo lloraba, pero ellos me sostenían con su fe cuando la mía flaqueaba.\n\nHace dos meses recibí una llamada. Era él. \"Mamá, quiero volver a casa. Quiero empezar de nuevo.\"\n\nHoy mi hijo está en casa, está en un proceso de restauración, y ha empezado a venir a la iglesia. Dios es fiel, incluso cuando no entendemos sus tiempos.",
+      "groupId": "g4",
+      "groupName": "Casa de Esperanza",
+      "authorId": "6c2f827b-04a0-4627-9419-1dc04030cdd9",
+      "authorName": "Administrador",
+      "isFavoriteByResponsible": true,
+      "isFavoriteByAdmin": false,
+      "isHighlighted": false,
+      "createdAt": "2025-07-15T11:30:00.000Z",
+      "updatedAt": "2025-07-15T11:30:00.000Z"
+    }
+  ]
+}
