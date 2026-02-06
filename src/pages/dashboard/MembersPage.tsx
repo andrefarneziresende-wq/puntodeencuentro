@@ -134,7 +134,7 @@ export function MembersPage() {
     if (etiqueta.includes('Hombres')) return 'bg-[#2196F3] text-white';
     if (etiqueta.includes('Mujeres')) return 'bg-[#E91E63] text-white';
     if (etiqueta.includes('Parejas')) return 'bg-[#9C27B0] text-white';
-    if (etiqueta.includes('Nuevo creyente')) return 'bg-[#4CAF50] text-white';
+    if (etiqueta.includes('Nuevo creyente')) return 'bg-[#FFEB3B] text-black';
     if (etiqueta.includes('Casa de')) return 'bg-[#FF5722] text-white';
     return 'bg-[#607D8B] text-white';
   };
