@@ -141,7 +141,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <main className="px-5 py-5 max-w-2xl mx-auto">
+      <main className="px-5 pt-5 pb-0 max-w-2xl mx-auto">
         
         {/* Testimonios Destacados */}
         <section className="mb-6">
@@ -935,12 +935,11 @@ export function HomePage() {
         </section>
 
         {/* Nueva Reunión Button */}
-        <section className="-mx-5 px-5 pt-5 pb-8 bg-white">
+        <section className="-mx-5 px-5 py-5 bg-white">
           <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
             NUEVA REUNIÓN
           </button>
         </section>
-
       </main>
     </div>
   );
