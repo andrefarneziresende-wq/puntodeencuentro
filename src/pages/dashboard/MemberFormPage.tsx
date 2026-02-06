@@ -130,8 +130,37 @@ export function MemberFormPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
+  const [numeroExiste, setNumeroExiste] = useState(false);
+  const [checkingNumero, setCheckingNumero] = useState(false);
 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  // Check if member number already exists
+  const checkNumeroExiste = async (numero: string) => {
+    if (!numero.trim()) {
+      setNumeroExiste(false);
+      return;
+    }
+    
+    setCheckingNumero(true);
+    try {
+      const result = await api.getIntegrantes();
+      if (result.data) {
+        const exists = result.data.some((integrante: any) => 
+          integrante.numero?.toString() === numero.trim() && 
+          integrante.id !== id // Exclude current member when editing
+        );
+        setNumeroExiste(exists);
+        if (exists) {
+          setFieldErrors(prev => ({ ...prev, numero: true }));
+        }
+      }
+    } catch (error) {
+      console.error('Error checking numero:', error);
+    } finally {
+      setCheckingNumero(false);
+    }
+  };
 
   useEffect(() => {
     if (isEditing) {
@@ -278,6 +307,12 @@ export function MemberFormPage() {
     // If "es miembro" is selected, "numero" is required
     if (formData.esMiembro && !formData.numero.trim()) {
       validationErrors.push('Si es miembro, el campo Número es obligatorio.');
+      errors.numero = true;
+    }
+    
+    // Check if numero already exists
+    if (formData.esMiembro && formData.numero.trim() && numeroExiste) {
+      validationErrors.push('El número de miembro ya existe.');
       errors.numero = true;
     }
     
@@ -509,18 +544,28 @@ export function MemberFormPage() {
                       <div className="w-44 border-t border-[#E0E0E0]"></div>
                     </div>
                     {/* Número - label and input side by side, aligned right */}
-                    <div className="flex items-center justify-end gap-2">
-                      <label className={`text-[14px] ${fieldErrors.numero ? 'text-[#F21D61]' : 'text-[#333]'}`}>Número *</label>
-                      <input
-                        type="text"
-                        value={formData.numero}
-                        onChange={(e) => {
-                          setFormData({ ...formData, numero: e.target.value });
-                          if (fieldErrors.numero) setFieldErrors({ ...fieldErrors, numero: false });
-                        }}
-                        className={`w-20 px-3 py-2 border rounded-lg text-[14px] ${fieldErrors.numero ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
-                        placeholder=""
-                      />
+                    <div className="flex flex-col items-end gap-1">
+                      <div className="flex items-center gap-2">
+                        <label className={`text-[14px] ${fieldErrors.numero || numeroExiste ? 'text-[#F21D61]' : 'text-[#333]'}`}>Número *</label>
+                        <input
+                          type="text"
+                          value={formData.numero}
+                          onChange={(e) => {
+                            setFormData({ ...formData, numero: e.target.value });
+                            if (fieldErrors.numero) setFieldErrors({ ...fieldErrors, numero: false });
+                            if (numeroExiste) setNumeroExiste(false);
+                          }}
+                          onBlur={(e) => checkNumeroExiste(e.target.value)}
+                          className={`w-20 px-3 py-2 border rounded-lg text-[14px] ${fieldErrors.numero || numeroExiste ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
+                          placeholder=""
+                        />
+                        {checkingNumero && (
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#4CAF50]"></div>
+                        )}
+                      </div>
+                      {numeroExiste && (
+                        <span className="text-[12px] text-[#F21D61]">Este número ya existe</span>
+                      )}
                     </div>
                   </>
                 )}
