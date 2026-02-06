@@ -24,11 +24,11 @@ interface Filters {
     desdeSiempre: [number, number];
   };
   formacion: {
-    discipuladoInicial: string;
-    preBautismos: string;
-    escuelaBiblica: string;
-    escuelaDiscipulado: string;
-    entrenamiento: string;
+    discipuladoInicial: string[];
+    preBautismos: string[];
+    escuelaBiblica: string[];
+    escuelaDiscipulado: string[];
+    entrenamiento: string[];
   };
   fe: {
     nuevoCreyente: boolean;
@@ -55,11 +55,11 @@ const initialFilters: Filters = {
     desdeSiempre: [0, 80],
   },
   formacion: {
-    discipuladoInicial: '',
-    preBautismos: '',
-    escuelaBiblica: '',
-    escuelaDiscipulado: '',
-    entrenamiento: '',
+    discipuladoInicial: [],
+    preBautismos: [],
+    escuelaBiblica: [],
+    escuelaDiscipulado: [],
+    entrenamiento: [],
   },
   fe: {
     nuevoCreyente: false,
@@ -616,8 +616,9 @@ export function MembersPage() {
                   selected={tempFilters.formacion.discipuladoInicial}
                   onSelect={(value) => setTempFilters({
                     ...tempFilters,
-                    formacion: { ...tempFilters.formacion, discipuladoInicial: value }
+                    formacion: { ...tempFilters.formacion, discipuladoInicial: toggleArrayFilter(tempFilters.formacion.discipuladoInicial, value) }
                   })}
+                  multiple
                 />
                 <Dropdown
                   label="Pre bautismos"
@@ -626,8 +627,9 @@ export function MembersPage() {
                   selected={tempFilters.formacion.preBautismos}
                   onSelect={(value) => setTempFilters({
                     ...tempFilters,
-                    formacion: { ...tempFilters.formacion, preBautismos: value }
+                    formacion: { ...tempFilters.formacion, preBautismos: toggleArrayFilter(tempFilters.formacion.preBautismos, value) }
                   })}
+                  multiple
                 />
                 <Dropdown
                   label="Escuela bíblica"
@@ -636,8 +638,9 @@ export function MembersPage() {
                   selected={tempFilters.formacion.escuelaBiblica}
                   onSelect={(value) => setTempFilters({
                     ...tempFilters,
-                    formacion: { ...tempFilters.formacion, escuelaBiblica: value }
+                    formacion: { ...tempFilters.formacion, escuelaBiblica: toggleArrayFilter(tempFilters.formacion.escuelaBiblica, value) }
                   })}
+                  multiple
                 />
                 <Dropdown
                   label="Escuela discipulado"
@@ -646,8 +649,9 @@ export function MembersPage() {
                   selected={tempFilters.formacion.escuelaDiscipulado}
                   onSelect={(value) => setTempFilters({
                     ...tempFilters,
-                    formacion: { ...tempFilters.formacion, escuelaDiscipulado: value }
+                    formacion: { ...tempFilters.formacion, escuelaDiscipulado: toggleArrayFilter(tempFilters.formacion.escuelaDiscipulado, value) }
                   })}
+                  multiple
                 />
                 <Dropdown
                   label="Entrenamiento"
@@ -656,8 +660,9 @@ export function MembersPage() {
                   selected={tempFilters.formacion.entrenamiento}
                   onSelect={(value) => setTempFilters({
                     ...tempFilters,
-                    formacion: { ...tempFilters.formacion, entrenamiento: value }
+                    formacion: { ...tempFilters.formacion, entrenamiento: toggleArrayFilter(tempFilters.formacion.entrenamiento, value) }
                   })}
+                  multiple
                 />
               </div>
               
