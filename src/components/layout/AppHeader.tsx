@@ -34,8 +34,8 @@ export function AppHeader() {
     <>
       <header className="bg-white shadow-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
-          {/* Logo + Title */}
-          <div className="flex items-center gap-2">
+          {/* Logo + Title - Link to Home */}
+          <Link to="/dashboard" className="flex items-center gap-2">
             <Logo size="sm" />
             <div className="flex flex-col leading-none">
               <span className="text-[8px] sm:text-[10px] text-black font-bold tracking-[0.2em]">seguimiento</span>
@@ -46,7 +46,7 @@ export function AppHeader() {
                 GRUPOS DE HOGAR
               </span>
             </div>
-          </div>
+          </Link>
           
           {/* Menu Button */}
           <button
