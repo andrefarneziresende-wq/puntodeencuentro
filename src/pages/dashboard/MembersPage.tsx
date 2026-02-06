@@ -120,11 +120,11 @@ export function MembersPage() {
   const getRolBadge = (rol: string | null) => {
     switch (rol) {
       case 'responsable':
-        return <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Responsable</span>;
+        return <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded">Responsable</span>;
       case 'ayudante':
-        return <span className="inline-block bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Ayudante</span>;
+        return <span className="inline-block bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded">Ayudante</span>;
       case 'supervisor':
-        return <span className="inline-block bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Supervisor</span>;
+        return <span className="inline-block bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded">Supervisor</span>;
       default:
         return null;
     }
@@ -397,7 +397,7 @@ export function MembersPage() {
                     <div className="flex flex-wrap gap-1 mt-1">
                       {getRolBadge(integrante.rol)}
                       {integrante.grupo && (
-                        <span className="inline-flex items-center gap-1 bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded-lg underline">
+                        <span className="inline-flex items-center gap-1 bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
@@ -408,7 +408,7 @@ export function MembersPage() {
                         </span>
                       )}
                       {!integrante.grupo && (
-                        <span className="inline-block bg-[#FFEB3B] text-black text-[10px] font-medium px-2 py-0.5 rounded-lg">
+                        <span className="inline-block bg-[#FFEB3B] text-black text-[10px] font-medium px-2 py-0.5 rounded">
                           Sin grupo
                         </span>
                       )}
@@ -418,7 +418,7 @@ export function MembersPage() {
                         {integrante.etiquetas.map((etiqueta, idx) => (
                           <span 
                             key={idx} 
-                            className={`inline-block text-[9px] font-medium px-2 py-0.5 rounded-lg ${getEtiquetaColor(etiqueta)}`}
+                            className={`inline-block text-[9px] font-medium px-2 py-0.5 rounded ${getEtiquetaColor(etiqueta)}`}
                           >
                             {etiqueta}
                           </span>
@@ -429,7 +429,7 @@ export function MembersPage() {
                   
                   {/* Percentage */}
                   <div className="flex-shrink-0">
-                    <span className="text-[14px] font-bold text-[#4CAF50]">{integrante.porcentaje}%</span>
+                    <span className="inline-block bg-[#CBCBCB] text-white text-[12px] font-bold px-2.5 py-1 rounded-full">{integrante.porcentaje}%</span>
                   </div>
                 </div>
               ))}
