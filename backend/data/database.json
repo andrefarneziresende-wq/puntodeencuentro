@@ -585,9 +585,9 @@
         "escuelaDiscipulado": "terminado",
         "entrenamiento": "terminado"
       },
-      "bautizado": true,
+      "bautizado": false,
       "nuevoBautizado": false,
-      "iglesiaProcedente": null,
+      "iglesiaProcedente": "Test",
       "ministerios": [
         "Jóvenes",
         "Adolescentes",
@@ -678,7 +678,9 @@
         "ayudante": false,
         "ayudanteGrupos": [],
         "responsable": true,
-        "responsableGrupos": ["Parejas jóvenes"],
+        "responsableGrupos": [
+          "Parejas jóvenes"
+        ],
         "supervisor": false,
         "supervisorGrupos": []
       },
@@ -764,7 +766,9 @@
       "gruposSupervisa": null,
       "responsabilidad": {
         "ayudante": true,
-        "ayudanteGrupos": ["Casa de Samuel"],
+        "ayudanteGrupos": [
+          "Casa de Samuel"
+        ],
         "responsable": false,
         "responsableGrupos": [],
         "supervisor": false,
