@@ -9,6 +9,7 @@ interface Integrante {
   foto: string | null;
   rol: 'responsable' | 'ayudante' | 'supervisor' | null;
   grupo: string | null;
+  gruposSupervisa?: string[];
   etiquetas: string[];
   porcentaje: number;
 }
@@ -541,31 +542,48 @@ export function MembersPage() {
                       </div>
                     )}
                     
-                    {/* Group badge + Percentage - second line */}
-                    <div className="flex items-center gap-2 mt-1">
-                      {integrante.grupo ? (
-                        <span className="inline-flex items-center gap-1 bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                          </svg>
-                          {integrante.grupo}
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 bg-[#F21D61] text-white text-[10px] font-medium px-2 py-0.5 rounded">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                            <line x1="12" y1="9" x2="12" y2="13"/>
-                            <line x1="12" y1="17" x2="12.01" y2="17"/>
-                          </svg>
-                          Sin grupo
-                        </span>
-                      )}
-                      {/* Percentage next to group - only show if has group */}
-                      {integrante.grupo && (
-                        <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
+                    {/* Group badges + Percentage - stacked vertically */}
+                    <div className="flex flex-col gap-1 mt-1">
+                      {/* Main group + percentage on same line */}
+                      <div className="flex items-center gap-2">
+                        {integrante.grupo ? (
+                          <span className="inline-flex items-center gap-1 bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                              <circle cx="9" cy="7" r="4"/>
+                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            {integrante.grupo}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 bg-[#F21D61] text-white text-[10px] font-medium px-2 py-0.5 rounded">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                              <line x1="12" y1="9" x2="12" y2="13"/>
+                              <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            Sin grupo
+                          </span>
+                        )}
+                        {/* Percentage next to group - only show if has group */}
+                        {integrante.grupo && (
+                          <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
+                        )}
+                      </div>
+                      {/* Additional groups supervised - stacked vertically */}
+                      {integrante.gruposSupervisa && integrante.gruposSupervisa.length > 0 && (
+                        integrante.gruposSupervisa.map((grupoSup, idx) => (
+                          <span key={idx} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                              <circle cx="9" cy="7" r="4"/>
+                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            {grupoSup}
+                          </span>
+                        ))
                       )}
                     </div>
                     
