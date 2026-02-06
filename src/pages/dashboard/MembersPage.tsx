@@ -12,6 +12,14 @@ interface Integrante {
   gruposSupervisa?: string[];
   etiquetas: string[];
   porcentaje: number;
+  responsabilidad?: {
+    ayudante: boolean;
+    ayudanteGrupos: string[];
+    responsable: boolean;
+    responsableGrupos: string[];
+    supervisor: boolean;
+    supervisorGrupos: string[];
+  };
 }
 
 interface Filters {
@@ -535,10 +543,25 @@ export function MembersPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-bold text-[#333333] truncate underline">{integrante.nombre}</p>
                     
-                    {/* Role badge - first line */}
-                    {integrante.rol && (
-                      <div className="mt-1">
-                        {getRolBadge(integrante.rol)}
+                    {/* Role badges - show all active roles */}
+                    {(integrante.responsabilidad?.ayudante || integrante.responsabilidad?.responsable || integrante.responsabilidad?.supervisor || integrante.rol) && (
+                      <div className="flex flex-col gap-1 mt-1">
+                        {integrante.responsabilidad ? (
+                          <>
+                            {integrante.responsabilidad.supervisor && (
+                              <span className="inline-block w-fit bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded">Supervisor</span>
+                            )}
+                            {integrante.responsabilidad.responsable && (
+                              <span className="inline-block w-fit bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded">Responsable</span>
+                            )}
+                            {integrante.responsabilidad.ayudante && (
+                              <span className="inline-block w-fit bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded">Ayudante</span>
+                            )}
+                          </>
+                        ) : (
+                          // Fallback for old data
+                          getRolBadge(integrante.rol)
+                        )}
                       </div>
                     )}
                     

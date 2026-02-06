@@ -555,15 +555,20 @@
       "id": "i1",
       "numero": 43,
       "nombre": "Francisco Hernández Rodríguez",
-      "foto": null,
+      "foto": "/uploads/8d61e15f-409f-475e-b7f4-4b7853d0884b.jpeg",
       "email": "fhernandez@email.com",
       "telefono": "+34 685002002",
       "edad": 43,
       "fechaNacimiento": "12/02/1982",
       "direccion": "Calle San Vicente Mártir, 12 46023 Valencia",
-      "rol": "responsable",
+      "rol": "supervisor",
       "grupo": "Casa de Samuel",
-      "gruposSupervisa": [],
+      "gruposSupervisa": [
+        "Casa de Samuel",
+        "Casa de María Inés",
+        "Casa Enrique y Julia",
+        "Hombres adultos 1"
+      ],
       "esMiembro": true,
       "nuevoCreyente": false,
       "etiquetas": [],
@@ -635,7 +640,25 @@
           "nombre": "Multimedia Proyección",
           "asistio": false
         }
-      ]
+      ],
+      "responsabilidad": {
+        "ayudante": false,
+        "ayudanteGrupos": [],
+        "responsable": true,
+        "responsableGrupos": [
+          "Casa de Samuel",
+          "Casa de María Inés",
+          "Casa Enrique y Julia",
+          "Hombres adultos 1"
+        ],
+        "supervisor": true,
+        "supervisorGrupos": [
+          "Casa de Samuel",
+          "Casa de María Inés",
+          "Casa Enrique y Julia",
+          "Hombres adultos 1"
+        ]
+      }
     },
     {
       "id": "i2",

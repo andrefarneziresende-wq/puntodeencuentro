@@ -20,6 +20,14 @@ interface MemberDetail {
   nuevoCreyente: boolean;
   etiquetas: string[];
   porcentaje: number | null;
+  responsabilidad?: {
+    ayudante: boolean;
+    ayudanteGrupos: string[];
+    responsable: boolean;
+    responsableGrupos: string[];
+    supervisor: boolean;
+    supervisorGrupos: string[];
+  };
   asistencia: {
     ultimoMes: number;
     ultimoAno: number;
@@ -234,8 +242,26 @@ export function MemberDetailPage() {
 
           {/* Badges */}
           <div className="flex flex-col gap-2">
-            {/* Role badge */}
-            {member.rol && (
+            {/* Role badges - show all active roles */}
+            {member.responsabilidad ? (
+              <>
+                {member.responsabilidad.supervisor && (
+                  <span className="inline-flex items-center gap-1 w-fit bg-[#FF9800] text-white text-[12px] font-medium px-3 py-1 rounded">
+                    Supervisor
+                  </span>
+                )}
+                {member.responsabilidad.responsable && (
+                  <span className="inline-flex items-center gap-1 w-fit bg-[#CBCBCB] text-white text-[12px] font-medium px-3 py-1 rounded">
+                    Responsable
+                  </span>
+                )}
+                {member.responsabilidad.ayudante && (
+                  <span className="inline-flex items-center gap-1 w-fit bg-[#9E9E9E] text-white text-[12px] font-medium px-3 py-1 rounded">
+                    Ayudante
+                  </span>
+                )}
+              </>
+            ) : member.rol && (
               <span className="inline-flex items-center gap-1 w-fit bg-[#CBCBCB] text-white text-[12px] font-medium px-3 py-1 rounded">
                 {member.rol === 'responsable' && 'Responsable'}
                 {member.rol === 'ayudante' && 'Ayudante'}
