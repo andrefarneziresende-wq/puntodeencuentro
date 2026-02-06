@@ -54,6 +54,7 @@ export function MemberDetailPage() {
   const [showDarBajaModal, setShowDarBajaModal] = useState(false);
   const [showNoPuedeBajaModal, setShowNoPuedeBajaModal] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [showBautizadoInfo, setShowBautizadoInfo] = useState(false);
 
   useEffect(() => {
     loadMember();
@@ -392,23 +393,26 @@ export function MemberDetailPage() {
                 </div>
               )}
 
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-[14px] text-[#333] flex items-center gap-1">
+              <div className="flex items-center gap-2 mb-3 relative">
+                <span className="inline-flex items-center gap-1 bg-[#C8EDFA] text-black text-[12px] font-medium px-3 py-1 rounded">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"/>
                     <path d="M2 17l10 5 10-5"/>
                     <path d="M2 12l10 5 10-5"/>
                   </svg>
                   Bautizado
-                  <button className="ml-1">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#45C1EE" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <line x1="12" y1="16" x2="12" y2="12"/>
-                      <line x1="12" y1="8" x2="12.01" y2="8"/>
-                    </svg>
-                  </button>
                 </span>
-                <span className="text-[14px] text-[#333] flex items-center gap-2">
+                <button 
+                  onClick={() => setShowBautizadoInfo(!showBautizadoInfo)}
+                  className="relative"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#45C1EE" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                </button>
+                <span className="text-[14px] text-[#333] flex items-center gap-2 ml-auto">
                   {member.bautizado ? 'Sí' : 'No'}
                   {member.nuevoBautizado && <span className="text-[12px] text-[#666]">- Nuevo bautizado</span>}
                   {!member.bautizado && (
@@ -419,6 +423,11 @@ export function MemberDetailPage() {
                     </svg>
                   )}
                 </span>
+                {showBautizadoInfo && (
+                  <div className="absolute top-8 left-0 right-0 bg-[#666] text-white text-[12px] p-3 rounded-lg shadow-lg z-10">
+                    Se considera nuevo bautizado a la persona bautizada durante el último año.
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-between items-center mb-3">
