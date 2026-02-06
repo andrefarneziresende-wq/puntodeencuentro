@@ -421,9 +421,17 @@ export function MembersPage() {
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-medium text-[#333333] truncate">{integrante.nombre}</p>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {getRolBadge(integrante.rol)}
-                      {integrante.grupo && (
+                    
+                    {/* Role badge - first line */}
+                    {integrante.rol && (
+                      <div className="mt-1">
+                        {getRolBadge(integrante.rol)}
+                      </div>
+                    )}
+                    
+                    {/* Group badge + Percentage - second line */}
+                    <div className="flex items-center gap-2 mt-1">
+                      {integrante.grupo ? (
                         <span className="inline-flex items-center gap-1 bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -433,13 +441,21 @@ export function MembersPage() {
                           </svg>
                           {integrante.grupo}
                         </span>
-                      )}
-                      {!integrante.grupo && (
-                        <span className="inline-block bg-[#FFEB3B] text-black text-[10px] font-medium px-2 py-0.5 rounded">
+                      ) : (
+                        <span className="inline-flex items-center gap-1 bg-[#FFEB3B] text-black text-[10px] font-medium px-2 py-0.5 rounded">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                          </svg>
                           Sin grupo
                         </span>
                       )}
+                      {/* Percentage next to group */}
+                      <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
                     </div>
+                    
+                    {/* Etiquetas - third line */}
                     {integrante.etiquetas.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-1">
                         {integrante.etiquetas.map((etiqueta, idx) => (
@@ -452,11 +468,6 @@ export function MembersPage() {
                         ))}
                       </div>
                     )}
-                  </div>
-                  
-                  {/* Percentage */}
-                  <div className="flex-shrink-0">
-                    <span className="inline-block bg-[#CBCBCB] text-white text-[12px] font-bold px-2.5 py-1 rounded-full">{integrante.porcentaje}%</span>
                   </div>
                   </div>
                   {/* Separator with padding */}
