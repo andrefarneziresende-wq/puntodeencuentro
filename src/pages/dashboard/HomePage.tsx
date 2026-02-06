@@ -935,12 +935,10 @@ export function HomePage() {
         </section>
 
         {/* Nueva Reunión Button */}
-        <section className="mb-6">
-          <div className="bg-white rounded-2xl shadow-md p-5">
-            <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
-              NUEVA REUNIÓN
-            </button>
-          </div>
+        <section className="-mx-5 px-5 pt-5 pb-8 bg-white">
+          <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
+            NUEVA REUNIÓN
+          </button>
         </section>
 
       </main>
