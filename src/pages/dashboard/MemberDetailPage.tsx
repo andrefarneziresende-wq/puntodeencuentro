@@ -242,7 +242,29 @@ export function MemberDetailPage() {
 
           {/* Badges */}
           <div className="flex flex-col gap-2">
-            {/* Role badges with their groups */}
+            {/* 1. Group badge (member's own group) - FIRST */}
+            {member.grupo ? (
+              <span className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                {member.grupo}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 w-fit bg-[#F21D61] text-white text-[12px] font-medium px-3 py-1 rounded">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Sin grupo
+              </span>
+            )}
+
+            {/* 2. Role badges with their groups */}
             {member.responsabilidad ? (
               <>
                 {/* Supervisor + groups */}
@@ -311,7 +333,7 @@ export function MemberDetailPage() {
               </span>
             )}
 
-            {/* Nuevo creyente */}
+            {/* 3. Nuevo creyente */}
             {member.nuevoCreyente && (
               <div className="flex items-center gap-2 relative">
                 <span className="inline-flex items-center gap-1 w-fit bg-[#FFEB3B] text-black text-[12px] font-medium px-3 py-1 rounded">
@@ -338,42 +360,7 @@ export function MemberDetailPage() {
               </div>
             )}
 
-            {/* Group badge */}
-            {member.grupo ? (
-              <span className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                {member.grupo}
-              </span>
-            ) : (
-              <span className="inline-flex items-center gap-1 w-fit bg-[#F21D61] text-white text-[12px] font-medium px-3 py-1 rounded">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                  <line x1="12" y1="9" x2="12" y2="13"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-                Sin grupo
-              </span>
-            )}
-
-            {/* Grupos que supervisa */}
-            {member.gruposSupervisa && member.gruposSupervisa.map((grupo, idx) => (
-              <span key={idx} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                {grupo}
-              </span>
-            ))}
-
-            {/* Etiquetas - filter out Nuevo creyente since it's handled separately */}
+            {/* 4. Etiquetas - filter out Nuevo creyente since it's handled separately */}
             {member.etiquetas && member.etiquetas.filter(e => e.toLowerCase() !== 'nuevo creyente').length > 0 && 
               member.etiquetas.filter(e => e.toLowerCase() !== 'nuevo creyente').map((etiqueta, idx) => (
               <span key={idx} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded">
