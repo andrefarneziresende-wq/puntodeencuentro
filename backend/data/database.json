@@ -120,6 +120,10 @@
         "iniciado": { "total": 183, "porcentaje": 72 },
         "noIniciado": { "total": 42, "porcentaje": 22 }
       }
+    },
+    "oracion": {
+      "motivosDeOracion": 7084,
+      "oracionesContestadas": 4359
     }
   },
   "users": [
