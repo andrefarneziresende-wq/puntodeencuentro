@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { AppHeader } from '../../components/layout';
 import { api } from '../../services/api';
 
@@ -480,7 +481,7 @@ export function MembersPage() {
             <div>
               {visibleIntegrantes.map((integrante, index) => (
                 <div key={integrante.id}>
-                  <div className="flex items-center gap-3 p-4">
+                  <Link to={`/dashboard/integrante/${integrante.id}`} className="flex items-center gap-3 p-4 hover:bg-[#F5F5F5] transition-colors">
                   {/* Avatar */}
                   <div className="w-12 h-12 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
                     {integrante.foto ? (
@@ -554,7 +555,7 @@ export function MembersPage() {
                       </div>
                     )}
                   </div>
-                  </div>
+                  </Link>
                   {/* Separator with padding */}
                   {index < visibleIntegrantes.length - 1 && (
                     <div className="px-[10px]">

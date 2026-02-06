@@ -7,6 +7,7 @@ import {
   NewTestimonyPage,
   GroupsPage,
   MembersPage,
+  MemberDetailPage,
   MinistriesPage,
   WithdrawalsPage
 } from '../pages/dashboard';
@@ -79,6 +80,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <MembersPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/dashboard/integrante/:id',
+    element: (
+      <ProtectedRoute>
+        <MemberDetailPage />
       </ProtectedRoute>
     ),
   },

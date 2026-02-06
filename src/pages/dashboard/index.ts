@@ -4,5 +4,6 @@ export { TestimonyDetailPage } from './TestimonyDetailPage';
 export { NewTestimonyPage } from './NewTestimonyPage';
 export { GroupsPage } from './GroupsPage';
 export { MembersPage } from './MembersPage';
+export { MemberDetailPage } from './MemberDetailPage';
 export { MinistriesPage } from './MinistriesPage';
 export { WithdrawalsPage } from './WithdrawalsPage';

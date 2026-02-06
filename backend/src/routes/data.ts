@@ -81,6 +81,25 @@ router.get('/integrantes', async (req: Request, res: Response) => {
   }
 });
 
+// Get single integrante by ID
+router.get('/integrantes/:id', async (req: Request, res: Response) => {
+  try {
+    const dbPath = path.resolve('./data/database.json');
+    const content = fs.readFileSync(dbPath, 'utf-8');
+    const data = JSON.parse(content);
+    const integrante = (data.integrantes || []).find((i: { id: string }) => i.id === req.params.id);
+    
+    if (!integrante) {
+      return res.status(404).json({ error: 'Integrante no encontrado.' });
+    }
+    
+    res.json({ integrante });
+  } catch (error) {
+    console.error('Error fetching integrante:', error);
+    res.status(500).json({ error: 'Error al obtener el integrante.' });
+  }
+});
+
 router.get('/members/:id', async (req: Request, res: Response) => {
   try {
     const db = getDatabase();
