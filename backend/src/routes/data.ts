@@ -9,11 +9,52 @@ import { getDatabase } from '../database/index.js';
 import { authenticate } from '../middleware/auth.js';
 import fs from 'fs';
 import path from 'path';
+import { randomUUID } from 'crypto';
 
 const router = Router();
 
 // All routes require authentication
 router.use(authenticate);
+
+// Upload image
+router.post('/upload', async (req: Request, res: Response) => {
+  try {
+    const { image, filename } = req.body;
+    
+    if (!image) {
+      return res.status(400).json({ error: 'No image provided.' });
+    }
+    
+    // Extract base64 data
+    const matches = image.match(/^data:image\/([a-zA-Z]+);base64,(.+)$/);
+    if (!matches) {
+      return res.status(400).json({ error: 'Invalid image format.' });
+    }
+    
+    const ext = matches[1];
+    const data = matches[2];
+    const buffer = Buffer.from(data, 'base64');
+    
+    // Generate unique filename
+    const uniqueFilename = `${randomUUID()}.${ext}`;
+    const uploadsDir = path.resolve('./uploads');
+    
+    // Ensure uploads directory exists
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+    
+    const filepath = path.join(uploadsDir, uniqueFilename);
+    fs.writeFileSync(filepath, buffer);
+    
+    // Return the URL
+    const imageUrl = `/uploads/${uniqueFilename}`;
+    res.json({ url: imageUrl });
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    res.status(500).json({ error: 'Error al subir la imagen.' });
+  }
+});
 
 // Dashboard Stats
 router.get('/dashboard/stats', async (req: Request, res: Response) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AppHeader } from '../../components/layout';
-import { api } from '../../services/api';
+import { api, getImageUrl } from '../../services/api';
 
 interface MemberFormData {
   foto: string | null;
@@ -233,10 +233,20 @@ export function MemberFormPage() {
     setSaving(true);
     
     try {
+      let dataToSave = { ...formData };
+      
+      // Upload image if there's a new one (base64 format)
+      if (formData.foto && formData.foto.startsWith('data:image')) {
+        const uploadResult = await api.uploadImage(formData.foto);
+        if (uploadResult.data?.url) {
+          dataToSave.foto = uploadResult.data.url;
+        }
+      }
+      
       if (isEditing && id) {
-        await api.updateIntegrante(id, formData);
+        await api.updateIntegrante(id, dataToSave);
       } else {
-        await api.createIntegrante(formData);
+        await api.createIntegrante(dataToSave);
       }
       navigate('/dashboard/integrantes');
     } catch (error) {
@@ -379,7 +389,7 @@ export function MemberFormPage() {
                 className="relative w-16 h-16 flex-shrink-0"
               >
                 {formData.foto || previewUrl ? (
-                  <img src={formData.foto || previewUrl || ''} alt="Foto" className="w-full h-full rounded-full object-cover" />
+                  <img src={getImageUrl(formData.foto) || previewUrl || ''} alt="Foto" className="w-full h-full rounded-full object-cover" />
                 ) : (
                   <img src="/icon-photo-placeholder.png" alt="Foto" className="w-full h-full object-contain" />
                 )}

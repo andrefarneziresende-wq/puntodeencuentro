@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AppHeader } from '../../components/layout';
-import { api } from '../../services/api';
+import { api, getImageUrl } from '../../services/api';
 
 interface MemberDetail {
   id: string;
@@ -174,7 +174,7 @@ export function MemberDetailPage() {
             {/* Photo */}
             <div className="w-20 h-20 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
               {member.foto ? (
-                <img src={member.foto} alt={member.nombre} className="w-full h-full object-cover" />
+                <img src={getImageUrl(member.foto) || ''} alt={member.nombre} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-[#9E9E9E]">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

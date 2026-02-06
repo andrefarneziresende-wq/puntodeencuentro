@@ -5,6 +5,13 @@
  */
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const BASE_URL = API_URL.replace('/api', '');
+
+export const getImageUrl = (path: string | null): string | null => {
+  if (!path) return null;
+  if (path.startsWith('data:') || path.startsWith('http')) return path;
+  return `${BASE_URL}${path}`;
+};
 
 interface ApiResponse<T> {
   data?: T;
@@ -180,6 +187,13 @@ class ApiService {
     return this.request<{ integrante: any }>(`/integrantes/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
+    });
+  }
+
+  async uploadImage(imageBase64: string) {
+    return this.request<{ url: string }>('/upload', {
+      method: 'POST',
+      body: JSON.stringify({ image: imageBase64 }),
     });
   }
 

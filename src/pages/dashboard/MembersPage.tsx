@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppHeader } from '../../components/layout';
-import { api } from '../../services/api';
+import { api, getImageUrl } from '../../services/api';
 
 interface Integrante {
   id: string;
@@ -520,7 +520,7 @@ export function MembersPage() {
                   {/* Avatar */}
                   <div className="w-12 h-12 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
                     {integrante.foto ? (
-                      <img src={integrante.foto} alt={integrante.nombre} className="w-full h-full object-cover" />
+                      <img src={getImageUrl(integrante.foto) || ''} alt={integrante.nombre} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-[#9E9E9E]">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
