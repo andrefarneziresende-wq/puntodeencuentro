@@ -279,7 +279,7 @@ export function HomePage() {
                 <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-full mt-1">
                   Supervisor
                 </div>
-                <p className="text-[10px] text-[#9E9E9E] mt-1">1 cada 5,1 grupos</p>
+                <span className="block bg-[#F2F2F2] text-[#9E9E9E] text-[10px] px-2 py-0.5 rounded-full mt-1">1 cada 5,1 grupos</span>
               </div>
               <div>
                 <p className="text-[32px] font-bold text-[#333333] leading-none">51</p>
@@ -312,7 +312,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">67</p>
-                <p className="text-[12px] text-[#9E9E9E]">1,5 en cada grupo</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full">1,5 en cada grupo</span>
               </div>
               <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
                 <img src="/icon-visitor.png" alt="" width="14" height="14" />
@@ -327,7 +327,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">23</p>
-                <p className="text-[12px] text-[#9E9E9E]">0,5 en cada grupo</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full">0,5 en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#D4E157] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
@@ -347,7 +347,7 @@ export function HomePage() {
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">12</p>
-                <p className="text-[12px] text-[#9E9E9E]">0,5 en cada grupo</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full">0,5 en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#C8EDFA] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
@@ -367,7 +367,7 @@ export function HomePage() {
             <div>
               <div className="flex items-baseline gap-2 mb-1">
                 <p className="text-[40px] font-bold text-[#333333] leading-none">7</p>
-                <p className="text-[12px] text-[#9E9E9E]">0,5 en cada grupo</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full">0,5 en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
