@@ -20,6 +20,8 @@ interface MemberDetail {
   nuevoCreyente: boolean;
   etiquetas: string[];
   porcentaje: number | null;
+  dadoDeBaja?: boolean;
+  fechaBaja?: string;
   responsabilidad?: {
     ayudante: boolean;
     ayudanteGrupos: string[];
@@ -103,14 +105,55 @@ export function MemberDetailPage() {
     }
   };
 
-  const handleDarBaja = () => {
-    if (member?.rol === 'responsable' || member?.rol === 'supervisor') {
+  const handleDarBaja = async () => {
+    // Check if member has any active responsibilities
+    const hasResponsibility = member?.responsabilidad?.responsable || 
+                              member?.responsabilidad?.supervisor ||
+                              member?.rol === 'responsable' || 
+                              member?.rol === 'supervisor';
+    
+    if (hasResponsibility) {
       setShowDarBajaModal(false);
       setShowNoPuedeBajaModal(true);
     } else {
-      // Process dar de baja
-      setShowDarBajaModal(false);
-      navigate('/dashboard/integrantes');
+      // Process dar de baja - soft delete
+      try {
+        const result = await api.updateIntegrante(member!.id, {
+          dadoDeBaja: true,
+          fechaBaja: new Date().toISOString()
+        });
+        
+        if (result.error) {
+          alert('Error al dar de baja: ' + result.error);
+          return;
+        }
+        
+        setShowDarBajaModal(false);
+        navigate('/dashboard/integrantes');
+      } catch (error) {
+        console.error('Error al dar de baja:', error);
+        alert('Error al procesar la solicitud');
+      }
+    }
+  };
+
+  const handleReactivar = async () => {
+    try {
+      const result = await api.updateIntegrante(member!.id, {
+        dadoDeBaja: false,
+        fechaBaja: null
+      });
+      
+      if (result.error) {
+        alert('Error al reactivar: ' + result.error);
+        return;
+      }
+      
+      // Reload member data
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al reactivar:', error);
+      alert('Error al procesar la solicitud');
     }
   };
 
@@ -224,7 +267,14 @@ export function MemberDetailPage() {
           </div>
 
           {/* Name */}
-          <h1 className="text-[28px] font-bold text-[#333] leading-tight mb-2">{member.nombre}</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <h1 className="text-[28px] font-bold text-[#333] leading-tight">{member.nombre}</h1>
+            {member.dadoDeBaja && (
+              <span className="inline-block bg-[#F21D61] text-white text-[12px] font-medium px-3 py-1 rounded">
+                De baja
+              </span>
+            )}
+          </div>
           
           {/* Age and Date */}
           <p className="text-[14px] text-[#333] mb-2">
@@ -574,12 +624,21 @@ export function MemberDetailPage() {
           >
             EDITAR
           </Link>
-          <button 
-            onClick={() => setShowDarBajaModal(true)}
-            className="w-full text-[#F21D61] text-[14px] font-medium py-2"
-          >
-            DAR DE BAJA
-          </button>
+          {member.dadoDeBaja ? (
+            <button 
+              onClick={handleReactivar}
+              className="w-full text-[#4CAF50] text-[14px] font-medium py-2"
+            >
+              REACTIVAR
+            </button>
+          ) : (
+            <button 
+              onClick={() => setShowDarBajaModal(true)}
+              className="w-full text-[#F21D61] text-[14px] font-medium py-2"
+            >
+              DAR DE BAJA
+            </button>
+          )}
         </div>
       </footer>
 

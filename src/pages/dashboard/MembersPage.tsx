@@ -12,6 +12,8 @@ interface Integrante {
   gruposSupervisa?: string[];
   etiquetas: string[];
   porcentaje: number;
+  dadoDeBaja?: boolean;
+  fechaBaja?: string;
   responsabilidad?: {
     ayudante: boolean;
     ayudanteGrupos: string[];
@@ -24,6 +26,7 @@ interface Integrante {
 
 interface Filters {
   miembros: boolean;
+  mostrarDeBaja: boolean;
   responsabilidad: string[];
   gruposDeHogar: string[];
   ministerios: string[];
@@ -55,6 +58,7 @@ interface OrderBy {
 
 const initialFilters: Filters = {
   miembros: false,
+  mostrarDeBaja: false,
   responsabilidad: [],
   gruposDeHogar: [],
   ministerios: [],
@@ -183,6 +187,11 @@ export function MembersPage() {
     let result = [...integrantes];
 
     // Apply filters
+    // Filter by dado de baja - by default hide members who are "de baja"
+    if (!filters.mostrarDeBaja) {
+      result = result.filter(i => !i.dadoDeBaja);
+    }
+
     // Filter by responsabilidad
     if (filters.responsabilidad.length > 0) {
       result = result.filter(i => i.rol && filters.responsabilidad.map(r => r.toLowerCase()).includes(i.rol));
@@ -541,7 +550,14 @@ export function MembersPage() {
                   
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-bold text-[#333333] truncate underline">{integrante.nombre}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-[14px] font-bold text-[#333333] truncate underline">{integrante.nombre}</p>
+                      {integrante.dadoDeBaja && (
+                        <span className="inline-block bg-[#F21D61] text-white text-[9px] font-medium px-2 py-0.5 rounded flex-shrink-0">
+                          De baja
+                        </span>
+                      )}
+                    </div>
                     
                     {/* Check if member's grupo is in any of their role groups */}
                     {(() => {
@@ -760,6 +776,13 @@ export function MembersPage() {
                 label="Miembros" 
                 checked={tempFilters.miembros} 
                 onChange={() => setTempFilters({...tempFilters, miembros: !tempFilters.miembros})}
+              />
+
+              {/* Mostrar de baja Toggle */}
+              <Toggle 
+                label="Mostrar de baja" 
+                checked={tempFilters.mostrarDeBaja} 
+                onChange={() => setTempFilters({...tempFilters, mostrarDeBaja: !tempFilters.mostrarDeBaja})}
               />
               
               {/* Responsabilidad */}
