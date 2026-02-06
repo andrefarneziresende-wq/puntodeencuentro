@@ -164,13 +164,19 @@ export function MemberFormPage() {
             supervisor: member.responsabilidad.supervisor || false,
             supervisorGrupos: member.responsabilidad.supervisorGrupos || []
           } : {
-            // Fallback for old data format
+            // Fallback for old data format - use grupo as default if gruposSupervisa is empty
             ayudante: member.rol === 'ayudante',
-            ayudanteGrupos: member.rol === 'ayudante' ? (member.gruposSupervisa || []) : [],
+            ayudanteGrupos: member.rol === 'ayudante' 
+              ? (member.gruposSupervisa && member.gruposSupervisa.length > 0 ? member.gruposSupervisa : (member.grupo ? [member.grupo] : [])) 
+              : [],
             responsable: member.rol === 'responsable',
-            responsableGrupos: member.rol === 'responsable' ? (member.gruposSupervisa || []) : [],
+            responsableGrupos: member.rol === 'responsable' 
+              ? (member.gruposSupervisa && member.gruposSupervisa.length > 0 ? member.gruposSupervisa : (member.grupo ? [member.grupo] : [])) 
+              : [],
             supervisor: member.rol === 'supervisor',
-            supervisorGrupos: member.rol === 'supervisor' ? (member.gruposSupervisa || []) : []
+            supervisorGrupos: member.rol === 'supervisor' 
+              ? (member.gruposSupervisa && member.gruposSupervisa.length > 0 ? member.gruposSupervisa : (member.grupo ? [member.grupo] : [])) 
+              : []
           },
           formacion: {
             discipuladoInicial: member.formacion?.discipuladoInicial?.toLowerCase().replace(' ', '_') || '',
