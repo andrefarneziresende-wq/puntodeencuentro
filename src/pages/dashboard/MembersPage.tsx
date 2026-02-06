@@ -337,7 +337,7 @@ export function MembersPage() {
         <h1 className="text-[28px] font-bold text-[#333333] mb-4">Integrantes</h1>
         
         {/* Filter and Order */}
-        <div className="flex items-center gap-6 mb-4">
+        <div className="flex items-center justify-between mb-4">
           <button 
             onClick={openFilterModal}
             className="flex items-center gap-2 text-[#66B97B] text-[14px]"
