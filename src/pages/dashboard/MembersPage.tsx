@@ -448,8 +448,10 @@ export function MembersPage() {
                           Sin grupo
                         </span>
                       )}
-                      {/* Percentage next to group */}
-                      <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
+                      {/* Percentage next to group - only show if has group */}
+                      {integrante.grupo && (
+                        <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
+                      )}
                     </div>
                     
                     {/* Etiquetas - third line */}
