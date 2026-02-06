@@ -323,7 +323,7 @@ export function HomePage() {
                 <div className="inline-block bg-[#F5F5F5] text-[#333333] text-[10px] font-medium px-2 py-1 rounded-full mt-1">
                   Supervisor
                 </div>
-                <span className="block bg-[#F2F2F2] text-[#9E9E9E] text-[10px] px-2 py-0.5 rounded-full mt-1">1 cada 5,1 grupos</span>
+                <span className="block bg-[#F2F2F2] text-[#9E9E9E] text-[8px] px-1.5 py-0.5 rounded-full mt-1">1 cada 5,1 grupos</span>
               </div>
               <div>
                 <p className="text-[32px] font-bold text-[#333333] leading-none">51</p>
