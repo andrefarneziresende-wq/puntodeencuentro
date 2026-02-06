@@ -417,7 +417,7 @@ export function MembersPage() {
                   
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-medium text-[#333333] truncate">{integrante.nombre}</p>
+                    <p className="text-[14px] font-bold text-[#333333] truncate underline">{integrante.nombre}</p>
                     
                     {/* Role badge - first line */}
                     {integrante.rol && (
