@@ -400,9 +400,10 @@ export function MembersPage() {
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#4CAF50]"></div>
             </div>
           ) : (
-            <div className="divide-y divide-[#E0E0E0]">
-              {integrantes.map((integrante) => (
-                <div key={integrante.id} className="flex items-center gap-3 p-4">
+            <div>
+              {integrantes.map((integrante, index) => (
+                <div key={integrante.id}>
+                  <div className="flex items-center gap-3 p-4">
                   {/* Avatar */}
                   <div className="w-12 h-12 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
                     {integrante.foto ? (
@@ -457,6 +458,13 @@ export function MembersPage() {
                   <div className="flex-shrink-0">
                     <span className="inline-block bg-[#CBCBCB] text-white text-[12px] font-bold px-2.5 py-1 rounded-full">{integrante.porcentaje}%</span>
                   </div>
+                  </div>
+                  {/* Separator with padding */}
+                  {index < integrantes.length - 1 && (
+                    <div className="px-[10px]">
+                      <div className="border-b border-[#E0E0E0]"></div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
