@@ -513,7 +513,7 @@ export function HomePage() {
             {/* Tabs */}
             <div className="flex items-center gap-4 mb-4">
               <span className="text-[14px] font-medium text-[#333333]">Grupos de Hogar</span>
-              <span className="text-[14px] font-medium text-[#4CAF50]">→ INTEGRANTES</span>
+              <Link to="/dashboard/integrantes" className="text-[14px] font-medium text-[#4CAF50]">→ INTEGRANTES</Link>
             </div>
             
             {/* Map */}

@@ -68,6 +68,19 @@ router.get('/members', async (req: Request, res: Response) => {
   }
 });
 
+// Integrantes (new format)
+router.get('/integrantes', async (req: Request, res: Response) => {
+  try {
+    const dbPath = path.resolve('./data/database.json');
+    const content = fs.readFileSync(dbPath, 'utf-8');
+    const data = JSON.parse(content);
+    res.json({ integrantes: data.integrantes || [] });
+  } catch (error) {
+    console.error('Error fetching integrantes:', error);
+    res.status(500).json({ error: 'Error al obtener los integrantes.' });
+  }
+});
+
 router.get('/members/:id', async (req: Request, res: Response) => {
   try {
     const db = getDatabase();

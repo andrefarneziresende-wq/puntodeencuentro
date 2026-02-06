@@ -2,178 +2,193 @@ import { useState, useEffect } from 'react';
 import { AppHeader } from '../../components/layout';
 import { api } from '../../services/api';
 
-interface Member {
+interface Integrante {
   id: string;
-  name: string;
-  email: string;
-  phone: string;
-  groupId: string;
-  groupName: string;
-  role: string;
-  photoUrl: string | null;
-  joinedAt: string;
-  isActive: boolean;
+  nombre: string;
+  foto: string | null;
+  rol: 'responsable' | 'ayudante' | 'supervisor' | null;
+  grupo: string | null;
+  etiquetas: string[];
+  porcentaje: number;
 }
 
 export function MembersPage() {
-  const [members, setMembers] = useState<Member[]>([]);
+  const [showMap, setShowMap] = useState(false);
+  const [integrantes, setIntegrantes] = useState<Integrante[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    loadMembers();
+    loadIntegrantes();
   }, []);
 
-  const loadMembers = async () => {
+  const loadIntegrantes = async () => {
     setLoading(true);
-    const result = await api.getMembers();
-    if (result.data) {
-      setMembers(result.data.members);
+    const result = await api.getIntegrantes();
+    if (result.data?.integrantes) {
+      setIntegrantes(result.data.integrantes);
     }
     setLoading(false);
   };
 
-  const filteredMembers = members.filter(member =>
-    member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    member.groupName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const getRoleLabel = (role: string) => {
-    const roles: Record<string, string> = {
-      'leader': 'Líder',
-      'co-leader': 'Co-líder',
-      'member': 'Miembro'
-    };
-    return roles[role] || role;
+  const getRolBadge = (rol: string | null) => {
+    switch (rol) {
+      case 'responsable':
+        return <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Responsable</span>;
+      case 'ayudante':
+        return <span className="inline-block bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Ayudante</span>;
+      case 'supervisor':
+        return <span className="inline-block bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Supervisor</span>;
+      default:
+        return null;
+    }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
+  const getEtiquetaColor = (etiqueta: string) => {
+    if (etiqueta.includes('Hombres')) return 'bg-[#2196F3] text-white';
+    if (etiqueta.includes('Mujeres')) return 'bg-[#E91E63] text-white';
+    if (etiqueta.includes('Parejas')) return 'bg-[#9C27B0] text-white';
+    if (etiqueta.includes('Nuevo creyente')) return 'bg-[#4CAF50] text-white';
+    if (etiqueta.includes('Casa de')) return 'bg-[#FF5722] text-white';
+    return 'bg-[#607D8B] text-white';
   };
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <AppHeader />
-
-      <main className="max-w-2xl mx-auto px-5 py-6">
+      
+      <main className="px-5 pt-5 pb-0 max-w-2xl mx-auto">
         {/* Title */}
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-[28px] font-bold text-[#333333]">Integrantes</h1>
-          <button
-            className="bg-[#4CAF50] text-white p-2.5 rounded-full shadow-md hover:bg-[#43A047] transition-colors"
-            aria-label="Añadir integrante"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
+        <h1 className="text-[28px] font-bold text-[#333333] mb-4">Integrantes</h1>
+        
+        {/* Filter and Order */}
+        <div className="flex items-center gap-6 mb-4">
+          <button className="flex items-center gap-2 text-[#9E9E9E] text-[14px]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
             </svg>
+            FILTRAR
+          </button>
+          <button className="flex items-center gap-2 text-[#9E9E9E] text-[14px]">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="4" y1="21" x2="4" y2="14"/>
+              <line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/>
+              <line x1="20" y1="12" x2="20" y2="3"/>
+            </svg>
+            ORDENAR POR
           </button>
         </div>
-
-        {/* Search */}
-        <div className="relative mb-6">
-          <svg 
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#9E9E9E]" 
-            width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        
+        {/* Toggle Map */}
+        <button 
+          onClick={() => setShowMap(!showMap)}
+          className="flex items-center gap-2 text-[#9E9E9E] text-[14px] mb-4"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/>
           </svg>
-          <input
-            type="text"
-            placeholder="Buscar por nombre o grupo..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white rounded-xl border border-[#E0E0E0] text-[15px] focus:outline-none focus:border-[#4CAF50] transition-colors"
-          />
-        </div>
-
-        {/* Content */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+          {showMap ? 'OCULTAR MAPA' : 'MOSTRAR MAPA'}
+        </button>
+        
+        {/* Map */}
+        {showMap && (
+          <div className="rounded-xl overflow-hidden mb-4">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99089.57696587789!2d-0.4545851!3d39.4699075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia%2C%20Spain!5e0!3m2!1sen!2s!4v1706000000000!5m2!1sen!2s"
+              width="100%"
+              height="200"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Mapa de Integrantes"
+            ></iframe>
+          </div>
+        )}
+        
+        {/* List */}
+        <div className="bg-white rounded-2xl shadow-md overflow-hidden">
           {loading ? (
-            <div className="flex justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#4CAF50]"></div>
-            </div>
-          ) : filteredMembers.length === 0 ? (
-            <div className="p-6 text-center">
-              <p className="text-[#9E9E9E] text-[15px]">
-                {searchTerm ? 'No se encontraron integrantes.' : 'No hay integrantes registrados.'}
-              </p>
+            <div className="flex justify-center items-center py-10">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#4CAF50]"></div>
             </div>
           ) : (
-            <div className="divide-y divide-[#F0F0F0]">
-              {filteredMembers.map((member) => (
-                <div
-                  key={member.id}
-                  className="p-4 hover:bg-[#FAFAFA] transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    {/* Avatar */}
-                    <div className="w-12 h-12 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
-                      {member.photoUrl ? (
-                        <img 
-                          src={member.photoUrl} 
-                          alt={member.name} 
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-[#4CAF50] text-white text-[18px] font-bold">
-                          {member.name.charAt(0).toUpperCase()}
-                        </div>
+            <div className="divide-y divide-[#E0E0E0]">
+              {integrantes.map((integrante) => (
+                <div key={integrante.id} className="flex items-center gap-3 p-4">
+                  {/* Avatar */}
+                  <div className="w-12 h-12 rounded-full bg-[#E0E0E0] overflow-hidden flex-shrink-0">
+                    {integrante.foto ? (
+                      <img src={integrante.foto} alt={integrante.nombre} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-[#9E9E9E]">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="12" cy="7" r="4"/>
+                          <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[14px] font-medium text-[#333333] truncate">{integrante.nombre}</p>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {getRolBadge(integrante.rol)}
+                      {integrante.grupo && (
+                        <span className="inline-block bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded-lg">
+                          {integrante.grupo}
+                        </span>
+                      )}
+                      {!integrante.grupo && (
+                        <span className="inline-block bg-[#FFEB3B] text-black text-[10px] font-medium px-2 py-0.5 rounded-lg">
+                          Sin grupo
+                        </span>
                       )}
                     </div>
-
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-[15px] font-semibold text-[#333333] truncate">
-                          {member.name}
-                        </h3>
-                        <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full flex-shrink-0 ${
-                          member.role === 'leader' 
-                            ? 'bg-[#FFF3E0] text-[#FF9800]'
-                            : member.role === 'co-leader'
-                            ? 'bg-[#E3F2FD] text-[#2196F3]'
-                            : 'bg-[#F5F5F5] text-[#757575]'
-                        }`}>
-                          {getRoleLabel(member.role)}
-                        </span>
+                    {integrante.etiquetas.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {integrante.etiquetas.map((etiqueta, idx) => (
+                          <span 
+                            key={idx} 
+                            className={`inline-block text-[9px] font-medium px-2 py-0.5 rounded-lg ${getEtiquetaColor(etiqueta)}`}
+                          >
+                            {etiqueta}
+                          </span>
+                        ))}
                       </div>
-                      <p className="text-[13px] text-[#757575] truncate">
-                        {member.groupName}
-                      </p>
-                      <p className="text-[12px] text-[#9E9E9E]">
-                        Desde {formatDate(member.joinedAt)}
-                      </p>
-                    </div>
-
-                    {/* Actions */}
-                    <button className="text-[#9E9E9E] hover:text-[#4CAF50] transition-colors p-1">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="12" cy="5" r="1"/>
-                        <circle cx="12" cy="19" r="1"/>
-                      </svg>
-                    </button>
+                    )}
+                  </div>
+                  
+                  {/* Percentage */}
+                  <div className="flex-shrink-0">
+                    <span className="text-[14px] font-bold text-[#4CAF50]">{integrante.porcentaje}%</span>
                   </div>
                 </div>
               ))}
             </div>
           )}
+          
+          {/* Ver más */}
+          {integrantes.length > 0 && (
+            <div className="text-center py-4 border-t border-[#E0E0E0]">
+              <button className="text-[#4CAF50] text-[14px] font-medium">VER MÁS</button>
+            </div>
+          )}
         </div>
-
-        {/* Count */}
-        {!loading && filteredMembers.length > 0 && (
-          <p className="text-center text-[13px] text-[#9E9E9E] mt-4">
-            {filteredMembers.length} integrante{filteredMembers.length !== 1 ? 's' : ''}
-          </p>
-        )}
       </main>
+      
+      {/* Footer Button */}
+      <footer className="w-full bg-white px-5 py-5 mt-6">
+        <div className="max-w-2xl mx-auto">
+          <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
+            NUEVO INTEGRANTE
+          </button>
+        </div>
+      </footer>
     </div>
   );
 }

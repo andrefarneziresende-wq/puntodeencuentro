@@ -161,6 +161,10 @@ class ApiService {
     return this.request<{ members: any[] }>('/members');
   }
 
+  async getIntegrantes() {
+    return this.request<{ integrantes: any[] }>('/integrantes');
+  }
+
   async getMember(id: string) {
     return this.request<{ member: any }>(`/members/${id}`);
   }
