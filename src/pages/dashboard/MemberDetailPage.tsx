@@ -55,6 +55,7 @@ export function MemberDetailPage() {
   const [showNoPuedeBajaModal, setShowNoPuedeBajaModal] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [showBautizadoInfo, setShowBautizadoInfo] = useState(false);
+  const [showNuevoCreyenteInfo, setShowNuevoCreyenteInfo] = useState(false);
 
   useEffect(() => {
     loadMember();
@@ -244,22 +245,29 @@ export function MemberDetailPage() {
 
             {/* Nuevo creyente */}
             {member.nuevoCreyente && (
-              <span className="inline-flex items-center gap-1 w-fit bg-[#FFEB3B] text-black text-[12px] font-medium px-3 py-1 rounded">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="8.5" cy="7" r="4"/>
-                  <line x1="20" y1="8" x2="20" y2="14"/>
-                  <line x1="23" y1="11" x2="17" y2="11"/>
-                </svg>
-                Nuevo creyente
-                <button className="ml-1">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#45C1EE" strokeWidth="2">
+              <div className="flex items-center gap-2 relative">
+                <span className="inline-flex items-center gap-1 w-fit bg-[#FFEB3B] text-black text-[12px] font-medium px-3 py-1 rounded">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="8.5" cy="7" r="4"/>
+                    <line x1="20" y1="8" x2="20" y2="14"/>
+                    <line x1="23" y1="11" x2="17" y2="11"/>
+                  </svg>
+                  Nuevo creyente
+                </span>
+                <button onClick={() => setShowNuevoCreyenteInfo(!showNuevoCreyenteInfo)}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#45C1EE" strokeWidth="2">
                     <circle cx="12" cy="12" r="10"/>
                     <line x1="12" y1="16" x2="12" y2="12"/>
                     <line x1="12" y1="8" x2="12.01" y2="8"/>
                   </svg>
                 </button>
-              </span>
+                {showNuevoCreyenteInfo && (
+                  <div className="absolute top-8 left-0 right-0 bg-[#666] text-white text-[12px] p-3 rounded-lg shadow-lg z-10 min-w-[250px]">
+                    Se considera nuevo creyente a la persona convertida durante el último año.
+                  </div>
+                )}
+              </div>
             )}
 
             {/* Group badge */}
