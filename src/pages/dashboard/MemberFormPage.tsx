@@ -245,9 +245,51 @@ export function MemberFormPage() {
     
     if (saving) return;
     
-    // Validate that if a role is selected, at least one group must be selected
     const validationErrors: string[] = [];
     
+    // Required fields validation
+    if (!formData.nombre.trim()) {
+      validationErrors.push('El campo Nombre es obligatorio.');
+    }
+    if (!formData.apellidos.trim()) {
+      validationErrors.push('El campo Apellidos es obligatorio.');
+    }
+    if (!formData.fechaNacimiento.trim()) {
+      validationErrors.push('El campo Fecha de Nacimiento es obligatorio.');
+    }
+    if (!formData.prefijo.trim()) {
+      validationErrors.push('El campo Prefijo es obligatorio.');
+    }
+    if (!formData.telefono.trim()) {
+      validationErrors.push('El campo Teléfono es obligatorio.');
+    }
+    if (!formData.direccion.trim()) {
+      validationErrors.push('El campo Dirección es obligatorio.');
+    }
+    
+    // If "es miembro" is selected, "numero" is required
+    if (formData.esMiembro && !formData.numero.trim()) {
+      validationErrors.push('Si es miembro, el campo Número es obligatorio.');
+    }
+    
+    // Formación fields validation
+    if (!formData.formacion.discipuladoInicial) {
+      validationErrors.push('El campo Discipulado inicial es obligatorio.');
+    }
+    if (!formData.formacion.preBautismos) {
+      validationErrors.push('El campo Pre bautismos es obligatorio.');
+    }
+    if (!formData.formacion.escuelaBiblica) {
+      validationErrors.push('El campo Escuela bíblica es obligatorio.');
+    }
+    if (!formData.formacion.escuelaDiscipulado) {
+      validationErrors.push('El campo Escuela discipulado es obligatorio.');
+    }
+    if (!formData.formacion.entrenamiento) {
+      validationErrors.push('El campo Entrenamiento es obligatorio.');
+    }
+    
+    // Validate that if a role is selected, at least one group must be selected
     if (formData.responsabilidad.supervisor && formData.responsabilidad.supervisorGrupos.length === 0) {
       validationErrors.push('Si seleccionas Supervisor, debes seleccionar al menos un Grupo de Hogar.');
     }
