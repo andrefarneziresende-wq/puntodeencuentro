@@ -78,8 +78,8 @@ export function HomePage() {
 
   const loadDashboardStats = async () => {
     const result = await api.getDashboardStats();
-    if (result.data) {
-      setStats(result.data);
+    if (result.data?.stats) {
+      setStats(result.data.stats);
     }
   };
 
