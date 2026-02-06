@@ -485,9 +485,12 @@ export function MemberDetailPage() {
       {/* Footer Buttons */}
       <footer className="fixed bottom-0 left-0 right-0 bg-white px-5 py-4 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
         <div className="max-w-2xl mx-auto">
-          <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-2">
+          <Link 
+            to={`/dashboard/editar-integrante/${id}`}
+            className="block w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-2 text-center"
+          >
             EDITAR
-          </button>
+          </Link>
           <button 
             onClick={() => setShowDarBajaModal(true)}
             className="w-full text-[#F21D61] text-[14px] font-medium py-2"

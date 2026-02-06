@@ -618,9 +618,12 @@ export function MembersPage() {
       {/* Footer Button */}
       <footer className="w-full bg-white px-5 py-5 mt-6">
         <div className="max-w-2xl mx-auto">
-          <button className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors">
+          <Link 
+            to="/dashboard/nuevo-integrante"
+            className="block w-full bg-[#4CAF50] text-white text-[16px] font-medium py-4 px-6 rounded-full hover:bg-[#43A047] transition-colors text-center"
+          >
             NUEVO INTEGRANTE
-          </button>
+          </Link>
         </div>
       </footer>
 

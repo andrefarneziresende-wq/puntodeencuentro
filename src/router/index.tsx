@@ -8,6 +8,7 @@ import {
   GroupsPage,
   MembersPage,
   MemberDetailPage,
+  MemberFormPage,
   MinistriesPage,
   WithdrawalsPage
 } from '../pages/dashboard';
@@ -88,6 +89,22 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <MemberDetailPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/dashboard/nuevo-integrante',
+    element: (
+      <ProtectedRoute>
+        <MemberFormPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/dashboard/editar-integrante/:id',
+    element: (
+      <ProtectedRoute>
+        <MemberFormPage />
       </ProtectedRoute>
     ),
   },
