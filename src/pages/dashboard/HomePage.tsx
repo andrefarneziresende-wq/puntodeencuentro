@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AppHeader } from '../../components/layout';
 import { api } from '../../services/api';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Line, ComposedChart } from 'recharts';
 
 interface HighlightedTestimony {
   id: string;
@@ -28,6 +29,20 @@ interface DashboardStats {
   reunionesStats: {
     tipos: { periodicas: number; comunion: number; evangelisticas: number };
     frecuencia: { semanal: number; quincenal: number; mensual: number };
+  };
+  asistencia: {
+    ultimoMes: number;
+    ultimoAno: number;
+    desdeSiempre: number;
+    historico: Array<{
+      fecha: string;
+      integrantes: number;
+      visitantes: number;
+      total: number;
+      mediaIntegrantes: number;
+      mediaVisitantes: number;
+      mediaTotal: number;
+    }>;
   };
 }
 
@@ -517,6 +532,190 @@ export function HomePage() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Mapa de Localización"
               ></iframe>
+            </div>
+          </div>
+        </section>
+
+        {/* Asistencia */}
+        <section className="mb-6">
+          <div className="bg-white rounded-2xl shadow-md p-5">
+            {/* Title */}
+            <h2 
+              className="text-[24px] text-[#333333] mb-5"
+              style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 300 }}
+            >
+              Asistencia
+            </h2>
+            
+            {/* Progress Bars */}
+            <div className="space-y-5 mb-6">
+              {/* Último MES */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="inline-block bg-[#F5F5F5] text-[#333333] text-[13px] font-bold px-3 py-1 rounded">
+                    Último MES
+                  </span>
+                  <span className="text-[28px] font-bold text-[#333333]">{stats?.asistencia?.ultimoMes || 53} %</span>
+                </div>
+                <div className="h-3 bg-[#E0E0E0] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#4CAF50] rounded-full transition-all duration-500"
+                    style={{ width: `${stats?.asistencia?.ultimoMes || 53}%` }}
+                  ></div>
+                </div>
+              </div>
+              
+              {/* Último AÑO */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="inline-block bg-[#F5F5F5] text-[#333333] text-[13px] font-bold px-3 py-1 rounded">
+                    Último AÑO
+                  </span>
+                  <span className="text-[28px] font-bold text-[#333333]">{stats?.asistencia?.ultimoAno || 75} %</span>
+                </div>
+                <div className="h-3 bg-[#E0E0E0] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#4CAF50] rounded-full transition-all duration-500"
+                    style={{ width: `${stats?.asistencia?.ultimoAno || 75}%` }}
+                  ></div>
+                </div>
+              </div>
+              
+              {/* Desde SIEMPRE */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="inline-block bg-[#F5F5F5] text-[#333333] text-[13px] font-bold px-3 py-1 rounded">
+                    Desde SIEMPRE
+                  </span>
+                  <span className="text-[28px] font-bold text-[#333333]">{stats?.asistencia?.desdeSiempre || 85} %</span>
+                </div>
+                <div className="h-3 bg-[#E0E0E0] rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#4CAF50] rounded-full transition-all duration-500"
+                    style={{ width: `${stats?.asistencia?.desdeSiempre || 85}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Chart */}
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart
+                  data={stats?.asistencia?.historico || [
+                    { fecha: '01/10', integrantes: 270, visitantes: 55, total: 270, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '08/10', integrantes: 275, visitantes: 60, total: 275, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '15/10', integrantes: 265, visitantes: 50, total: 265, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '22/10', integrantes: 293, visitantes: 45, total: 338, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '29/10', integrantes: 300, visitantes: 55, total: 320, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '05/11', integrantes: 310, visitantes: 60, total: 330, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                    { fecha: '12/11', integrantes: 295, visitantes: 120, total: 320, mediaIntegrantes: 280, mediaVisitantes: 30, mediaTotal: 310 },
+                  ]}
+                  margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#E0E0E0" />
+                  <XAxis 
+                    dataKey="fecha" 
+                    tick={{ fontSize: 10, fill: '#9E9E9E' }}
+                    axisLine={{ stroke: '#E0E0E0' }}
+                    tickLine={false}
+                  />
+                  <YAxis 
+                    tick={{ fontSize: 10, fill: '#9E9E9E' }}
+                    axisLine={{ stroke: '#E0E0E0' }}
+                    tickLine={false}
+                    domain={[0, 360]}
+                    ticks={[0, 60, 120, 180, 240, 300, 360]}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #E0E0E0',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="integrantes" 
+                    fill="rgba(76, 175, 80, 0.3)" 
+                    stroke="#4CAF50" 
+                    strokeWidth={2}
+                    name="Integrantes"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="total" 
+                    stroke="#C5E1A5" 
+                    strokeWidth={2}
+                    dot={{ fill: '#C5E1A5', strokeWidth: 0, r: 3 }}
+                    name="Total"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="visitantes" 
+                    stroke="#2196F3" 
+                    strokeWidth={2}
+                    dot={{ fill: '#2196F3', strokeWidth: 0, r: 3 }}
+                    name="Visitantes"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="mediaIntegrantes" 
+                    stroke="#4CAF50" 
+                    strokeWidth={1}
+                    strokeDasharray="5 5"
+                    dot={false}
+                    name="Media Integrantes"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="mediaVisitantes" 
+                    stroke="#2196F3" 
+                    strokeWidth={1}
+                    strokeDasharray="5 5"
+                    dot={false}
+                    name="Media Visitantes"
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="mediaTotal" 
+                    stroke="#333333" 
+                    strokeWidth={1}
+                    strokeDasharray="5 5"
+                    dot={false}
+                    name="Media Total"
+                  />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+            
+            {/* Legend */}
+            <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-[11px]">
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#4CAF50]"></span>
+                <span className="text-[#666666]">Integrantes</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#2196F3]"></span>
+                <span className="text-[#666666]">Visitantes</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#C5E1A5]"></span>
+                <span className="text-[#666666]">Total</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#4CAF50] border-2 border-dashed border-[#4CAF50]"></span>
+                <span className="text-[#666666]">Media Integrantes</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#2196F3] border-2 border-dashed border-[#2196F3]"></span>
+                <span className="text-[#666666]">Media Visitantes</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#333333]"></span>
+                <span className="text-[#666666]">Media Total</span>
+              </div>
             </div>
           </div>
         </section>

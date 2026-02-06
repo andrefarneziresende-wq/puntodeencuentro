@@ -41,9 +41,18 @@
       "nuevos": 5
     },
     "asistencia": {
-      "ultimaReunion": 53,
-      "mediaMes": 75,
-      "mediaGeneral": 85
+      "ultimoMes": 53,
+      "ultimoAno": 75,
+      "desdeSiempre": 85,
+      "historico": [
+        { "fecha": "01/10", "integrantes": 270, "visitantes": 55, "total": 270, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "08/10", "integrantes": 275, "visitantes": 60, "total": 275, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "15/10", "integrantes": 265, "visitantes": 50, "total": 265, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "22/10", "integrantes": 293, "visitantes": 45, "total": 338, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "29/10", "integrantes": 300, "visitantes": 55, "total": 320, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "05/11", "integrantes": 310, "visitantes": 60, "total": 330, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 },
+        { "fecha": "12/11", "integrantes": 295, "visitantes": 120, "total": 320, "mediaIntegrantes": 280, "mediaVisitantes": 30, "mediaTotal": 310 }
+      ]
     },
     "demografia": {
       "hombres": 183,
