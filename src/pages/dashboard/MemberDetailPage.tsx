@@ -248,6 +248,9 @@ export function MemberDetailPage() {
               const grupoInAyudante = member.responsabilidad?.ayudante && member.responsabilidad?.ayudanteGrupos?.includes(member.grupo || '');
               const grupoIsInRoleGroups = grupoInSupervisor || grupoInResponsable || grupoInAyudante;
               
+              // Track displayed groups to avoid duplicates
+              const displayedGrupos = new Set<string>();
+              
               return (
                 <>
                   {/* If grupo is NOT in any role groups, show grupo first as normal */}
@@ -283,7 +286,11 @@ export function MemberDetailPage() {
                           <span className="inline-flex items-center gap-1 w-fit bg-[#FF9800] text-white text-[12px] font-medium px-3 py-1 rounded">
                             Supervisor
                           </span>
-                          {member.responsabilidad.supervisorGrupos?.map((grupo, idx) => (
+                          {member.responsabilidad.supervisorGrupos?.filter(g => {
+                            if (displayedGrupos.has(g)) return false;
+                            displayedGrupos.add(g);
+                            return true;
+                          }).map((grupo, idx) => (
                             <span key={`sup-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -302,7 +309,11 @@ export function MemberDetailPage() {
                           <span className="inline-flex items-center gap-1 w-fit bg-[#CBCBCB] text-white text-[12px] font-medium px-3 py-1 rounded">
                             Responsable
                           </span>
-                          {member.responsabilidad.responsableGrupos?.map((grupo, idx) => (
+                          {member.responsabilidad.responsableGrupos?.filter(g => {
+                            if (displayedGrupos.has(g)) return false;
+                            displayedGrupos.add(g);
+                            return true;
+                          }).map((grupo, idx) => (
                             <span key={`res-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -321,7 +332,11 @@ export function MemberDetailPage() {
                           <span className="inline-flex items-center gap-1 w-fit bg-[#9E9E9E] text-white text-[12px] font-medium px-3 py-1 rounded">
                             Ayudante
                           </span>
-                          {member.responsabilidad.ayudanteGrupos?.map((grupo, idx) => (
+                          {member.responsabilidad.ayudanteGrupos?.filter(g => {
+                            if (displayedGrupos.has(g)) return false;
+                            displayedGrupos.add(g);
+                            return true;
+                          }).map((grupo, idx) => (
                             <span key={`ayu-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>

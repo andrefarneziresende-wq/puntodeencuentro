@@ -550,6 +550,9 @@ export function MembersPage() {
                       const grupoInAyudante = integrante.responsabilidad?.ayudante && integrante.responsabilidad?.ayudanteGrupos?.includes(integrante.grupo || '');
                       const grupoIsInRoleGroups = grupoInSupervisor || grupoInResponsable || grupoInAyudante;
                       
+                      // Track displayed groups to avoid duplicates
+                      const displayedGrupos = new Set<string>();
+                      
                       return (
                         <>
                           {/* If grupo is NOT in any role groups, show grupo first as normal */}
@@ -593,7 +596,11 @@ export function MembersPage() {
                                       <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
                                     )}
                                   </div>
-                                  {integrante.responsabilidad.supervisorGrupos?.map((grupo, idx) => (
+                                  {integrante.responsabilidad.supervisorGrupos?.filter(g => {
+                                    if (displayedGrupos.has(g)) return false;
+                                    displayedGrupos.add(g);
+                                    return true;
+                                  }).map((grupo, idx) => (
                                     <span key={`sup-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
                                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -615,7 +622,11 @@ export function MembersPage() {
                                       <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
                                     )}
                                   </div>
-                                  {integrante.responsabilidad.responsableGrupos?.map((grupo, idx) => (
+                                  {integrante.responsabilidad.responsableGrupos?.filter(g => {
+                                    if (displayedGrupos.has(g)) return false;
+                                    displayedGrupos.add(g);
+                                    return true;
+                                  }).map((grupo, idx) => (
                                     <span key={`res-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
                                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -637,7 +648,11 @@ export function MembersPage() {
                                       <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-bold px-2 py-0.5 rounded">{integrante.porcentaje}%</span>
                                     )}
                                   </div>
-                                  {integrante.responsabilidad.ayudanteGrupos?.map((grupo, idx) => (
+                                  {integrante.responsabilidad.ayudanteGrupos?.filter(g => {
+                                    if (displayedGrupos.has(g)) return false;
+                                    displayedGrupos.add(g);
+                                    return true;
+                                  }).map((grupo, idx) => (
                                     <span key={`ayu-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
                                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
