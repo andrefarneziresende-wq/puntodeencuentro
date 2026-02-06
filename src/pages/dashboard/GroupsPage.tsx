@@ -35,7 +35,7 @@ export function GroupsPage() {
     <div className="min-h-screen bg-[#F5F5F5]">
       <AppHeader />
 
-      <main className="max-w-2xl mx-auto px-4 py-6">
+      <main className="max-w-2xl mx-auto px-5 py-6">
         {/* Title */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-[28px] font-bold text-[#333333]">Grupos de Hogar</h1>

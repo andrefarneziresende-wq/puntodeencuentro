@@ -60,7 +60,7 @@ export function MembersPage() {
     <div className="min-h-screen bg-[#F5F5F5]">
       <AppHeader />
 
-      <main className="max-w-2xl mx-auto px-4 py-6">
+      <main className="max-w-2xl mx-auto px-5 py-6">
         {/* Title */}
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-[28px] font-bold text-[#333333]">Integrantes</h1>

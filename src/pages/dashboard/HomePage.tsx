@@ -49,14 +49,14 @@ export function HomePage() {
         <div className="absolute inset-0 bg-black/20" />
         
         {/* Welcome Text */}
-        <div className="relative z-10 flex flex-col justify-center h-full px-4">
+        <div className="relative z-10 flex flex-col justify-center h-full px-5">
           <h1 
             className="text-white"
             style={{ 
               fontFamily: 'Roboto, sans-serif', 
               fontWeight: 700, 
-              fontSize: '40px',
-              lineHeight: '100%'
+              fontSize: '32px',
+              lineHeight: '110%'
             }}
           >
             Bienvenido
@@ -66,19 +66,19 @@ export function HomePage() {
             style={{ 
               fontFamily: 'Roboto, sans-serif', 
               fontWeight: 700, 
-              fontSize: '40px',
-              lineHeight: '100%'
+              fontSize: '32px',
+              lineHeight: '110%'
             }}
           >
             a la gestión y seguimiento de
           </p>
           <p 
-            className="text-white mt-2"
+            className="text-white mt-1"
             style={{ 
               fontFamily: 'Roboto, sans-serif', 
               fontWeight: 700, 
-              fontSize: '40px',
-              lineHeight: '100%'
+              fontSize: '32px',
+              lineHeight: '110%'
             }}
           >
             grupos de hogar
@@ -86,7 +86,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <main className="px-4 py-5 max-w-2xl mx-auto">
+      <main className="px-5 py-5 max-w-2xl mx-auto">
         
         {/* Testimonios Destacados */}
         <section className="mb-6">
@@ -108,7 +108,7 @@ export function HomePage() {
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#4CAF50]"></div>
             </div>
           ) : (
-            <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5">
               {highlightedTestimonies.map((testimony) => (
                 <Link
                   key={testimony.id}

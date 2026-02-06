@@ -49,10 +49,10 @@ input, select, textarea {
 
 /* Prevent text from causing horizontal overflow */
 * {
-  max-width: 100%;
   box-sizing: border-box;
 }
 
 html, body {
   overflow-x: hidden;
+  width: 100%;
 }
