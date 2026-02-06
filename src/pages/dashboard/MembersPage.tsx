@@ -569,10 +569,10 @@ export function MembersPage() {
                       )}
                     </div>
                     
-                    {/* Etiquetas - stacked vertically */}
-                    {integrante.etiquetas.length > 0 && (
+                    {/* Etiquetas - stacked vertically, filter out group name and nuevo creyente */}
+                    {integrante.etiquetas.filter(e => e !== integrante.grupo && e.toLowerCase() !== 'nuevo creyente').length > 0 && (
                       <div className="flex flex-col gap-1 mt-1">
-                        {integrante.etiquetas.map((etiqueta, idx) => (
+                        {integrante.etiquetas.filter(e => e !== integrante.grupo && e.toLowerCase() !== 'nuevo creyente').map((etiqueta, idx) => (
                           <span 
                             key={idx} 
                             className={`inline-flex items-center gap-1 w-fit text-[10px] font-medium px-2 py-0.5 rounded ${getEtiquetaColor(etiqueta)}`}

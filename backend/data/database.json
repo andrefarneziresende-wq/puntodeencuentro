@@ -511,7 +511,7 @@
       "gruposSupervisa": null,
       "esMiembro": true,
       "nuevoCreyente": false,
-      "etiquetas": ["Parejas jóvenes"],
+      "etiquetas": [],
       "porcentaje": 88,
       "asistencia": { "ultimoMes": 53, "ultimoAno": 75, "desdeSiempre": 85 },
       "formacion": {
