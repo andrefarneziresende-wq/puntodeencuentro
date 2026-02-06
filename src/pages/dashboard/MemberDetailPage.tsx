@@ -215,8 +215,8 @@ export function MemberDetailPage() {
           <h1 className="text-[28px] font-bold text-[#333] leading-tight mb-2">{member.nombre}</h1>
           
           {/* Age and Date */}
-          <p className="text-[14px] text-[#666] mb-2">
-            {member.edad} años <span className="text-[#999] ml-2">{member.fechaNacimiento}</span>
+          <p className="text-[14px] text-[#333] mb-2">
+            <span className="font-bold">{member.edad} años</span> <span className="ml-2">{member.fechaNacimiento}</span>
           </p>
 
           {/* Address */}
