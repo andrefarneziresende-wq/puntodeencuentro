@@ -99,6 +99,7 @@ export function MembersPage() {
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [tempFilters, setTempFilters] = useState<Filters>(initialFilters);
   const [orderBy, setOrderBy] = useState<OrderBy>({ field: '', direction: 'asc' });
+  const [visibleCount, setVisibleCount] = useState(10);
   const [tempOrderBy, setTempOrderBy] = useState<OrderBy>({ field: '', direction: 'asc' });
   
   // Dropdown states
@@ -223,6 +224,19 @@ export function MembersPage() {
 
     return result;
   }, [integrantes, filters, orderBy]);
+
+  // Visible integrantes (paginated)
+  const visibleIntegrantes = filteredAndSortedIntegrantes.slice(0, visibleCount);
+  const hasMoreToShow = filteredAndSortedIntegrantes.length > visibleCount;
+
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 10);
+  };
+
+  // Reset visible count when filters change
+  React.useEffect(() => {
+    setVisibleCount(10);
+  }, [filters, orderBy]);
 
   // Custom Dropdown Component
   const Dropdown = ({ 
@@ -462,7 +476,7 @@ export function MembersPage() {
             </div>
           ) : (
             <div>
-              {filteredAndSortedIntegrantes.map((integrante, index) => (
+              {visibleIntegrantes.map((integrante, index) => (
                 <div key={integrante.id}>
                   <div className="flex items-center gap-3 p-4">
                   {/* Avatar */}
@@ -540,7 +554,7 @@ export function MembersPage() {
                   </div>
                   </div>
                   {/* Separator with padding */}
-                  {index < filteredAndSortedIntegrantes.length - 1 && (
+                  {index < visibleIntegrantes.length - 1 && (
                     <div className="px-[10px]">
                       <div className="border-b border-[#E0E0E0]"></div>
                     </div>
@@ -550,10 +564,15 @@ export function MembersPage() {
             </div>
           )}
           
-          {/* Ver más */}
-          {filteredAndSortedIntegrantes.length > 0 && (
+          {/* Ver más - only show if there are more items to load */}
+          {hasMoreToShow && (
             <div className="text-center py-4 border-t border-[#E0E0E0]">
-              <button className="text-[#4CAF50] text-[14px] font-medium">VER MÁS</button>
+              <button 
+                onClick={loadMore}
+                className="text-[#4CAF50] text-[14px] font-medium"
+              >
+                VER MÁS ({filteredAndSortedIntegrantes.length - visibleCount} restantes)
+              </button>
             </div>
           )}
         </div>
