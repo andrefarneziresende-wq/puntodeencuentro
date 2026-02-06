@@ -224,11 +224,27 @@ export function MemberFormPage() {
     setUploadProgress(0);
   };
 
+  const [saving, setSaving] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement save functionality
-    console.log('Form data:', formData);
-    navigate('/dashboard/integrantes');
+    
+    if (saving) return;
+    setSaving(true);
+    
+    try {
+      if (isEditing && id) {
+        await api.updateIntegrante(id, formData);
+      } else {
+        await api.createIntegrante(formData);
+      }
+      navigate('/dashboard/integrantes');
+    } catch (error) {
+      console.error('Error saving integrante:', error);
+      alert('Error al guardar el integrante. Por favor, inténtalo de nuevo.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const Toggle = ({ checked, onChange, label }: { checked: boolean; onChange: (val: boolean) => void; label?: string }) => (
@@ -800,9 +816,10 @@ export function MemberFormPage() {
           <button 
             type="submit"
             onClick={handleSubmit}
-            className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-2"
+            disabled={saving}
+            className={`w-full text-white text-[16px] font-medium py-3 px-6 rounded-full mb-2 ${saving ? 'bg-[#9E9E9E]' : 'bg-[#4CAF50]'}`}
           >
-            GUARDAR
+            {saving ? 'GUARDANDO...' : 'GUARDAR'}
           </button>
           <button 
             type="button"

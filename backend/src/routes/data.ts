@@ -100,6 +100,136 @@ router.get('/integrantes/:id', async (req: Request, res: Response) => {
   }
 });
 
+// Create new integrante
+router.post('/integrantes', async (req: Request, res: Response) => {
+  try {
+    const dbPath = path.resolve('./data/database.json');
+    const content = fs.readFileSync(dbPath, 'utf-8');
+    const data = JSON.parse(content);
+    
+    const integrantes = data.integrantes || [];
+    
+    // Generate new ID
+    const maxId = integrantes.reduce((max: number, i: { id: string }) => {
+      const num = parseInt(i.id.replace('i', ''), 10);
+      return num > max ? num : max;
+    }, 0);
+    const newId = `i${maxId + 1}`;
+    
+    // Generate new member number if es miembro
+    let newNumero = null;
+    if (req.body.esMiembro) {
+      const maxNumero = integrantes.reduce((max: number, i: { numero?: number }) => {
+        return (i.numero || 0) > max ? i.numero || 0 : max;
+      }, 0);
+      newNumero = maxNumero + 1;
+    }
+    
+    const newIntegrante = {
+      id: newId,
+      numero: req.body.esMiembro ? (req.body.numero ? parseInt(req.body.numero, 10) : newNumero) : null,
+      nombre: `${req.body.nombre} ${req.body.apellidos}`.trim(),
+      foto: req.body.foto || null,
+      email: req.body.email || '',
+      telefono: req.body.prefijo ? `${req.body.prefijo} ${req.body.telefono}` : req.body.telefono || '',
+      edad: null,
+      fechaNacimiento: req.body.fechaNacimiento || '',
+      direccion: req.body.direccion || '',
+      rol: req.body.responsabilidad?.supervisor ? 'supervisor' : 
+           req.body.responsabilidad?.responsable ? 'responsable' : 
+           req.body.responsabilidad?.ayudante ? 'ayudante' : null,
+      grupo: req.body.grupo || null,
+      gruposSupervisa: req.body.responsabilidad?.supervisorGrupos || [],
+      esMiembro: req.body.esMiembro || false,
+      nuevoCreyente: req.body.fe?.nuevoCreyente || false,
+      etiquetas: [],
+      porcentaje: req.body.grupo ? 0 : null,
+      asistencia: { ultimoMes: 0, ultimoAno: 0, desdeSiempre: 0 },
+      formacion: {
+        discipuladoInicial: req.body.formacion?.discipuladoInicial?.replace('_', ' ') || 'No iniciado',
+        preBautismos: req.body.formacion?.preBautismos?.replace('_', ' ') || 'No iniciado',
+        escuelaBiblica: req.body.formacion?.escuelaBiblica?.replace('_', ' ') || 'No iniciado',
+        escuelaDiscipulado: req.body.formacion?.escuelaDiscipulado?.replace('_', ' ') || 'No iniciado',
+        entrenamiento: req.body.formacion?.entrenamiento?.replace('_', ' ') || 'No iniciado'
+      },
+      bautizado: req.body.fe?.bautizado || false,
+      nuevoBautizado: req.body.fe?.nuevoBautizado || false,
+      iglesiaProcedente: req.body.fe?.procedenteOtraIglesia ? req.body.fe.nombreIglesiaCiudad : null,
+      ministerios: req.body.ministerios || [],
+      observaciones: req.body.observaciones || '',
+      servicios: []
+    };
+    
+    integrantes.push(newIntegrante);
+    data.integrantes = integrantes;
+    
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+    
+    res.status(201).json({ integrante: newIntegrante });
+  } catch (error) {
+    console.error('Error creating integrante:', error);
+    res.status(500).json({ error: 'Error al crear el integrante.' });
+  }
+});
+
+// Update integrante
+router.put('/integrantes/:id', async (req: Request, res: Response) => {
+  try {
+    const dbPath = path.resolve('./data/database.json');
+    const content = fs.readFileSync(dbPath, 'utf-8');
+    const data = JSON.parse(content);
+    
+    const integrantes = data.integrantes || [];
+    const index = integrantes.findIndex((i: { id: string }) => i.id === req.params.id);
+    
+    if (index === -1) {
+      return res.status(404).json({ error: 'Integrante no encontrado.' });
+    }
+    
+    const existing = integrantes[index];
+    
+    const updatedIntegrante = {
+      ...existing,
+      numero: req.body.esMiembro ? (req.body.numero ? parseInt(req.body.numero, 10) : existing.numero) : null,
+      nombre: `${req.body.nombre} ${req.body.apellidos}`.trim(),
+      foto: req.body.foto || existing.foto,
+      email: req.body.email || existing.email,
+      telefono: req.body.prefijo ? `${req.body.prefijo} ${req.body.telefono}` : req.body.telefono || existing.telefono,
+      fechaNacimiento: req.body.fechaNacimiento || existing.fechaNacimiento,
+      direccion: req.body.direccion || existing.direccion,
+      rol: req.body.responsabilidad?.supervisor ? 'supervisor' : 
+           req.body.responsabilidad?.responsable ? 'responsable' : 
+           req.body.responsabilidad?.ayudante ? 'ayudante' : null,
+      grupo: req.body.grupo || null,
+      gruposSupervisa: req.body.responsabilidad?.supervisorGrupos || [],
+      esMiembro: req.body.esMiembro || false,
+      nuevoCreyente: req.body.fe?.nuevoCreyente || false,
+      formacion: {
+        discipuladoInicial: req.body.formacion?.discipuladoInicial?.replace('_', ' ') || existing.formacion?.discipuladoInicial || 'No iniciado',
+        preBautismos: req.body.formacion?.preBautismos?.replace('_', ' ') || existing.formacion?.preBautismos || 'No iniciado',
+        escuelaBiblica: req.body.formacion?.escuelaBiblica?.replace('_', ' ') || existing.formacion?.escuelaBiblica || 'No iniciado',
+        escuelaDiscipulado: req.body.formacion?.escuelaDiscipulado?.replace('_', ' ') || existing.formacion?.escuelaDiscipulado || 'No iniciado',
+        entrenamiento: req.body.formacion?.entrenamiento?.replace('_', ' ') || existing.formacion?.entrenamiento || 'No iniciado'
+      },
+      bautizado: req.body.fe?.bautizado || false,
+      nuevoBautizado: req.body.fe?.nuevoBautizado || false,
+      iglesiaProcedente: req.body.fe?.procedenteOtraIglesia ? req.body.fe.nombreIglesiaCiudad : null,
+      ministerios: req.body.ministerios || existing.ministerios || [],
+      observaciones: req.body.observaciones || existing.observaciones || ''
+    };
+    
+    integrantes[index] = updatedIntegrante;
+    data.integrantes = integrantes;
+    
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');
+    
+    res.json({ integrante: updatedIntegrante });
+  } catch (error) {
+    console.error('Error updating integrante:', error);
+    res.status(500).json({ error: 'Error al actualizar el integrante.' });
+  }
+});
+
 router.get('/members/:id', async (req: Request, res: Response) => {
   try {
     const db = getDatabase();

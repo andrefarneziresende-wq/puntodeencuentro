@@ -169,6 +169,20 @@ class ApiService {
     return this.request<{ integrante: any }>(`/integrantes/${id}`);
   }
 
+  async createIntegrante(data: any) {
+    return this.request<{ integrante: any }>('/integrantes', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateIntegrante(id: string, data: any) {
+    return this.request<{ integrante: any }>(`/integrantes/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
   async getMember(id: string) {
     return this.request<{ member: any }>(`/members/${id}`);
   }
