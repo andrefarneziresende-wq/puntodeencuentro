@@ -730,12 +730,7 @@ export function HomePage() {
             {/* Discipulado inicial */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                </svg>
+                <img src="/icon-book.png" alt="" width="16" height="16" />
                 <span className="text-[14px] font-medium text-[#333333]">Discipulado inicial</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -769,12 +764,7 @@ export function HomePage() {
             {/* Pre bautismo */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                </svg>
+                <img src="/icon-book.png" alt="" width="16" height="16" />
                 <span className="text-[14px] font-medium text-[#333333]">Pre bautismo</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -808,12 +798,7 @@ export function HomePage() {
             {/* Escuela bíblica */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                </svg>
+                <img src="/icon-book.png" alt="" width="16" height="16" />
                 <span className="text-[14px] font-medium text-[#333333]">Escuela bíblica</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -847,12 +832,7 @@ export function HomePage() {
             {/* Escuela discipulado */}
             <div className="mb-5">
               <div className="flex items-center gap-2 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                </svg>
+                <img src="/icon-book.png" alt="" width="16" height="16" />
                 <span className="text-[14px] font-medium text-[#333333]">Escuela discipulado</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
@@ -886,12 +866,7 @@ export function HomePage() {
             {/* Entrenamiento */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7"/>
-                  <rect x="14" y="3" width="7" height="7"/>
-                  <rect x="3" y="14" width="7" height="7"/>
-                  <rect x="14" y="14" width="7" height="7"/>
-                </svg>
+                <img src="/icon-book.png" alt="" width="16" height="16" />
                 <span className="text-[14px] font-medium text-[#333333]">Entrenamiento</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
