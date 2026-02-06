@@ -486,6 +486,41 @@ export function HomePage() {
           </div>
         </section>
 
+        {/* Localización */}
+        <section className="mb-6">
+          <div className="bg-white rounded-2xl shadow-md p-5">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h2 
+                className="text-[24px] text-[#333333]"
+                style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 300 }}
+              >
+                Localización
+              </h2>
+            </div>
+            
+            {/* Tabs */}
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-[14px] font-medium text-[#333333]">Grupos de Hogar</span>
+              <span className="text-[14px] font-medium text-[#4CAF50]">→ INTEGRANTES</span>
+            </div>
+            
+            {/* Map */}
+            <div className="rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99089.57696587789!2d-0.4545851!3d39.4699075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia%2C%20Spain!5e0!3m2!1sen!2s!4v1706000000000!5m2!1sen!2s"
+                width="100%"
+                height="280"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa de Localización"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   );
