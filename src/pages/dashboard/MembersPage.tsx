@@ -429,44 +429,46 @@ export function MembersPage() {
           </button>
         </div>
         
-        {/* Toggle Map - Inside Card */}
-        <div className="bg-white rounded-2xl shadow-md p-4 mb-4 flex justify-center">
-          <button 
-            onClick={() => setShowMap(!showMap)}
-            className="flex items-center gap-2 text-[#66B97B] text-[14px]"
-          >
-            {showMap ? (
-              /* Eye with line - to hide */
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            ) : (
-              /* Eye open - to show */
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-            )}
-            {showMap ? 'OCULTAR MAPA' : 'MOSTRAR MAPA'}
-          </button>
-        </div>
-        
-        {/* Map */}
-        {showMap && (
-          <div className="rounded-xl overflow-hidden mb-4">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99089.57696587789!2d-0.4545851!3d39.4699075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia%2C%20Spain!5e0!3m2!1sen!2s!4v1706000000000!5m2!1sen!2s"
-              width="100%"
-              height="200"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Mapa de Integrantes"
-            ></iframe>
+        {/* Toggle Map - Inside Card with Map */}
+        <div className="bg-white rounded-2xl shadow-md p-[10px] mb-4">
+          <div className="flex justify-center mb-2">
+            <button 
+              onClick={() => setShowMap(!showMap)}
+              className="flex items-center gap-2 text-[#66B97B] text-[14px]"
+            >
+              {showMap ? (
+                /* Eye with line - to hide */
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              ) : (
+                /* Eye open - to show */
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              )}
+              {showMap ? 'OCULTAR MAPA' : 'MOSTRAR MAPA'}
+            </button>
           </div>
-        )}
+          
+          {/* Map inside the card */}
+          {showMap && (
+            <div className="rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99089.57696587789!2d-0.4545851!3d39.4699075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia%2C%20Spain!5e0!3m2!1sen!2s!4v1706000000000!5m2!1sen!2s"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa de Integrantes"
+              ></iframe>
+            </div>
+          )}
+        </div>
         
         {/* List */}
         <div className="bg-white rounded-2xl shadow-md overflow-hidden">
