@@ -131,12 +131,9 @@ export function MembersPage() {
   };
 
   const getEtiquetaColor = (etiqueta: string) => {
-    if (etiqueta.includes('Hombres')) return 'bg-[#2196F3] text-white';
-    if (etiqueta.includes('Mujeres')) return 'bg-[#E91E63] text-white';
-    if (etiqueta.includes('Parejas')) return 'bg-[#9C27B0] text-white';
     if (etiqueta.includes('Nuevo creyente')) return 'bg-[#FFEB3B] text-black';
-    if (etiqueta.includes('Casa de')) return 'bg-[#FF5722] text-white';
-    return 'bg-[#607D8B] text-white';
+    // All other etiquetas use the same cyan color as group badges
+    return 'bg-[#72E6EA] text-black';
   };
 
   const openFilterModal = () => {
@@ -454,14 +451,20 @@ export function MembersPage() {
                       )}
                     </div>
                     
-                    {/* Etiquetas - third line */}
+                    {/* Etiquetas - stacked vertically */}
                     {integrante.etiquetas.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mt-1">
+                      <div className="flex flex-col gap-1 mt-1">
                         {integrante.etiquetas.map((etiqueta, idx) => (
                           <span 
                             key={idx} 
-                            className={`inline-block text-[9px] font-medium px-2 py-0.5 rounded ${getEtiquetaColor(etiqueta)}`}
+                            className={`inline-flex items-center gap-1 w-fit text-[10px] font-medium px-2 py-0.5 rounded ${getEtiquetaColor(etiqueta)}`}
                           >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                              <circle cx="9" cy="7" r="4"/>
+                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
                             {etiqueta}
                           </span>
                         ))}
