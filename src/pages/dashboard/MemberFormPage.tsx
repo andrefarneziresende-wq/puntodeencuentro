@@ -129,6 +129,7 @@ export function MemberFormPage() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
@@ -246,59 +247,77 @@ export function MemberFormPage() {
     if (saving) return;
     
     const validationErrors: string[] = [];
+    const errors: Record<string, boolean> = {};
     
     // Required fields validation
     if (!formData.nombre.trim()) {
       validationErrors.push('El campo Nombre es obligatorio.');
+      errors.nombre = true;
     }
     if (!formData.apellidos.trim()) {
       validationErrors.push('El campo Apellidos es obligatorio.');
+      errors.apellidos = true;
     }
     if (!formData.fechaNacimiento.trim()) {
       validationErrors.push('El campo Fecha de Nacimiento es obligatorio.');
+      errors.fechaNacimiento = true;
     }
     if (!formData.prefijo.trim()) {
       validationErrors.push('El campo Prefijo es obligatorio.');
+      errors.prefijo = true;
     }
     if (!formData.telefono.trim()) {
       validationErrors.push('El campo Teléfono es obligatorio.');
+      errors.telefono = true;
     }
     if (!formData.direccion.trim()) {
       validationErrors.push('El campo Dirección es obligatorio.');
+      errors.direccion = true;
     }
     
     // If "es miembro" is selected, "numero" is required
     if (formData.esMiembro && !formData.numero.trim()) {
       validationErrors.push('Si es miembro, el campo Número es obligatorio.');
+      errors.numero = true;
     }
     
     // Formación fields validation
     if (!formData.formacion.discipuladoInicial) {
       validationErrors.push('El campo Discipulado inicial es obligatorio.');
+      errors.discipuladoInicial = true;
     }
     if (!formData.formacion.preBautismos) {
       validationErrors.push('El campo Pre bautismos es obligatorio.');
+      errors.preBautismos = true;
     }
     if (!formData.formacion.escuelaBiblica) {
       validationErrors.push('El campo Escuela bíblica es obligatorio.');
+      errors.escuelaBiblica = true;
     }
     if (!formData.formacion.escuelaDiscipulado) {
       validationErrors.push('El campo Escuela discipulado es obligatorio.');
+      errors.escuelaDiscipulado = true;
     }
     if (!formData.formacion.entrenamiento) {
       validationErrors.push('El campo Entrenamiento es obligatorio.');
+      errors.entrenamiento = true;
     }
     
     // Validate that if a role is selected, at least one group must be selected
     if (formData.responsabilidad.supervisor && formData.responsabilidad.supervisorGrupos.length === 0) {
       validationErrors.push('Si seleccionas Supervisor, debes seleccionar al menos un Grupo de Hogar.');
+      errors.supervisorGrupos = true;
     }
     if (formData.responsabilidad.responsable && formData.responsabilidad.responsableGrupos.length === 0) {
       validationErrors.push('Si seleccionas Responsable, debes seleccionar al menos un Grupo de Hogar.');
+      errors.responsableGrupos = true;
     }
     if (formData.responsabilidad.ayudante && formData.responsabilidad.ayudanteGrupos.length === 0) {
       validationErrors.push('Si seleccionas Ayudante, debes seleccionar al menos un Grupo de Hogar.');
+      errors.ayudanteGrupos = true;
     }
+    
+    setFieldErrors(errors);
     
     if (validationErrors.length > 0) {
       alert(validationErrors.join('\n'));
@@ -353,7 +372,8 @@ export function MemberFormPage() {
     id,
     required = false,
     multiple = false,
-    selectedValues = []
+    selectedValues = [],
+    error = false
   }: { 
     label: string; 
     value: string; 
@@ -363,6 +383,7 @@ export function MemberFormPage() {
     required?: boolean;
     multiple?: boolean;
     selectedValues?: string[];
+    error?: boolean;
   }) => {
     const isOpen = openDropdown === id;
     const normalizedOptions = options.map(opt => 
@@ -371,13 +392,13 @@ export function MemberFormPage() {
 
     return (
       <div className="mb-4 relative">
-        <label className="block text-[14px] text-[#333] mb-1">
+        <label className={`block text-[14px] mb-1 ${error ? 'text-[#F21D61]' : 'text-[#333]'}`}>
           {label}{required && ' *'}
         </label>
         <button
           type="button"
           onClick={() => setOpenDropdown(isOpen ? null : id)}
-          className="w-full flex items-center justify-between px-4 py-3 bg-white border border-[#E0E0E0] rounded-lg text-left"
+          className={`w-full flex items-center justify-between px-4 py-3 bg-white border rounded-lg text-left ${error ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
         >
           <span className={`text-[14px] ${value || selectedValues.length > 0 ? 'text-[#333]' : 'text-[#999]'}`}>
             {multiple 
@@ -489,12 +510,15 @@ export function MemberFormPage() {
                     </div>
                     {/* Número - label and input side by side, aligned right */}
                     <div className="flex items-center justify-end gap-2">
-                      <label className="text-[14px] text-[#333]">Número *</label>
+                      <label className={`text-[14px] ${fieldErrors.numero ? 'text-[#F21D61]' : 'text-[#333]'}`}>Número *</label>
                       <input
                         type="text"
                         value={formData.numero}
-                        onChange={(e) => setFormData({ ...formData, numero: e.target.value })}
-                        className="w-20 px-3 py-2 border border-[#E0E0E0] rounded-lg text-[14px]"
+                        onChange={(e) => {
+                          setFormData({ ...formData, numero: e.target.value });
+                          if (fieldErrors.numero) setFieldErrors({ ...fieldErrors, numero: false });
+                        }}
+                        className={`w-20 px-3 py-2 border rounded-lg text-[14px] ${fieldErrors.numero ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                         placeholder=""
                       />
                     </div>
@@ -505,34 +529,43 @@ export function MemberFormPage() {
 
             {/* Basic Info */}
             <div className="mb-4">
-              <label className="block text-[14px] text-[#333] mb-1">Nombre *</label>
+              <label className={`block text-[14px] mb-1 ${fieldErrors.nombre ? 'text-[#F21D61]' : 'text-[#333]'}`}>Nombre *</label>
               <input
                 type="text"
                 value={formData.nombre}
-                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
+                onChange={(e) => {
+                  setFormData({ ...formData, nombre: e.target.value });
+                  if (fieldErrors.nombre) setFieldErrors({ ...fieldErrors, nombre: false });
+                }}
+                className={`w-full px-4 py-3 border rounded-lg text-[14px] ${fieldErrors.nombre ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-[14px] text-[#333] mb-1">Apellidos *</label>
+              <label className={`block text-[14px] mb-1 ${fieldErrors.apellidos ? 'text-[#F21D61]' : 'text-[#333]'}`}>Apellidos *</label>
               <input
                 type="text"
                 value={formData.apellidos}
-                onChange={(e) => setFormData({ ...formData, apellidos: e.target.value })}
-                className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
+                onChange={(e) => {
+                  setFormData({ ...formData, apellidos: e.target.value });
+                  if (fieldErrors.apellidos) setFieldErrors({ ...fieldErrors, apellidos: false });
+                }}
+                className={`w-full px-4 py-3 border rounded-lg text-[14px] ${fieldErrors.apellidos ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-[14px] text-[#333] mb-1">Fecha de Nacimiento *</label>
+              <label className={`block text-[14px] mb-1 ${fieldErrors.fechaNacimiento ? 'text-[#F21D61]' : 'text-[#333]'}`}>Fecha de Nacimiento *</label>
               <input
                 type="text"
                 value={formData.fechaNacimiento}
-                onChange={(e) => setFormData({ ...formData, fechaNacimiento: e.target.value })}
-                className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
+                onChange={(e) => {
+                  setFormData({ ...formData, fechaNacimiento: e.target.value });
+                  if (fieldErrors.fechaNacimiento) setFieldErrors({ ...fieldErrors, fechaNacimiento: false });
+                }}
+                className={`w-full px-4 py-3 border rounded-lg text-[14px] ${fieldErrors.fechaNacimiento ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                 placeholder="dd/mm/aaaa"
                 required
               />
@@ -540,11 +573,14 @@ export function MemberFormPage() {
 
             <div className="flex gap-3 mb-4">
               <div className="w-24">
-                <label className="block text-[14px] text-[#333] mb-1">Prefijo *</label>
+                <label className={`block text-[14px] mb-1 ${fieldErrors.prefijo ? 'text-[#F21D61]' : 'text-[#333]'}`}>Prefijo *</label>
                 <select
                   value={formData.prefijo}
-                  onChange={(e) => setFormData({ ...formData, prefijo: e.target.value })}
-                  className="w-full px-3 py-3 border border-[#E0E0E0] rounded-lg text-[14px] bg-white"
+                  onChange={(e) => {
+                    setFormData({ ...formData, prefijo: e.target.value });
+                    if (fieldErrors.prefijo) setFieldErrors({ ...fieldErrors, prefijo: false });
+                  }}
+                  className={`w-full px-3 py-3 border rounded-lg text-[14px] bg-white ${fieldErrors.prefijo ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                 >
                   <option value="+34">+34</option>
                   <option value="+1">+1</option>
@@ -552,35 +588,40 @@ export function MemberFormPage() {
                 </select>
               </div>
               <div className="flex-1">
-                <label className="block text-[14px] text-[#333] mb-1">Teléfono *</label>
+                <label className={`block text-[14px] mb-1 ${fieldErrors.telefono ? 'text-[#F21D61]' : 'text-[#333]'}`}>Teléfono *</label>
                 <input
                   type="tel"
                   value={formData.telefono}
-                  onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                  className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
+                  onChange={(e) => {
+                    setFormData({ ...formData, telefono: e.target.value });
+                    if (fieldErrors.telefono) setFieldErrors({ ...fieldErrors, telefono: false });
+                  }}
+                  className={`w-full px-4 py-3 border rounded-lg text-[14px] ${fieldErrors.telefono ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                   required
                 />
               </div>
             </div>
 
             <div className="mb-4">
-              <label className="block text-[14px] text-[#333] mb-1">Email *</label>
+              <label className="block text-[14px] text-[#333] mb-1">Email</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
-                required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-[14px] text-[#333] mb-1">Dirección *</label>
+              <label className={`block text-[14px] mb-1 ${fieldErrors.direccion ? 'text-[#F21D61]' : 'text-[#333]'}`}>Dirección *</label>
               <input
                 type="text"
                 value={formData.direccion}
-                onChange={(e) => setFormData({ ...formData, direccion: e.target.value })}
-                className="w-full px-4 py-3 border border-[#E0E0E0] rounded-lg text-[14px]"
+                onChange={(e) => {
+                  setFormData({ ...formData, direccion: e.target.value });
+                  if (fieldErrors.direccion) setFieldErrors({ ...fieldErrors, direccion: false });
+                }}
+                className={`w-full px-4 py-3 border rounded-lg text-[14px] ${fieldErrors.direccion ? 'border-[#F21D61] bg-red-50' : 'border-[#E0E0E0]'}`}
                 required
               />
             </div>
@@ -617,15 +658,20 @@ export function MemberFormPage() {
                   id="ayudanteGrupos"
                   value=""
                   options={gruposOptions}
-                  onChange={(val) => setFormData({ 
-                    ...formData, 
-                    responsabilidad: { 
-                      ...formData.responsabilidad, 
-                      ayudanteGrupos: val.split(',').filter(v => v) 
-                    }
-                  })}
+                  onChange={(val) => {
+                    setFormData({ 
+                      ...formData, 
+                      responsabilidad: { 
+                        ...formData.responsabilidad, 
+                        ayudanteGrupos: val.split(',').filter(v => v) 
+                      }
+                    });
+                    if (fieldErrors.ayudanteGrupos) setFieldErrors({ ...fieldErrors, ayudanteGrupos: false });
+                  }}
                   multiple
                   selectedValues={formData.responsabilidad.ayudanteGrupos}
+                  required
+                  error={fieldErrors.ayudanteGrupos}
                 />
               )}
 
@@ -646,15 +692,20 @@ export function MemberFormPage() {
                   id="responsableGrupos"
                   value=""
                   options={gruposOptions}
-                  onChange={(val) => setFormData({ 
-                    ...formData, 
-                    responsabilidad: { 
-                      ...formData.responsabilidad, 
-                      responsableGrupos: val.split(',').filter(v => v) 
-                    }
-                  })}
+                  onChange={(val) => {
+                    setFormData({ 
+                      ...formData, 
+                      responsabilidad: { 
+                        ...formData.responsabilidad, 
+                        responsableGrupos: val.split(',').filter(v => v) 
+                      }
+                    });
+                    if (fieldErrors.responsableGrupos) setFieldErrors({ ...fieldErrors, responsableGrupos: false });
+                  }}
                   multiple
                   selectedValues={formData.responsabilidad.responsableGrupos}
+                  required
+                  error={fieldErrors.responsableGrupos}
                 />
               )}
 
@@ -675,15 +726,20 @@ export function MemberFormPage() {
                   id="supervisorGrupos"
                   value=""
                   options={gruposOptions}
-                  onChange={(val) => setFormData({ 
-                    ...formData, 
-                    responsabilidad: { 
-                      ...formData.responsabilidad, 
-                      supervisorGrupos: val.split(',').filter(v => v) 
-                    }
-                  })}
+                  onChange={(val) => {
+                    setFormData({ 
+                      ...formData, 
+                      responsabilidad: { 
+                        ...formData.responsabilidad, 
+                        supervisorGrupos: val.split(',').filter(v => v) 
+                      }
+                    });
+                    if (fieldErrors.supervisorGrupos) setFieldErrors({ ...fieldErrors, supervisorGrupos: false });
+                  }}
                   multiple
                   selectedValues={formData.responsabilidad.supervisorGrupos}
+                  required
+                  error={fieldErrors.supervisorGrupos}
                 />
               )}
             </div>
@@ -697,11 +753,15 @@ export function MemberFormPage() {
                 id="discipuladoInicial"
                 value={formData.formacion.discipuladoInicial}
                 options={formacionOptions}
-                onChange={(val) => setFormData({ 
-                  ...formData, 
-                  formacion: { ...formData.formacion, discipuladoInicial: val }
-                })}
+                onChange={(val) => {
+                  setFormData({ 
+                    ...formData, 
+                    formacion: { ...formData.formacion, discipuladoInicial: val }
+                  });
+                  if (fieldErrors.discipuladoInicial) setFieldErrors({ ...fieldErrors, discipuladoInicial: false });
+                }}
                 required
+                error={fieldErrors.discipuladoInicial}
               />
 
               <Dropdown
@@ -709,11 +769,15 @@ export function MemberFormPage() {
                 id="preBautismos"
                 value={formData.formacion.preBautismos}
                 options={formacionOptions}
-                onChange={(val) => setFormData({ 
-                  ...formData, 
-                  formacion: { ...formData.formacion, preBautismos: val }
-                })}
+                onChange={(val) => {
+                  setFormData({ 
+                    ...formData, 
+                    formacion: { ...formData.formacion, preBautismos: val }
+                  });
+                  if (fieldErrors.preBautismos) setFieldErrors({ ...fieldErrors, preBautismos: false });
+                }}
                 required
+                error={fieldErrors.preBautismos}
               />
 
               <Dropdown
@@ -721,11 +785,15 @@ export function MemberFormPage() {
                 id="escuelaBiblica"
                 value={formData.formacion.escuelaBiblica}
                 options={formacionOptions}
-                onChange={(val) => setFormData({ 
-                  ...formData, 
-                  formacion: { ...formData.formacion, escuelaBiblica: val }
-                })}
+                onChange={(val) => {
+                  setFormData({ 
+                    ...formData, 
+                    formacion: { ...formData.formacion, escuelaBiblica: val }
+                  });
+                  if (fieldErrors.escuelaBiblica) setFieldErrors({ ...fieldErrors, escuelaBiblica: false });
+                }}
                 required
+                error={fieldErrors.escuelaBiblica}
               />
 
               <Dropdown
@@ -733,11 +801,15 @@ export function MemberFormPage() {
                 id="escuelaDiscipulado"
                 value={formData.formacion.escuelaDiscipulado}
                 options={formacionOptions}
-                onChange={(val) => setFormData({ 
-                  ...formData, 
-                  formacion: { ...formData.formacion, escuelaDiscipulado: val }
-                })}
+                onChange={(val) => {
+                  setFormData({ 
+                    ...formData, 
+                    formacion: { ...formData.formacion, escuelaDiscipulado: val }
+                  });
+                  if (fieldErrors.escuelaDiscipulado) setFieldErrors({ ...fieldErrors, escuelaDiscipulado: false });
+                }}
                 required
+                error={fieldErrors.escuelaDiscipulado}
               />
 
               <Dropdown
@@ -745,11 +817,15 @@ export function MemberFormPage() {
                 id="entrenamiento"
                 value={formData.formacion.entrenamiento}
                 options={formacionOptions}
-                onChange={(val) => setFormData({ 
-                  ...formData, 
-                  formacion: { ...formData.formacion, entrenamiento: val }
-                })}
+                onChange={(val) => {
+                  setFormData({ 
+                    ...formData, 
+                    formacion: { ...formData.formacion, entrenamiento: val }
+                  });
+                  if (fieldErrors.entrenamiento) setFieldErrors({ ...fieldErrors, entrenamiento: false });
+                }}
                 required
+                error={fieldErrors.entrenamiento}
               />
             </div>
 
