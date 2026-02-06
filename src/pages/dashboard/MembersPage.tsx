@@ -120,7 +120,7 @@ export function MembersPage() {
   const getRolBadge = (rol: string | null) => {
     switch (rol) {
       case 'responsable':
-        return <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Responsable</span>;
+        return <span className="inline-block bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Responsable</span>;
       case 'ayudante':
         return <span className="inline-block bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded-lg">Ayudante</span>;
       case 'supervisor':
