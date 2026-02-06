@@ -305,8 +305,9 @@ export function MemberDetailPage() {
               </span>
             ))}
 
-            {/* Etiquetas */}
-            {member.etiquetas && member.etiquetas.length > 0 && member.etiquetas.map((etiqueta, idx) => (
+            {/* Etiquetas - filter out Nuevo creyente since it's handled separately */}
+            {member.etiquetas && member.etiquetas.filter(e => e.toLowerCase() !== 'nuevo creyente').length > 0 && 
+              member.etiquetas.filter(e => e.toLowerCase() !== 'nuevo creyente').map((etiqueta, idx) => (
               <span key={idx} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
