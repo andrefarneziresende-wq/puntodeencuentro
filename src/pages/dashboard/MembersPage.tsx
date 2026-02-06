@@ -481,9 +481,9 @@ export function MembersPage() {
       {/* Filter Modal */}
       {showFilterModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto relative">
             {/* Header */}
-            <div className="sticky top-0 bg-white p-5 border-b border-[#E0E0E0]">
+            <div className="sticky top-0 bg-white p-5 border-b border-[#E0E0E0] z-10 rounded-t-2xl">
               <div className="flex items-center justify-between mb-2">
                 <h2 className="text-[24px] font-bold text-[#333333]">Filtrar por</h2>
                 <button onClick={() => setShowFilterModal(false)}>
@@ -682,7 +682,7 @@ export function MembersPage() {
             </div>
             
             {/* Footer */}
-            <div className="sticky bottom-0 bg-white p-5 border-t border-[#E0E0E0]">
+            <div className="sticky bottom-0 bg-white p-5 border-t border-[#E0E0E0] z-10 rounded-b-2xl">
               <button 
                 onClick={applyFilters}
                 className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-3"
@@ -691,7 +691,7 @@ export function MembersPage() {
               </button>
               <button 
                 onClick={() => setShowFilterModal(false)}
-                className="w-full text-[#4CAF50] text-[14px] font-medium"
+                className="w-full text-[#F21D61] text-[14px] font-medium underline"
               >
                 CANCELAR
               </button>
