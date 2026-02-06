@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../../components/layout';
 import { Input, Button, Alert } from '../../components/ui';
@@ -19,7 +20,7 @@ export function LoginPage() {
   const [hasError, setHasError] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [touched, setTouched] = useState({ email: false, password: false });
+  const [_touched, setTouched] = useState({ email: false, password: false });
 
   const validateForm = (): boolean => {
     let isValid = true;

@@ -6,9 +6,6 @@ interface TestimonyCardProps {
   content: string;
   groupName: string;
   createdAt: string;
-  isFavorite?: boolean;
-  onToggleFavorite?: () => void;
-  showFavoriteButton?: boolean;
 }
 
 export function TestimonyCard({
@@ -17,9 +14,6 @@ export function TestimonyCard({
   content,
   groupName,
   createdAt,
-  isFavorite = false,
-  onToggleFavorite,
-  showFavoriteButton = false,
 }: TestimonyCardProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
