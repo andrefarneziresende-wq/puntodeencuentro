@@ -314,7 +314,7 @@ export function HomePage() {
                 <p className="text-[40px] font-bold text-[#333333] leading-none">67</p>
                 <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full">1,5 en cada grupo</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 bg-[#E0E0E0] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
                 <img src="/icon-visitor.png" alt="" width="14" height="14" />
                 Visitantes
               </div>
