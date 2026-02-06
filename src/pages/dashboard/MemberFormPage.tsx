@@ -156,7 +156,7 @@ export function MemberFormPage() {
             ayudante: member.rol === 'ayudante',
             responsable: member.rol === 'responsable',
             supervisor: member.rol === 'supervisor',
-            grupoHogar: member.gruposSupervisa || []
+            grupoHogar: member.rol === 'supervisor' ? (member.gruposSupervisa || []) : []
           },
           formacion: {
             discipuladoInicial: member.formacion?.discipuladoInicial?.toLowerCase().replace(' ', '_') || '',
