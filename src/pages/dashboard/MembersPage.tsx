@@ -256,7 +256,7 @@ export function MembersPage() {
     </div>
   );
 
-  // Range Slider Component with Desde and Hasta side by side
+  // Range Slider Component - Single line with dual handles
   const RangeSlider = ({ 
     label, 
     min, 
@@ -271,52 +271,62 @@ export function MembersPage() {
     onChange: (value: [number, number]) => void;
   }) => {
     const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMin = Math.min(parseInt(e.target.value), value[1]);
+      const newMin = Math.min(parseInt(e.target.value), value[1] - 1);
       onChange([newMin, value[1]]);
     };
 
     const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMax = Math.max(parseInt(e.target.value), value[0]);
+      const newMax = Math.max(parseInt(e.target.value), value[0] + 1);
       onChange([value[0], newMax]);
     };
 
     return (
-      <div className="mb-5">
-        <label className="block text-[12px] font-medium text-[#333333] mb-2">{label}</label>
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <label className="text-[12px] font-medium text-[#333333]">{label}</label>
+        </div>
         
-        {/* Desde and Hasta side by side */}
-        <div className="flex items-center gap-3">
-          {/* Desde */}
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-[#9E9E9E] w-12">Desde</span>
-              <input
-                type="range"
-                min={min}
-                max={max}
-                value={value[0]}
-                onChange={handleMinChange}
-                className="flex-1 h-2 bg-[#E0E0E0] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
-              />
-              <span className="text-[11px] text-[#4CAF50] font-medium w-8 text-right">{value[0]}%</span>
-            </div>
+        {/* Single line: min value - slider - max value */}
+        <div className="flex items-center gap-2">
+          <span className="text-[12px] text-[#4CAF50] font-medium w-10">{value[0]}%</span>
+          
+          <div className="flex-1 relative h-6">
+            {/* Track background */}
+            <div className="absolute top-1/2 -translate-y-1/2 w-full h-1.5 bg-[#E0E0E0] rounded-full" />
+            
+            {/* Active track */}
+            <div 
+              className="absolute top-1/2 -translate-y-1/2 h-1.5 bg-[#4CAF50] rounded-full"
+              style={{ 
+                left: `${value[0]}%`, 
+                width: `${value[1] - value[0]}%` 
+              }}
+            />
+            
+            {/* Min slider */}
+            <input
+              type="range"
+              min={min}
+              max={max}
+              value={value[0]}
+              onChange={handleMinChange}
+              className="absolute top-0 w-full h-6 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
+              style={{ zIndex: 3 }}
+            />
+            
+            {/* Max slider */}
+            <input
+              type="range"
+              min={min}
+              max={max}
+              value={value[1]}
+              onChange={handleMaxChange}
+              className="absolute top-0 w-full h-6 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
+              style={{ zIndex: 4 }}
+            />
           </div>
           
-          {/* Hasta */}
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-[#9E9E9E] w-12">Hasta</span>
-              <input
-                type="range"
-                min={min}
-                max={max}
-                value={value[1]}
-                onChange={handleMaxChange}
-                className="flex-1 h-2 bg-[#E0E0E0] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
-              />
-              <span className="text-[11px] text-[#4CAF50] font-medium w-8 text-right">{value[1]}%</span>
-            </div>
-          </div>
+          <span className="text-[12px] text-[#4CAF50] font-medium w-10 text-right">{value[1]}%</span>
         </div>
       </div>
     );
