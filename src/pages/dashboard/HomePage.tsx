@@ -11,12 +11,34 @@ interface HighlightedTestimony {
   createdAt: string;
 }
 
+interface DashboardStats {
+  gruposDeHogar: {
+    total: number;
+    integrantes: { total: number; porGrupo: number; sinGrupo: number; sinGrupoPorcentaje: number };
+    miembros: { total: number; porGrupo: number; sinGrupo: number; sinGrupoPorcentaje: number };
+    enMinisterio: { integrantes: number; miembros: number };
+    liderazgo: { supervisores: number; supervisoresPorGrupo: number; responsables: number; ayudantes: number };
+  };
+  fe: {
+    visitantes: { total: number; porGrupo: number };
+    nuevosCreyentes: { total: number; porGrupo: number };
+    nuevosBautizados: { total: number; porGrupo: number };
+    procedentesOtraIglesia: { total: number; porGrupo: number };
+  };
+  reunionesStats: {
+    tipos: { periodicas: number; comunion: number; evangelisticas: number };
+    frecuencia: { semanal: number; quincenal: number; mensual: number };
+  };
+}
+
 export function HomePage() {
   const [highlightedTestimonies, setHighlightedTestimonies] = useState<HighlightedTestimony[]>([]);
   const [loadingTestimonies, setLoadingTestimonies] = useState(true);
+  const [stats, setStats] = useState<DashboardStats | null>(null);
 
   useEffect(() => {
     loadHighlightedTestimonies();
+    loadDashboardStats();
   }, []);
 
   const loadHighlightedTestimonies = async () => {
@@ -26,6 +48,13 @@ export function HomePage() {
       setHighlightedTestimonies(result.data.testimonies.slice(0, 2));
     }
     setLoadingTestimonies(false);
+  };
+
+  const loadDashboardStats = async () => {
+    const result = await api.getDashboardStats();
+    if (result.data) {
+      setStats(result.data);
+    }
   };
 
   const truncateText = (text: string, maxLength: number = 200) => {
@@ -311,10 +340,10 @@ export function HomePage() {
             {/* Visitantes */}
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-[40px] font-bold text-[#333333] leading-none">67</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">1,5 en cada grupo</span>
+                <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.visitantes?.total || 0}</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.visitantes?.porGrupo || 0} en cada grupo</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 bg-[#E0E0E0] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
+              <div className="inline-flex items-center gap-1.5 bg-[#E0E0E0] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
                 <img src="/icon-visitor.png" alt="" width="14" height="14" />
                 Visitantes
               </div>
@@ -326,11 +355,11 @@ export function HomePage() {
             {/* Nuevos creyentes */}
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-[40px] font-bold text-[#333333] leading-none">23</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">0,5 en cada grupo</span>
+                <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.nuevosCreyentes?.total || 0}</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.nuevosCreyentes?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 bg-[#D4E157] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
+                <div className="inline-flex items-center gap-1.5 bg-[#D4E157] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
                   <img src="/icon-believer.png" alt="" width="14" height="14" />
                   Nuevos creyentes
                 </div>
@@ -346,11 +375,11 @@ export function HomePage() {
             {/* Nuevos bautizados */}
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-[40px] font-bold text-[#333333] leading-none">12</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">0,5 en cada grupo</span>
+                <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.nuevosBautizados?.total || 0}</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.nuevosBautizados?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 bg-[#C8EDFA] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
+                <div className="inline-flex items-center gap-1.5 bg-[#C8EDFA] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
                   <img src="/icon-baptized.png" alt="" width="14" height="14" />
                   Nuevos bautizados
                 </div>
@@ -366,16 +395,91 @@ export function HomePage() {
             {/* Procedentes de otra iglesia */}
             <div>
               <div className="flex items-baseline gap-2 mb-1">
-                <p className="text-[40px] font-bold text-[#333333] leading-none">7</p>
-                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">0,5 en cada grupo</span>
+                <p className="text-[40px] font-bold text-[#333333] leading-none">{stats?.fe?.procedentesOtraIglesia?.total || 0}</p>
+                <span className="bg-[#F2F2F2] text-[#9E9E9E] text-[12px] px-2 py-0.5 rounded-full relative -top-1">{stats?.fe?.procedentesOtraIglesia?.porGrupo || 0} en cada grupo</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-full">
+                <div className="inline-flex items-center gap-1.5 bg-[#F5F5F5] text-[#333333] text-[12px] font-medium px-3 py-1.5 rounded-lg">
                   <img src="/icon-church.png" alt="" width="14" height="14" />
                   Procedentes de otra iglesia
                 </div>
                 <div className="w-5 h-5 rounded-full border border-[#45C1EE] flex items-center justify-center">
                   <span className="text-[10px] text-[#45C1EE]">i</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Reuniones */}
+        <section className="mb-6">
+          <div className="bg-white rounded-2xl shadow-md p-5">
+            {/* Title */}
+            <h2 
+              className="text-[24px] text-[#333333] mb-4"
+              style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 300 }}
+            >
+              Reuniones
+            </h2>
+            
+            {/* First Row - Percentages with badges */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-2">{stats?.reunionesStats?.tipos?.periodicas || 0}%</p>
+                <div className="inline-block bg-[#72E6EA] text-black text-[11px] font-medium px-2.5 py-1 rounded-lg">
+                  Periódicas
+                </div>
+              </div>
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-2">{stats?.reunionesStats?.tipos?.comunion || 0}%</p>
+                <div className="inline-block bg-[#72E6EA] text-black text-[11px] font-medium px-2.5 py-1 rounded-lg">
+                  Comunión
+                </div>
+              </div>
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-2">{stats?.reunionesStats?.tipos?.evangelisticas || 0}%</p>
+                <div className="inline-block bg-[#72E6EA] text-black text-[11px] font-medium px-2.5 py-1 rounded-lg">
+                  Evangelísticas
+                </div>
+              </div>
+            </div>
+            
+            {/* Second Row - Frequencies */}
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-1">{stats?.reunionesStats?.frecuencia?.semanal || 0}%</p>
+                <div className="flex items-center gap-1.5 text-[#9E9E9E] text-[12px]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  Semanal
+                </div>
+              </div>
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-1">{stats?.reunionesStats?.frecuencia?.quincenal || 0}%</p>
+                <div className="flex items-center gap-1.5 text-[#9E9E9E] text-[12px]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  Quincenal
+                </div>
+              </div>
+              <div>
+                <p className="text-[32px] font-bold text-[#333333] leading-none mb-1">{stats?.reunionesStats?.frecuencia?.mensual || 0}%</p>
+                <div className="flex items-center gap-1.5 text-[#9E9E9E] text-[12px]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                  Mensual
                 </div>
               </div>
             </div>

@@ -54,6 +54,36 @@
     "oracion": {
       "promedio": 7084,
       "contestadas": 4359
+    },
+    "fe": {
+      "visitantes": {
+        "total": 67,
+        "porGrupo": 1.5
+      },
+      "nuevosCreyentes": {
+        "total": 23,
+        "porGrupo": 0.5
+      },
+      "nuevosBautizados": {
+        "total": 12,
+        "porGrupo": 0.5
+      },
+      "procedentesOtraIglesia": {
+        "total": 7,
+        "porGrupo": 0.5
+      }
+    },
+    "reunionesStats": {
+      "tipos": {
+        "periodicas": 73,
+        "comunion": 22,
+        "evangelisticas": 5
+      },
+      "frecuencia": {
+        "semanal": 73,
+        "quincenal": 22,
+        "mensual": 5
+      }
     }
   },
   "users": [
