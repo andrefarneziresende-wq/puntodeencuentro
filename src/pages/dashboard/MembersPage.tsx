@@ -430,7 +430,7 @@ export function MembersPage() {
         </div>
         
         {/* Toggle Map - Inside Card */}
-        <div className="bg-white rounded-2xl shadow-md p-4 mb-4">
+        <div className="bg-white rounded-2xl shadow-md p-4 mb-4 flex justify-center">
           <button 
             onClick={() => setShowMap(!showMap)}
             className="flex items-center gap-2 text-[#66B97B] text-[14px]"
@@ -571,7 +571,7 @@ export function MembersPage() {
                 onClick={loadMore}
                 className="text-[#4CAF50] text-[14px] font-medium"
               >
-                VER MÁS ({filteredAndSortedIntegrantes.length - visibleCount} restantes)
+                VER MÁS
               </button>
             </div>
           )}
