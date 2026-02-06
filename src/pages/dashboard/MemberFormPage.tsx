@@ -360,16 +360,19 @@ export function MemberFormPage() {
               <button
                 type="button"
                 onClick={() => setShowPhotoModal(true)}
-                className="w-16 h-16 rounded-full bg-[#E8F5E9] border-2 border-[#4CAF50] flex items-center justify-center overflow-hidden flex-shrink-0"
+                className="relative w-16 h-16 flex-shrink-0"
               >
                 {formData.foto || previewUrl ? (
-                  <img src={formData.foto || previewUrl || ''} alt="Foto" className="w-full h-full object-cover" />
+                  <img src={formData.foto || previewUrl || ''} alt="Foto" className="w-full h-full rounded-full object-cover" />
                 ) : (
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="1.5">
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
-                  </svg>
+                  <img src="/icon-photo-placeholder.png" alt="Foto" className="w-full h-full object-contain" />
                 )}
+                {/* Camera icon - bottom right */}
+                <img 
+                  src="/icon-camera.png" 
+                  alt="Cambiar foto" 
+                  className="absolute bottom-0 right-0 w-6 h-6"
+                />
               </button>
               <div className="flex-1">
                 {/* Es miembro toggle - aligned right */}
@@ -832,12 +835,7 @@ export function MemberFormPage() {
                   <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="w-24 h-24 rounded-full bg-[#E8F5E9] border-2 border-[#4CAF50] flex items-center justify-center">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="1.5">
-                    <circle cx="12" cy="7" r="4"/>
-                    <path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/>
-                  </svg>
-                </div>
+                <img src="/icon-photo-placeholder.png" alt="Foto" className="w-24 h-24 object-contain" />
               )}
             </div>
 
