@@ -159,7 +159,7 @@ export function MemberDetailPage() {
             {!member.esMiembro && (
               <span className="bg-[#F21D61] text-white text-[11px] px-3 py-1 rounded">No es miembro</span>
             )}
-            <span className="text-[#666] text-[14px]">Miembro: {member.numero}</span>
+            <span className="bg-white rounded-lg shadow-sm p-[10px] text-[#666] text-[14px]">Miembro: {member.numero}</span>
           </div>
         </div>
 
