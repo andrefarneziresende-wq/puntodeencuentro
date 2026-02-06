@@ -93,6 +93,33 @@
         "quincenal": 22,
         "mensual": 5
       }
+    },
+    "formacion": {
+      "discipuladoInicial": {
+        "terminado": { "total": 183, "porcentaje": 72 },
+        "iniciado": { "total": 42, "porcentaje": 22 },
+        "noIniciado": { "total": 21, "porcentaje": 6 }
+      },
+      "preBautismo": {
+        "terminado": { "total": 183, "porcentaje": 72 },
+        "iniciado": { "total": 42, "porcentaje": 22 },
+        "noIniciado": { "total": 21, "porcentaje": 6 }
+      },
+      "escuelaBiblica": {
+        "terminado": { "total": 183, "porcentaje": 72 },
+        "iniciado": { "total": 21, "porcentaje": 6 },
+        "noIniciado": { "total": 42, "porcentaje": 22 }
+      },
+      "escuelaDiscipulado": {
+        "terminado": { "total": 21, "porcentaje": 6 },
+        "iniciado": { "total": 183, "porcentaje": 72 },
+        "noIniciado": { "total": 42, "porcentaje": 22 }
+      },
+      "entrenamiento": {
+        "terminado": { "total": 21, "porcentaje": 6 },
+        "iniciado": { "total": 183, "porcentaje": 72 },
+        "noIniciado": { "total": 42, "porcentaje": 22 }
+      }
     }
   },
   "users": [

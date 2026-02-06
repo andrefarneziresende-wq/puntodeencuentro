@@ -44,6 +44,13 @@ interface DashboardStats {
       mediaTotal: number;
     }>;
   };
+  formacion: {
+    discipuladoInicial: { terminado: { total: number; porcentaje: number }; iniciado: { total: number; porcentaje: number }; noIniciado: { total: number; porcentaje: number } };
+    preBautismo: { terminado: { total: number; porcentaje: number }; iniciado: { total: number; porcentaje: number }; noIniciado: { total: number; porcentaje: number } };
+    escuelaBiblica: { terminado: { total: number; porcentaje: number }; iniciado: { total: number; porcentaje: number }; noIniciado: { total: number; porcentaje: number } };
+    escuelaDiscipulado: { terminado: { total: number; porcentaje: number }; iniciado: { total: number; porcentaje: number }; noIniciado: { total: number; porcentaje: number } };
+    entrenamiento: { terminado: { total: number; porcentaje: number }; iniciado: { total: number; porcentaje: number }; noIniciado: { total: number; porcentaje: number } };
+  };
 }
 
 export function HomePage() {
@@ -700,6 +707,211 @@ export function HomePage() {
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-[#333333]"></span>
                 <span className="text-[#666666]">Media Total</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Formación */}
+        <section className="mb-6">
+          <div className="bg-white rounded-2xl shadow-md p-5">
+            {/* Title */}
+            <h2 
+              className="text-[24px] text-[#333333] mb-5"
+              style={{ fontFamily: 'Roboto, sans-serif', fontWeight: 300 }}
+            >
+              Formación
+            </h2>
+            
+            {/* Discipulado inicial */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span className="text-[14px] font-medium text-[#333333]">Discipulado inicial</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.discipuladoInicial?.terminado?.total || 183}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.discipuladoInicial?.terminado?.porcentaje || 72}%</span>
+                  </p>
+                  <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Terminado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.discipuladoInicial?.iniciado?.total || 42}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.discipuladoInicial?.iniciado?.porcentaje || 22}%</span>
+                  </p>
+                  <span className="inline-block bg-[#C6DE41] text-[#333333] text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Iniciado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.discipuladoInicial?.noIniciado?.total || 21}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.discipuladoInicial?.noIniciado?.porcentaje || 6}%</span>
+                  </p>
+                  <span className="inline-block bg-[#F44336] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">No iniciado</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Divider */}
+            <div className="h-[1px] bg-[#E0E0E0] mb-5"></div>
+            
+            {/* Pre bautismo */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span className="text-[14px] font-medium text-[#333333]">Pre bautismo</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.preBautismo?.terminado?.total || 183}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.preBautismo?.terminado?.porcentaje || 72}%</span>
+                  </p>
+                  <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Terminado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.preBautismo?.iniciado?.total || 42}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.preBautismo?.iniciado?.porcentaje || 22}%</span>
+                  </p>
+                  <span className="inline-block bg-[#C6DE41] text-[#333333] text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Iniciado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.preBautismo?.noIniciado?.total || 21}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.preBautismo?.noIniciado?.porcentaje || 6}%</span>
+                  </p>
+                  <span className="inline-block bg-[#F44336] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">No iniciado</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Divider */}
+            <div className="h-[1px] bg-[#E0E0E0] mb-5"></div>
+            
+            {/* Escuela bíblica */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span className="text-[14px] font-medium text-[#333333]">Escuela bíblica</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaBiblica?.terminado?.total || 183}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaBiblica?.terminado?.porcentaje || 72}%</span>
+                  </p>
+                  <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Terminado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaBiblica?.iniciado?.total || 21}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaBiblica?.iniciado?.porcentaje || 6}%</span>
+                  </p>
+                  <span className="inline-block bg-[#C6DE41] text-[#333333] text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Iniciado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaBiblica?.noIniciado?.total || 42}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaBiblica?.noIniciado?.porcentaje || 22}%</span>
+                  </p>
+                  <span className="inline-block bg-[#F44336] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">No iniciado</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Divider */}
+            <div className="h-[1px] bg-[#E0E0E0] mb-5"></div>
+            
+            {/* Escuela discipulado */}
+            <div className="mb-5">
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span className="text-[14px] font-medium text-[#333333]">Escuela discipulado</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaDiscipulado?.terminado?.total || 21}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaDiscipulado?.terminado?.porcentaje || 6}%</span>
+                  </p>
+                  <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Terminado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaDiscipulado?.iniciado?.total || 183}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaDiscipulado?.iniciado?.porcentaje || 72}%</span>
+                  </p>
+                  <span className="inline-block bg-[#C6DE41] text-[#333333] text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Iniciado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.escuelaDiscipulado?.noIniciado?.total || 42}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.escuelaDiscipulado?.noIniciado?.porcentaje || 22}%</span>
+                  </p>
+                  <span className="inline-block bg-[#F44336] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">No iniciado</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Divider */}
+            <div className="h-[1px] bg-[#E0E0E0] mb-5"></div>
+            
+            {/* Entrenamiento */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                  <rect x="3" y="3" width="7" height="7"/>
+                  <rect x="14" y="3" width="7" height="7"/>
+                  <rect x="3" y="14" width="7" height="7"/>
+                  <rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                <span className="text-[14px] font-medium text-[#333333]">Entrenamiento</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.entrenamiento?.terminado?.total || 21}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.entrenamiento?.terminado?.porcentaje || 6}%</span>
+                  </p>
+                  <span className="inline-block bg-[#4CAF50] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Terminado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.entrenamiento?.iniciado?.total || 183}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.entrenamiento?.iniciado?.porcentaje || 72}%</span>
+                  </p>
+                  <span className="inline-block bg-[#C6DE41] text-[#333333] text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">Iniciado</span>
+                </div>
+                <div>
+                  <p className="text-[28px] font-bold text-[#333333] leading-none">
+                    {stats?.formacion?.entrenamiento?.noIniciado?.total || 42}
+                    <span className="text-[12px] font-normal text-[#9E9E9E] ml-1">{stats?.formacion?.entrenamiento?.noIniciado?.porcentaje || 22}%</span>
+                  </p>
+                  <span className="inline-block bg-[#F44336] text-white text-[10px] font-medium px-2.5 py-1 rounded-lg mt-1">No iniciado</span>
+                </div>
               </div>
             </div>
           </div>
