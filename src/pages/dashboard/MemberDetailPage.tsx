@@ -450,7 +450,7 @@ export function MemberDetailPage() {
           <h2 className="text-[20px] font-light text-[#333] mb-4">Servicios</h2>
           
           <div className="space-y-2">
-            {member.servicios.map((servicio, idx) => (
+            {member.servicios.filter(s => s.asistio).map((servicio, idx) => (
               <div key={idx} className="flex items-center justify-between py-1">
                 <div className="flex items-center gap-2">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
@@ -462,16 +462,7 @@ export function MemberDetailPage() {
                   <span className="text-[13px] text-[#666]">{servicio.fecha}</span>
                   <span className="text-[13px] text-[#333]">{servicio.nombre}</span>
                 </div>
-                {servicio.asistio ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#4CAF50" stroke="none">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" fill="none"/>
-                  </svg>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E0E0E0" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/>
-                  </svg>
-                )}
+                <img src="/icon-check.png" alt="Asistió" width="20" height="20" />
               </div>
             ))}
           </div>
