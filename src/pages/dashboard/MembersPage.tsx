@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppHeader } from '../../components/layout';
 import { api } from '../../services/api';
 
@@ -166,6 +166,63 @@ export function MembersPage() {
     }
     return [...array, value];
   };
+
+  // Apply filters and sorting to integrantes
+  const filteredAndSortedIntegrantes = React.useMemo(() => {
+    let result = [...integrantes];
+
+    // Apply filters
+    // Filter by responsabilidad
+    if (filters.responsabilidad.length > 0) {
+      result = result.filter(i => i.rol && filters.responsabilidad.map(r => r.toLowerCase()).includes(i.rol));
+    }
+
+    // Filter by grupos de hogar
+    if (filters.gruposDeHogar.length > 0) {
+      result = result.filter(i => {
+        if (filters.gruposDeHogar.includes('Sin grupo')) {
+          return !i.grupo || filters.gruposDeHogar.includes(i.grupo);
+        }
+        return i.grupo && filters.gruposDeHogar.includes(i.grupo);
+      });
+    }
+
+    // Filter by asistencia (porcentaje)
+    if (filters.asistencia.ultimoMes[0] > 0 || filters.asistencia.ultimoMes[1] < 100) {
+      result = result.filter(i => {
+        if (i.porcentaje === null) return true;
+        return i.porcentaje >= filters.asistencia.ultimoMes[0] && i.porcentaje <= filters.asistencia.ultimoMes[1];
+      });
+    }
+
+    // Apply sorting
+    if (orderBy.field) {
+      result.sort((a, b) => {
+        let comparison = 0;
+        switch (orderBy.field) {
+          case 'Nombre':
+            comparison = a.nombre.localeCompare(b.nombre);
+            break;
+          case 'Grupo de hogar':
+            const grupoA = a.grupo || 'zzz';
+            const grupoB = b.grupo || 'zzz';
+            comparison = grupoA.localeCompare(grupoB);
+            break;
+          case 'Responsabilidad':
+            const rolOrder: Record<string, number> = { supervisor: 1, responsable: 2, ayudante: 3 };
+            const rolA = a.rol ? rolOrder[a.rol] || 4 : 4;
+            const rolB = b.rol ? rolOrder[b.rol] || 4 : 4;
+            comparison = rolA - rolB;
+            break;
+          default:
+            comparison = 0;
+        }
+        return orderBy.direction === 'desc' ? -comparison : comparison;
+      });
+    }
+
+    return result;
+  }, [integrantes, filters, orderBy]);
 
   // Custom Dropdown Component
   const Dropdown = ({ 
@@ -405,7 +462,7 @@ export function MembersPage() {
             </div>
           ) : (
             <div>
-              {integrantes.map((integrante, index) => (
+              {filteredAndSortedIntegrantes.map((integrante, index) => (
                 <div key={integrante.id}>
                   <div className="flex items-center gap-3 p-4">
                   {/* Avatar */}
@@ -483,7 +540,7 @@ export function MembersPage() {
                   </div>
                   </div>
                   {/* Separator with padding */}
-                  {index < integrantes.length - 1 && (
+                  {index < filteredAndSortedIntegrantes.length - 1 && (
                     <div className="px-[10px]">
                       <div className="border-b border-[#E0E0E0]"></div>
                     </div>
@@ -494,7 +551,7 @@ export function MembersPage() {
           )}
           
           {/* Ver más */}
-          {integrantes.length > 0 && (
+          {filteredAndSortedIntegrantes.length > 0 && (
             <div className="text-center py-4 border-t border-[#E0E0E0]">
               <button className="text-[#4CAF50] text-[14px] font-medium">VER MÁS</button>
             </div>
