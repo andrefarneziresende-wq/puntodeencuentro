@@ -328,7 +328,7 @@ export function MembersPage() {
     </div>
   );
 
-  // Range Slider Component - Single line with dual handles
+  // Range Slider Component - Single line with dual handles (touch/mouse events)
   const RangeSlider = ({ 
     label, 
     min, 
@@ -342,15 +342,53 @@ export function MembersPage() {
     value: [number, number]; 
     onChange: (value: [number, number]) => void;
   }) => {
-    const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMin = Math.min(parseInt(e.target.value), value[1] - 1);
-      onChange([newMin, value[1]]);
+    const trackRef = React.useRef<HTMLDivElement>(null);
+    const [dragging, setDragging] = React.useState<'min' | 'max' | null>(null);
+
+    const getPercentFromPosition = (clientX: number): number => {
+      if (!trackRef.current) return 0;
+      const rect = trackRef.current.getBoundingClientRect();
+      const percent = ((clientX - rect.left) / rect.width) * 100;
+      return Math.min(Math.max(Math.round(percent), min), max);
     };
 
-    const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMax = Math.max(parseInt(e.target.value), value[0] + 1);
-      onChange([value[0], newMax]);
+    const handleStart = (handle: 'min' | 'max') => (e: React.MouseEvent | React.TouchEvent) => {
+      e.preventDefault();
+      setDragging(handle);
     };
+
+    React.useEffect(() => {
+      if (!dragging) return;
+
+      const handleMove = (e: MouseEvent | TouchEvent) => {
+        const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+        const newPercent = getPercentFromPosition(clientX);
+        
+        if (dragging === 'min') {
+          const newMin = Math.min(newPercent, value[1] - 1);
+          onChange([Math.max(newMin, min), value[1]]);
+        } else {
+          const newMax = Math.max(newPercent, value[0] + 1);
+          onChange([value[0], Math.min(newMax, max)]);
+        }
+      };
+
+      const handleEnd = () => {
+        setDragging(null);
+      };
+
+      document.addEventListener('mousemove', handleMove);
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchmove', handleMove);
+      document.addEventListener('touchend', handleEnd);
+
+      return () => {
+        document.removeEventListener('mousemove', handleMove);
+        document.removeEventListener('mouseup', handleEnd);
+        document.removeEventListener('touchmove', handleMove);
+        document.removeEventListener('touchend', handleEnd);
+      };
+    }, [dragging, value, onChange, min, max]);
 
     return (
       <div className="mb-4">
@@ -362,7 +400,7 @@ export function MembersPage() {
         <div className="flex items-center gap-2">
           <span className="text-[12px] text-[#4CAF50] font-medium w-10">{value[0]}%</span>
           
-          <div className="flex-1 relative h-6">
+          <div ref={trackRef} className="flex-1 relative h-8 touch-none">
             {/* Track background */}
             <div className="absolute top-1/2 -translate-y-1/2 w-full h-1.5 bg-[#E0E0E0] rounded-full" />
             
@@ -375,26 +413,20 @@ export function MembersPage() {
               }}
             />
             
-            {/* Min slider */}
-            <input
-              type="range"
-              min={min}
-              max={max}
-              value={value[0]}
-              onChange={handleMinChange}
-              className="absolute top-0 w-full h-6 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
-              style={{ zIndex: value[0] > 50 ? 5 : 3 }}
+            {/* Min handle */}
+            <div
+              onMouseDown={handleStart('min')}
+              onTouchStart={handleStart('min')}
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 bg-[#4CAF50] rounded-full cursor-pointer shadow-md hover:scale-110 active:scale-110 transition-transform"
+              style={{ left: `${value[0]}%`, zIndex: dragging === 'min' ? 10 : 5 }}
             />
             
-            {/* Max slider */}
-            <input
-              type="range"
-              min={min}
-              max={max}
-              value={value[1]}
-              onChange={handleMaxChange}
-              className="absolute top-0 w-full h-6 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
-              style={{ zIndex: 4 }}
+            {/* Max handle */}
+            <div
+              onMouseDown={handleStart('max')}
+              onTouchStart={handleStart('max')}
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 bg-[#4CAF50] rounded-full cursor-pointer shadow-md hover:scale-110 active:scale-110 transition-transform"
+              style={{ left: `${value[1]}%`, zIndex: dragging === 'max' ? 10 : 5 }}
             />
           </div>
           
