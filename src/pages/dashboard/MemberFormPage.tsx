@@ -17,9 +17,11 @@ interface MemberFormData {
   grupo: string;
   responsabilidad: {
     ayudante: boolean;
+    ayudanteGrupos: string[];
     responsable: boolean;
+    responsableGrupos: string[];
     supervisor: boolean;
-    grupoHogar: string[];
+    supervisorGrupos: string[];
   };
   formacion: {
     discipuladoInicial: string;
@@ -57,9 +59,11 @@ const initialFormData: MemberFormData = {
   grupo: '',
   responsabilidad: {
     ayudante: false,
+    ayudanteGrupos: [],
     responsable: false,
+    responsableGrupos: [],
     supervisor: false,
-    grupoHogar: []
+    supervisorGrupos: []
   },
   formacion: {
     discipuladoInicial: '',
@@ -154,9 +158,11 @@ export function MemberFormPage() {
           grupo: member.grupo || '',
           responsabilidad: {
             ayudante: member.rol === 'ayudante',
+            ayudanteGrupos: member.rol === 'ayudante' ? (member.gruposSupervisa || []) : [],
             responsable: member.rol === 'responsable',
+            responsableGrupos: member.rol === 'responsable' ? (member.gruposSupervisa || []) : [],
             supervisor: member.rol === 'supervisor',
-            grupoHogar: member.rol === 'supervisor' ? (member.gruposSupervisa || []) : []
+            supervisorGrupos: member.rol === 'supervisor' ? (member.gruposSupervisa || []) : []
           },
           formacion: {
             discipuladoInicial: member.formacion?.discipuladoInicial?.toLowerCase().replace(' ', '_') || '',
@@ -490,6 +496,7 @@ export function MemberFormPage() {
             <div className="border-t border-[#E0E0E0] pt-4 mt-4">
               <h3 className="text-[16px] font-bold text-[#333] mb-4">Responsabilidad</h3>
               
+              {/* Ayudante */}
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[14px] text-[#333]">Ayudante</span>
                 <Toggle 
@@ -500,7 +507,25 @@ export function MemberFormPage() {
                   })} 
                 />
               </div>
+              {formData.responsabilidad.ayudante && (
+                <Dropdown
+                  label="Grupo de Hogar"
+                  id="ayudanteGrupos"
+                  value=""
+                  options={gruposOptions}
+                  onChange={(val) => setFormData({ 
+                    ...formData, 
+                    responsabilidad: { 
+                      ...formData.responsabilidad, 
+                      ayudanteGrupos: val.split(',').filter(v => v) 
+                    }
+                  })}
+                  multiple
+                  selectedValues={formData.responsabilidad.ayudanteGrupos}
+                />
+              )}
 
+              {/* Responsable */}
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[14px] text-[#333]">Responsable</span>
                 <Toggle 
@@ -511,7 +536,25 @@ export function MemberFormPage() {
                   })} 
                 />
               </div>
+              {formData.responsabilidad.responsable && (
+                <Dropdown
+                  label="Grupo de Hogar"
+                  id="responsableGrupos"
+                  value=""
+                  options={gruposOptions}
+                  onChange={(val) => setFormData({ 
+                    ...formData, 
+                    responsabilidad: { 
+                      ...formData.responsabilidad, 
+                      responsableGrupos: val.split(',').filter(v => v) 
+                    }
+                  })}
+                  multiple
+                  selectedValues={formData.responsabilidad.responsableGrupos}
+                />
+              )}
 
+              {/* Supervisor */}
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[14px] text-[#333]">Supervisor</span>
                 <Toggle 
@@ -522,22 +565,21 @@ export function MemberFormPage() {
                   })} 
                 />
               </div>
-
               {formData.responsabilidad.supervisor && (
                 <Dropdown
                   label="Grupo de Hogar"
-                  id="grupoSupervisa"
+                  id="supervisorGrupos"
                   value=""
                   options={gruposOptions}
                   onChange={(val) => setFormData({ 
                     ...formData, 
                     responsabilidad: { 
                       ...formData.responsabilidad, 
-                      grupoHogar: val.split(',').filter(v => v) 
+                      supervisorGrupos: val.split(',').filter(v => v) 
                     }
                   })}
                   multiple
-                  selectedValues={formData.responsabilidad.grupoHogar}
+                  selectedValues={formData.responsabilidad.supervisorGrupos}
                 />
               )}
             </div>
