@@ -349,14 +349,7 @@ export function MembersPage() {
             onClick={openOrderModal}
             className="flex items-center gap-2 text-[#66B97B] text-[14px]"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="4" y1="21" x2="4" y2="14"/>
-              <line x1="4" y1="10" x2="4" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="12"/>
-              <line x1="12" y1="8" x2="12" y2="3"/>
-              <line x1="20" y1="21" x2="20" y2="16"/>
-              <line x1="20" y1="12" x2="20" y2="3"/>
-            </svg>
+            <img src="/icon-sort.png" alt="" width="16" height="16" />
             ORDENAR POR
           </button>
         </div>
