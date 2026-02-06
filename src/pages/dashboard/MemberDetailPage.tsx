@@ -423,14 +423,16 @@ export function MemberDetailPage() {
                   </svg>
                 </button>
                 <span className="text-[14px] text-[#333] flex items-center gap-2 ml-auto">
-                  {member.bautizado ? 'Sí' : 'No'}
-                  {member.nuevoBautizado && <span className="text-[12px] text-[#666]">- Nuevo bautizado</span>}
-                  {!member.bautizado && (
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F21D61" strokeWidth="2">
-                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                      <line x1="12" y1="9" x2="12" y2="13"/>
-                      <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
+                  {member.bautizado ? (
+                    <>
+                      Sí
+                      {member.nuevoBautizado && <span className="text-[12px] text-[#666]">- Nuevo bautizado</span>}
+                    </>
+                  ) : (
+                    <>
+                      <img src="/icon-warning.png" alt="No bautizado" width="18" height="18" />
+                      No
+                    </>
                   )}
                 </span>
                 {showBautizadoInfo && (
