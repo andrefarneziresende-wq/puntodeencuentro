@@ -242,23 +242,65 @@ export function MemberDetailPage() {
 
           {/* Badges */}
           <div className="flex flex-col gap-2">
-            {/* Role badges - show all active roles */}
+            {/* Role badges with their groups */}
             {member.responsabilidad ? (
               <>
+                {/* Supervisor + groups */}
                 {member.responsabilidad.supervisor && (
-                  <span className="inline-flex items-center gap-1 w-fit bg-[#FF9800] text-white text-[12px] font-medium px-3 py-1 rounded">
-                    Supervisor
-                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className="inline-flex items-center gap-1 w-fit bg-[#FF9800] text-white text-[12px] font-medium px-3 py-1 rounded">
+                      Supervisor
+                    </span>
+                    {member.responsabilidad.supervisorGrupos?.map((grupo, idx) => (
+                      <span key={`sup-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                          <circle cx="9" cy="7" r="4"/>
+                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        {grupo}
+                      </span>
+                    ))}
+                  </div>
                 )}
+                {/* Responsable + groups */}
                 {member.responsabilidad.responsable && (
-                  <span className="inline-flex items-center gap-1 w-fit bg-[#CBCBCB] text-white text-[12px] font-medium px-3 py-1 rounded">
-                    Responsable
-                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className="inline-flex items-center gap-1 w-fit bg-[#CBCBCB] text-white text-[12px] font-medium px-3 py-1 rounded">
+                      Responsable
+                    </span>
+                    {member.responsabilidad.responsableGrupos?.map((grupo, idx) => (
+                      <span key={`res-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                          <circle cx="9" cy="7" r="4"/>
+                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        {grupo}
+                      </span>
+                    ))}
+                  </div>
                 )}
+                {/* Ayudante + groups */}
                 {member.responsabilidad.ayudante && (
-                  <span className="inline-flex items-center gap-1 w-fit bg-[#9E9E9E] text-white text-[12px] font-medium px-3 py-1 rounded">
-                    Ayudante
-                  </span>
+                  <div className="flex flex-col gap-1">
+                    <span className="inline-flex items-center gap-1 w-fit bg-[#9E9E9E] text-white text-[12px] font-medium px-3 py-1 rounded">
+                      Ayudante
+                    </span>
+                    {member.responsabilidad.ayudanteGrupos?.map((grupo, idx) => (
+                      <span key={`ayu-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[12px] font-medium px-3 py-1 rounded underline ml-3">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                          <circle cx="9" cy="7" r="4"/>
+                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        {grupo}
+                      </span>
+                    ))}
+                  </div>
                 )}
               </>
             ) : member.rol && (

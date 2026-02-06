@@ -543,25 +543,64 @@ export function MembersPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-bold text-[#333333] truncate underline">{integrante.nombre}</p>
                     
-                    {/* Role badges - show all active roles */}
-                    {(integrante.responsabilidad?.ayudante || integrante.responsabilidad?.responsable || integrante.responsabilidad?.supervisor || integrante.rol) && (
+                    {/* Role badges with their groups */}
+                    {integrante.responsabilidad ? (
                       <div className="flex flex-col gap-1 mt-1">
-                        {integrante.responsabilidad ? (
+                        {/* Supervisor + groups */}
+                        {integrante.responsabilidad.supervisor && (
                           <>
-                            {integrante.responsabilidad.supervisor && (
-                              <span className="inline-block w-fit bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded">Supervisor</span>
-                            )}
-                            {integrante.responsabilidad.responsable && (
-                              <span className="inline-block w-fit bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded">Responsable</span>
-                            )}
-                            {integrante.responsabilidad.ayudante && (
-                              <span className="inline-block w-fit bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded">Ayudante</span>
-                            )}
+                            <span className="inline-block w-fit bg-[#FF9800] text-white text-[10px] font-medium px-2 py-0.5 rounded">Supervisor</span>
+                            {integrante.responsabilidad.supervisorGrupos?.map((grupo, idx) => (
+                              <span key={`sup-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                  <circle cx="9" cy="7" r="4"/>
+                                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                {grupo}
+                              </span>
+                            ))}
                           </>
-                        ) : (
-                          // Fallback for old data
-                          getRolBadge(integrante.rol)
                         )}
+                        {/* Responsable + groups */}
+                        {integrante.responsabilidad.responsable && (
+                          <>
+                            <span className="inline-block w-fit bg-[#CBCBCB] text-white text-[10px] font-medium px-2 py-0.5 rounded">Responsable</span>
+                            {integrante.responsabilidad.responsableGrupos?.map((grupo, idx) => (
+                              <span key={`res-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                  <circle cx="9" cy="7" r="4"/>
+                                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                {grupo}
+                              </span>
+                            ))}
+                          </>
+                        )}
+                        {/* Ayudante + groups */}
+                        {integrante.responsabilidad.ayudante && (
+                          <>
+                            <span className="inline-block w-fit bg-[#9E9E9E] text-white text-[10px] font-medium px-2 py-0.5 rounded">Ayudante</span>
+                            {integrante.responsabilidad.ayudanteGrupos?.map((grupo, idx) => (
+                              <span key={`ayu-${idx}`} className="inline-flex items-center gap-1 w-fit bg-[#72E6EA] text-black text-[10px] font-medium px-2 py-0.5 rounded underline ml-2">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                  <circle cx="9" cy="7" r="4"/>
+                                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                {grupo}
+                              </span>
+                            ))}
+                          </>
+                        )}
+                      </div>
+                    ) : integrante.rol && (
+                      <div className="flex flex-col gap-1 mt-1">
+                        {getRolBadge(integrante.rol)}
                       </div>
                     )}
                     
