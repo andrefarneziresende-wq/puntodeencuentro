@@ -259,7 +259,7 @@ export function MembersPage() {
     </div>
   );
 
-  // Range Slider Component with dual handles
+  // Range Slider Component with two separate sliders
   const RangeSlider = ({ 
     label, 
     min, 
@@ -274,54 +274,51 @@ export function MembersPage() {
     onChange: (value: [number, number]) => void;
   }) => {
     const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMin = Math.min(parseInt(e.target.value), value[1] - 1);
+      const newMin = Math.min(parseInt(e.target.value), value[1]);
       onChange([newMin, value[1]]);
     };
 
     const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newMax = Math.max(parseInt(e.target.value), value[0] + 1);
+      const newMax = Math.max(parseInt(e.target.value), value[0]);
       onChange([value[0], newMax]);
     };
 
     return (
       <div className="mb-5">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-3">
           <label className="text-[12px] font-medium text-[#333333]">{label}</label>
           <span className="text-[12px] text-[#4CAF50] font-medium">{value[0]}% - {value[1]}%</span>
         </div>
-        <div className="relative h-6 flex items-center">
-          {/* Track background */}
-          <div className="absolute w-full h-2 bg-[#E0E0E0] rounded-full" />
-          
-          {/* Active track */}
-          <div 
-            className="absolute h-2 bg-[#4CAF50] rounded-full"
-            style={{ 
-              left: `${value[0]}%`, 
-              width: `${value[1] - value[0]}%` 
-            }}
-          />
-          
-          {/* Min slider */}
+        
+        {/* Min slider */}
+        <div className="mb-3">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[10px] text-[#9E9E9E]">Desde</span>
+            <span className="text-[10px] text-[#333333] font-medium">{value[0]}%</span>
+          </div>
           <input
             type="range"
             min={min}
             max={max}
             value={value[0]}
             onChange={handleMinChange}
-            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md"
-            style={{ zIndex: value[0] > max - 10 ? 5 : 3 }}
+            className="w-full h-2 bg-[#E0E0E0] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
           />
-          
-          {/* Max slider */}
+        </div>
+        
+        {/* Max slider */}
+        <div>
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[10px] text-[#9E9E9E]">Hasta</span>
+            <span className="text-[10px] text-[#333333] font-medium">{value[1]}%</span>
+          </div>
           <input
             type="range"
             min={min}
             max={max}
             value={value[1]}
             onChange={handleMaxChange}
-            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md"
-            style={{ zIndex: 4 }}
+            className="w-full h-2 bg-[#E0E0E0] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-[#4CAF50] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-md [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-[#4CAF50] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:border-0"
           />
         </div>
       </div>
