@@ -12,10 +12,97 @@ interface Integrante {
   porcentaje: number;
 }
 
+interface Filters {
+  miembros: boolean;
+  responsabilidad: string[];
+  gruposDeHogar: string[];
+  ministerios: string[];
+  responsableDeMinisterio: boolean;
+  asistencia: {
+    ultimoMes: [number, number];
+    ultimoAno: [number, number];
+    desdeSiempre: [number, number];
+  };
+  formacion: {
+    discipuladoInicial: string;
+    preBautismos: string;
+    escuelaBiblica: string;
+    escuelaDiscipulado: string;
+    entrenamiento: string;
+  };
+  fe: {
+    nuevoCreyente: boolean;
+    nuevoBautizado: boolean;
+    bautizado: boolean;
+    procedenteDeOtraIglesia: boolean;
+  };
+}
+
+interface OrderBy {
+  field: string;
+  direction: 'asc' | 'desc';
+}
+
+const initialFilters: Filters = {
+  miembros: false,
+  responsabilidad: [],
+  gruposDeHogar: [],
+  ministerios: [],
+  responsableDeMinisterio: false,
+  asistencia: {
+    ultimoMes: [0, 100],
+    ultimoAno: [20, 50],
+    desdeSiempre: [0, 80],
+  },
+  formacion: {
+    discipuladoInicial: '',
+    preBautismos: '',
+    escuelaBiblica: '',
+    escuelaDiscipulado: '',
+    entrenamiento: '',
+  },
+  fe: {
+    nuevoCreyente: false,
+    nuevoBautizado: false,
+    bautizado: false,
+    procedenteDeOtraIglesia: false,
+  },
+};
+
+const gruposOptions = [
+  'Sin grupo',
+  'Casa de Samuel',
+  'Casa de María Inés',
+  'Casa Enrique y Julia',
+  'Hombres adultos 1',
+  'Hombres adultos 2',
+  'Hombres senior',
+];
+
+const ministeriosOptions = [
+  'Alabanza',
+  'Infantil',
+  'Obra social',
+  'Jóvenes',
+  'Matrimonios',
+  'Intercesión',
+];
+
+const formacionOptions = ['No iniciado', 'Cursando', 'Terminado'];
+
 export function MembersPage() {
   const [showMap, setShowMap] = useState(false);
   const [integrantes, setIntegrantes] = useState<Integrante[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [tempFilters, setTempFilters] = useState<Filters>(initialFilters);
+  const [orderBy, setOrderBy] = useState<OrderBy>({ field: '', direction: 'asc' });
+  const [tempOrderBy, setTempOrderBy] = useState<OrderBy>({ field: '', direction: 'asc' });
+  
+  // Dropdown states
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     loadIntegrantes();
@@ -52,6 +139,171 @@ export function MembersPage() {
     return 'bg-[#607D8B] text-white';
   };
 
+  const openFilterModal = () => {
+    setTempFilters({ ...filters });
+    setShowFilterModal(true);
+  };
+
+  const openOrderModal = () => {
+    setTempOrderBy({ ...orderBy });
+    setShowOrderModal(true);
+  };
+
+  const applyFilters = () => {
+    setFilters({ ...tempFilters });
+    setShowFilterModal(false);
+  };
+
+  const clearFilters = () => {
+    setTempFilters(initialFilters);
+  };
+
+  const applyOrder = () => {
+    setOrderBy({ ...tempOrderBy });
+    setShowOrderModal(false);
+  };
+
+  const toggleArrayFilter = (array: string[], value: string) => {
+    if (array.includes(value)) {
+      return array.filter(v => v !== value);
+    }
+    return [...array, value];
+  };
+
+  // Custom Dropdown Component
+  const Dropdown = ({ 
+    label, 
+    id, 
+    options, 
+    selected, 
+    onSelect, 
+    multiple = false 
+  }: { 
+    label: string; 
+    id: string; 
+    options: string[]; 
+    selected: string | string[]; 
+    onSelect: (value: string) => void;
+    multiple?: boolean;
+  }) => {
+    const isOpen = openDropdown === id;
+    const selectedArray = Array.isArray(selected) ? selected : (selected ? [selected] : []);
+    const displayText = selectedArray.length > 0 
+      ? selectedArray.join(', ') 
+      : 'Selecciona una opción';
+
+    return (
+      <div className="mb-4">
+        <label className="block text-[14px] font-medium text-[#333333] mb-2">{label}</label>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setOpenDropdown(isOpen ? null : id)}
+            className="w-full flex items-center justify-between px-3 py-2 border border-[#E0E0E0] rounded-lg text-[14px] text-left"
+          >
+            <span className={selectedArray.length > 0 ? 'text-[#333333]' : 'text-[#9E9E9E]'}>
+              {displayText.length > 30 ? displayText.substring(0, 30) + '...' : displayText}
+            </span>
+            <svg 
+              width="20" height="20" viewBox="0 0 24 24" fill="none" 
+              stroke="#4CAF50" strokeWidth="2"
+              className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
+            >
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          {isOpen && (
+            <div className="absolute z-10 w-full mt-1 bg-white border border-[#E0E0E0] rounded-lg shadow-lg max-h-48 overflow-y-auto">
+              {options.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => {
+                    onSelect(option);
+                    if (!multiple) setOpenDropdown(null);
+                  }}
+                  className="w-full flex items-center justify-between px-3 py-2 text-[14px] text-left hover:bg-[#F5F5F5]"
+                >
+                  <span>{option}</span>
+                  {multiple && (
+                    <div className={`w-5 h-5 border-2 rounded flex items-center justify-center ${
+                      selectedArray.includes(option) ? 'bg-[#4CAF50] border-[#4CAF50]' : 'border-[#E0E0E0]'
+                    }`}>
+                      {selectedArray.includes(option) && (
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      )}
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Toggle Component
+  const Toggle = ({ label, checked, onChange }: { label: string; checked: boolean; onChange: () => void }) => (
+    <div className="flex items-center justify-between mb-4">
+      <span className="text-[14px] font-medium text-[#333333]">{label}</span>
+      <button
+        type="button"
+        onClick={onChange}
+        className={`w-12 h-6 rounded-full transition-colors ${checked ? 'bg-[#4CAF50]' : 'bg-[#E0E0E0]'}`}
+      >
+        <div className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${checked ? 'translate-x-6' : 'translate-x-0.5'}`} />
+      </button>
+    </div>
+  );
+
+  // Range Slider Component
+  const RangeSlider = ({ 
+    label, 
+    min, 
+    max, 
+    value, 
+    onChange 
+  }: { 
+    label: string; 
+    min: number; 
+    max: number; 
+    value: [number, number]; 
+    onChange: (value: [number, number]) => void;
+  }) => (
+    <div className="mb-4">
+      <label className="block text-[12px] font-medium text-[#333333] mb-2">{label}</label>
+      <div className="flex items-center gap-2">
+        <span className="text-[12px] text-[#9E9E9E] w-8">{value[0]} %</span>
+        <div className="flex-1 relative h-2 bg-[#E0E0E0] rounded-full">
+          <div 
+            className="absolute h-full bg-[#4CAF50] rounded-full"
+            style={{ left: `${value[0]}%`, width: `${value[1] - value[0]}%` }}
+          />
+          <input
+            type="range"
+            min={min}
+            max={max}
+            value={value[0]}
+            onChange={(e) => onChange([parseInt(e.target.value), value[1]])}
+            className="absolute w-full h-full opacity-0 cursor-pointer"
+          />
+          <input
+            type="range"
+            min={min}
+            max={max}
+            value={value[1]}
+            onChange={(e) => onChange([value[0], parseInt(e.target.value)])}
+            className="absolute w-full h-full opacity-0 cursor-pointer"
+          />
+        </div>
+        <span className="text-[12px] text-[#9E9E9E] w-10 text-right">{value[1]} %</span>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <AppHeader />
@@ -62,13 +314,19 @@ export function MembersPage() {
         
         {/* Filter and Order */}
         <div className="flex items-center gap-6 mb-4">
-          <button className="flex items-center gap-2 text-[#9E9E9E] text-[14px]">
+          <button 
+            onClick={openFilterModal}
+            className="flex items-center gap-2 text-[#9E9E9E] text-[14px]"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
             </svg>
             FILTRAR
           </button>
-          <button className="flex items-center gap-2 text-[#9E9E9E] text-[14px]">
+          <button 
+            onClick={openOrderModal}
+            className="flex items-center gap-2 text-[#9E9E9E] text-[14px]"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="4" y1="21" x2="4" y2="14"/>
               <line x1="4" y1="10" x2="4" y2="3"/>
@@ -189,6 +447,285 @@ export function MembersPage() {
           </button>
         </div>
       </footer>
+
+      {/* Filter Modal */}
+      {showFilterModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-white p-5 border-b border-[#E0E0E0]">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-[24px] font-bold text-[#333333]">Filtrar por</h2>
+                <button onClick={() => setShowFilterModal(false)}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+              <button onClick={clearFilters} className="text-[#4CAF50] text-[14px] font-medium">
+                LIMPIAR FILTROS
+              </button>
+            </div>
+            
+            {/* Content */}
+            <div className="p-5">
+              {/* Miembros Toggle */}
+              <Toggle 
+                label="Miembros" 
+                checked={tempFilters.miembros} 
+                onChange={() => setTempFilters({...tempFilters, miembros: !tempFilters.miembros})}
+              />
+              
+              {/* Responsabilidad */}
+              <Dropdown
+                label="Responsabilidad"
+                id="responsabilidad"
+                options={['Ayudante', 'Responsable', 'Supervisor']}
+                selected={tempFilters.responsabilidad}
+                onSelect={(value) => setTempFilters({
+                  ...tempFilters, 
+                  responsabilidad: toggleArrayFilter(tempFilters.responsabilidad, value)
+                })}
+                multiple
+              />
+              
+              {/* Grupos de hogar */}
+              <Dropdown
+                label="Grupos de hogar"
+                id="grupos"
+                options={gruposOptions}
+                selected={tempFilters.gruposDeHogar}
+                onSelect={(value) => setTempFilters({
+                  ...tempFilters, 
+                  gruposDeHogar: toggleArrayFilter(tempFilters.gruposDeHogar, value)
+                })}
+                multiple
+              />
+              
+              {/* Ministerios */}
+              <Dropdown
+                label="Ministerios"
+                id="ministerios"
+                options={ministeriosOptions}
+                selected={tempFilters.ministerios}
+                onSelect={(value) => setTempFilters({
+                  ...tempFilters, 
+                  ministerios: toggleArrayFilter(tempFilters.ministerios, value)
+                })}
+                multiple
+              />
+              
+              {/* Responsable de Ministerio Toggle */}
+              <Toggle 
+                label="Responsable de Ministerio" 
+                checked={tempFilters.responsableDeMinisterio} 
+                onChange={() => setTempFilters({...tempFilters, responsableDeMinisterio: !tempFilters.responsableDeMinisterio})}
+              />
+              
+              {/* Asistencia Section */}
+              <div className="border-t border-[#E0E0E0] pt-4 mt-4">
+                <h3 className="text-[16px] font-bold text-[#333333] mb-4">Asistencia</h3>
+                <RangeSlider
+                  label="Último MES"
+                  min={0}
+                  max={100}
+                  value={tempFilters.asistencia.ultimoMes}
+                  onChange={(value) => setTempFilters({
+                    ...tempFilters,
+                    asistencia: { ...tempFilters.asistencia, ultimoMes: value }
+                  })}
+                />
+                <RangeSlider
+                  label="Último AÑO"
+                  min={0}
+                  max={100}
+                  value={tempFilters.asistencia.ultimoAno}
+                  onChange={(value) => setTempFilters({
+                    ...tempFilters,
+                    asistencia: { ...tempFilters.asistencia, ultimoAno: value }
+                  })}
+                />
+                <RangeSlider
+                  label="Desde SIEMPRE"
+                  min={0}
+                  max={100}
+                  value={tempFilters.asistencia.desdeSiempre}
+                  onChange={(value) => setTempFilters({
+                    ...tempFilters,
+                    asistencia: { ...tempFilters.asistencia, desdeSiempre: value }
+                  })}
+                />
+              </div>
+              
+              {/* Formación Section */}
+              <div className="border-t border-[#E0E0E0] pt-4 mt-4">
+                <h3 className="text-[16px] font-bold text-[#333333] mb-4">Formación</h3>
+                <Dropdown
+                  label="Discipulado inicial"
+                  id="discipulado"
+                  options={formacionOptions}
+                  selected={tempFilters.formacion.discipuladoInicial}
+                  onSelect={(value) => setTempFilters({
+                    ...tempFilters,
+                    formacion: { ...tempFilters.formacion, discipuladoInicial: value }
+                  })}
+                />
+                <Dropdown
+                  label="Pre bautismos"
+                  id="preBautismos"
+                  options={formacionOptions}
+                  selected={tempFilters.formacion.preBautismos}
+                  onSelect={(value) => setTempFilters({
+                    ...tempFilters,
+                    formacion: { ...tempFilters.formacion, preBautismos: value }
+                  })}
+                />
+                <Dropdown
+                  label="Escuela bíblica"
+                  id="escuelaBiblica"
+                  options={formacionOptions}
+                  selected={tempFilters.formacion.escuelaBiblica}
+                  onSelect={(value) => setTempFilters({
+                    ...tempFilters,
+                    formacion: { ...tempFilters.formacion, escuelaBiblica: value }
+                  })}
+                />
+                <Dropdown
+                  label="Escuela discipulado"
+                  id="escuelaDiscipulado"
+                  options={formacionOptions}
+                  selected={tempFilters.formacion.escuelaDiscipulado}
+                  onSelect={(value) => setTempFilters({
+                    ...tempFilters,
+                    formacion: { ...tempFilters.formacion, escuelaDiscipulado: value }
+                  })}
+                />
+                <Dropdown
+                  label="Entrenamiento"
+                  id="entrenamiento"
+                  options={formacionOptions}
+                  selected={tempFilters.formacion.entrenamiento}
+                  onSelect={(value) => setTempFilters({
+                    ...tempFilters,
+                    formacion: { ...tempFilters.formacion, entrenamiento: value }
+                  })}
+                />
+              </div>
+              
+              {/* Fe Section */}
+              <div className="border-t border-[#E0E0E0] pt-4 mt-4">
+                <h3 className="text-[16px] font-bold text-[#333333] mb-4">Fe</h3>
+                <Toggle 
+                  label="Nuevo creyente" 
+                  checked={tempFilters.fe.nuevoCreyente} 
+                  onChange={() => setTempFilters({
+                    ...tempFilters,
+                    fe: { ...tempFilters.fe, nuevoCreyente: !tempFilters.fe.nuevoCreyente }
+                  })}
+                />
+                <Toggle 
+                  label="Nuevo bautizado" 
+                  checked={tempFilters.fe.nuevoBautizado} 
+                  onChange={() => setTempFilters({
+                    ...tempFilters,
+                    fe: { ...tempFilters.fe, nuevoBautizado: !tempFilters.fe.nuevoBautizado }
+                  })}
+                />
+                <Toggle 
+                  label="Bautizado" 
+                  checked={tempFilters.fe.bautizado} 
+                  onChange={() => setTempFilters({
+                    ...tempFilters,
+                    fe: { ...tempFilters.fe, bautizado: !tempFilters.fe.bautizado }
+                  })}
+                />
+                <Toggle 
+                  label="Procedente de otra iglesia" 
+                  checked={tempFilters.fe.procedenteDeOtraIglesia} 
+                  onChange={() => setTempFilters({
+                    ...tempFilters,
+                    fe: { ...tempFilters.fe, procedenteDeOtraIglesia: !tempFilters.fe.procedenteDeOtraIglesia }
+                  })}
+                />
+              </div>
+            </div>
+            
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-white p-5 border-t border-[#E0E0E0]">
+              <button 
+                onClick={applyFilters}
+                className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-3"
+              >
+                FILTRAR
+              </button>
+              <button 
+                onClick={() => setShowFilterModal(false)}
+                className="w-full text-[#4CAF50] text-[14px] font-medium"
+              >
+                CANCELAR
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Order Modal */}
+      {showOrderModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-md">
+            {/* Header */}
+            <div className="p-5 border-b border-[#E0E0E0]">
+              <div className="flex items-center justify-between">
+                <h2 className="text-[24px] font-bold text-[#333333]">Ordenar por</h2>
+                <button onClick={() => setShowOrderModal(false)}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="p-5">
+              <Dropdown
+                label="Ordenar por"
+                id="orderField"
+                options={['Nombre', 'Grupo de hogar', 'Responsabilidad', 'Número de miembro']}
+                selected={tempOrderBy.field}
+                onSelect={(value) => setTempOrderBy({ ...tempOrderBy, field: value })}
+              />
+              <Dropdown
+                label="Tipo de orden"
+                id="orderDirection"
+                options={['Ascendente', 'Descendente']}
+                selected={tempOrderBy.direction === 'asc' ? 'Ascendente' : 'Descendente'}
+                onSelect={(value) => setTempOrderBy({ 
+                  ...tempOrderBy, 
+                  direction: value === 'Ascendente' ? 'asc' : 'desc' 
+                })}
+              />
+            </div>
+            
+            {/* Footer */}
+            <div className="p-5 border-t border-[#E0E0E0]">
+              <button 
+                onClick={applyOrder}
+                className="w-full bg-[#4CAF50] text-white text-[16px] font-medium py-3 px-6 rounded-full mb-3"
+              >
+                GUARDAR
+              </button>
+              <button 
+                onClick={() => setShowOrderModal(false)}
+                className="w-full text-[#4CAF50] text-[14px] font-medium"
+              >
+                CANCELAR
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
