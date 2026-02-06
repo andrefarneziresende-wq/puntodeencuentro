@@ -373,10 +373,12 @@ export function MemberFormPage() {
                 </div>
                 {formData.esMiembro && (
                   <>
-                    {/* Separator line */}
-                    <div className="border-t border-[#E0E0E0] my-2"></div>
-                    {/* Número - label and input side by side */}
-                    <div className="flex items-center gap-2">
+                    {/* Separator line - only between the content */}
+                    <div className="flex justify-end my-2">
+                      <div className="w-32 border-t border-[#E0E0E0]"></div>
+                    </div>
+                    {/* Número - label and input side by side, aligned right */}
+                    <div className="flex items-center justify-end gap-2">
                       <label className="text-[14px] text-[#333]">Número *</label>
                       <input
                         type="text"
