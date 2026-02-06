@@ -244,6 +244,25 @@ export function MemberFormPage() {
     e.preventDefault();
     
     if (saving) return;
+    
+    // Validate that if a role is selected, at least one group must be selected
+    const validationErrors: string[] = [];
+    
+    if (formData.responsabilidad.supervisor && formData.responsabilidad.supervisorGrupos.length === 0) {
+      validationErrors.push('Si seleccionas Supervisor, debes seleccionar al menos un Grupo de Hogar.');
+    }
+    if (formData.responsabilidad.responsable && formData.responsabilidad.responsableGrupos.length === 0) {
+      validationErrors.push('Si seleccionas Responsable, debes seleccionar al menos un Grupo de Hogar.');
+    }
+    if (formData.responsabilidad.ayudante && formData.responsabilidad.ayudanteGrupos.length === 0) {
+      validationErrors.push('Si seleccionas Ayudante, debes seleccionar al menos un Grupo de Hogar.');
+    }
+    
+    if (validationErrors.length > 0) {
+      alert(validationErrors.join('\n'));
+      return;
+    }
+    
     setSaving(true);
     
     try {

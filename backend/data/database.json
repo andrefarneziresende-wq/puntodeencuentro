@@ -674,6 +674,14 @@
       "rol": "responsable",
       "grupo": "Parejas jóvenes",
       "gruposSupervisa": null,
+      "responsabilidad": {
+        "ayudante": false,
+        "ayudanteGrupos": [],
+        "responsable": true,
+        "responsableGrupos": ["Parejas jóvenes"],
+        "supervisor": false,
+        "supervisorGrupos": []
+      },
       "esMiembro": true,
       "nuevoCreyente": false,
       "etiquetas": [],
@@ -754,6 +762,14 @@
       "rol": "ayudante",
       "grupo": "Casa de Samuel",
       "gruposSupervisa": null,
+      "responsabilidad": {
+        "ayudante": true,
+        "ayudanteGrupos": ["Casa de Samuel"],
+        "responsable": false,
+        "responsableGrupos": [],
+        "supervisor": false,
+        "supervisorGrupos": []
+      },
       "esMiembro": true,
       "nuevoCreyente": false,
       "etiquetas": [],
@@ -1341,6 +1357,50 @@
           "asistio": true
         }
       ]
+    },
+    {
+      "id": "i16",
+      "numero": 402,
+      "nombre": "",
+      "foto": null,
+      "email": "",
+      "telefono": "+34 ",
+      "edad": null,
+      "fechaNacimiento": "",
+      "direccion": "",
+      "rol": null,
+      "grupo": null,
+      "gruposSupervisa": [],
+      "responsabilidad": {
+        "ayudante": false,
+        "ayudanteGrupos": [],
+        "responsable": false,
+        "responsableGrupos": [],
+        "supervisor": false,
+        "supervisorGrupos": []
+      },
+      "esMiembro": true,
+      "nuevoCreyente": false,
+      "etiquetas": [],
+      "porcentaje": null,
+      "asistencia": {
+        "ultimoMes": 0,
+        "ultimoAno": 0,
+        "desdeSiempre": 0
+      },
+      "formacion": {
+        "discipuladoInicial": "No iniciado",
+        "preBautismos": "No iniciado",
+        "escuelaBiblica": "No iniciado",
+        "escuelaDiscipulado": "No iniciado",
+        "entrenamiento": "No iniciado"
+      },
+      "bautizado": false,
+      "nuevoBautizado": false,
+      "iglesiaProcedente": null,
+      "ministerios": [],
+      "observaciones": "",
+      "servicios": []
     }
   ]
 }
